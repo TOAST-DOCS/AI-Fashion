@@ -83,7 +83,7 @@
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID} |
+| POST | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
@@ -95,7 +95,7 @@
 <details><summary>요청 예</summary>
 
 ```
-curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}"
+curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
 ```
 
 </details>
@@ -140,7 +140,7 @@ curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{service
 
 | 메서드 | URI |
 | --- | --- |
-| DELETE | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID} |
+| DELETE | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
@@ -152,7 +152,7 @@ curl -X POST "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{service
 <details><summary>요청 예</summary>
 
 ```
-curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}"
+curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
 ```
 
 </details>
@@ -196,7 +196,7 @@ curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{servi
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/services |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/services |
 
 [Path Variable]
 
@@ -207,7 +207,7 @@ curl -X DELETE "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{servi
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 ```
 
 </details>
@@ -266,7 +266,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
 
 [Path Variable]
 
@@ -285,7 +285,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/services"
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
 ```
 
 </details>
@@ -351,7 +351,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
 
 [Path Variable]
 
@@ -369,7 +369,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
 ```
 
 </details>
@@ -433,8 +433,8 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
-| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큽니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식입니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
@@ -457,7 +457,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/image |
+| GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image |
 
 [Path Variable]
 
@@ -476,7 +476,7 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&amp;link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=="
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&amp;link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=="
 ```
 
 </details>
@@ -529,8 +529,8 @@ curl -X GET "${domain}/ai-fashion-search/v1.0/appkeys/{appKey}/service/{serviceI
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
 | -42000 | NotExistServiceID | 등록 안 된 서비스 아이디 |
-| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큽니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식입니다.<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020 | ImageTooLargeException | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45040 | InvalidImageFormatException | 이미지 파일이 지원하지 않는 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
