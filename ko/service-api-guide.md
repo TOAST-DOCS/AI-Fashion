@@ -31,6 +31,30 @@
 * 이미지 파일의 최대 크기: 5,000,000 bytes(단, [tag API](#tag-api)는 1,000,000 bytes)
 * 지원 이미지 포맷: PNG, JPEG, GIF
 
+<span id="filtering-guide"></span>
+### 필터링 가이드
+
+* 제한된 카테고리로 검색할 때 사용합니다.
+
+#### 대상 필드
+| 이름 | 필드 명 | 
+| --- | --- |
+| 카테고리 1depth | category1_id |
+| 카테고리 2depth | category2_id |
+| 카테고리 3depth | category3_id |
+
+
+#### 문법
+* `filter.{필드 명}`=`연산자`:`값`
+* 값(values)은 양의 정수만 가능합니다. 타입 (uint32: 0~4294967295)
+
+| 조건 | 연산자 | 예제 | 설명 |
+| --- | --- | --- | --- |
+| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | 대상 필드의 값이 파라미터 값과 같은 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 or 검색이 가능합니다. |
+| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | 대상 필드의 값이 파라미터 값과 다른 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 or 검색이 가능합니다. |
+| with in range | range | filter.category2_id=range:1003:1004 | 대상 필드의 값이 파라미터 값의 범위 내에 있는 문서만 결과로 응답합니다. |
+| out of range | !range | filter.category2_id=!range:1002:1004 | 대상 필드의 값이 파라미터 값의 범위 밖에 있는 문서만 결과로 응답합니다. |
+
 <span id="common-response"></span>
 ### 응답 공통 정보
 
@@ -285,8 +309,11 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
+| filter.category1_id | string | X | equal:3 | category1_id 값을 필터링 |
+| filter.category2_id | string | X | !equal:3 | category2_id 값을 필터링 |
+| filter.category3_id | string | X | range:1003:1005 | category3_id 값을 필터링 |
 
-
+* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
@@ -472,6 +499,11 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 최대 크기<br>1 이상 200 이하로 설정 가능 |
 | link | string | O | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link (URL encoding 필요) |
+| filter.category1_id | string | X | equal:3 | category1_id 값을 필터링 |
+| filter.category2_id | string | X | !equal:3 | category2_id 값을 필터링 |
+| filter.category3_id | string | X | range:1003:1005 | category3_id 값을 필터링 |
+
+* filter.category1_id~3은 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
