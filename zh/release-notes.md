@@ -1,6 +1,6 @@
 ## AI Service > AI Fashion > Release Notes
 
-### 2022. 05. 24.
+### May 24, 2022
 #### Feature Updates
 * [API] Improve search quality
 
