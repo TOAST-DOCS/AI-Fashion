@@ -308,7 +308,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
 | filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
-| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| threshold | float32 | X | 0.8 | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
@@ -499,7 +499,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
 | filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
-| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| threshold | float32 | X | 0.8 | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
 
@@ -619,7 +619,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | data.items[].tags | Array of json object | O |  | Array of detected item tag information |
 | data.items[].tags[].attribute | String | O | category | Tag attribute  |
 | data.items[].tags[].labels | Array of json object | O |  | Array of tag labels |
-| data.items[].tags[].labels[].label | String | O | blouse \| Blouse | Tag label <br/>The response language is different depending on the lang of the URL parameter.  |
+| data.items[].tags[].labels[].label | String | O | blouse \| Blouse | Tag label<br/>The response language is different depending on the lang of the URL parameter.  |
 | data.items[].tags[].labels[].score | float32 | O | 0.9545 | Confidence score of tag labels |
 | data.items[].center | float64 array | O | [0.825047801147227, 0.330948979591837] | Center x, y coordinate % of a detected item |
 | data.items[].b0 | float64 array | O | [0.676864247418738, 0.219377551020408] | x0, y0 coordinate % of a detected item |
@@ -717,4 +717,3 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45050 | InvalidImageURLException | The URL is not accessible. |
 | -45060 | ImageTimeoutError | Image download timeout occurred. |
 | -50000 | InternalServerError | Server error. |
-
