@@ -1,7 +1,8 @@
 ## AI Service > AI Fashion > Release Notes
 
 ### June 30, 2022
-* Added a search request parameter to limit search results (`threshold`)
+#### Feature Updates
+* [API] Added a search request parameter to limit search results (`threshold`)
 
 ### May 24, 2022
 #### Feature Updates
