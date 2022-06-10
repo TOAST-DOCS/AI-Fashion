@@ -5,7 +5,7 @@
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다. 
+- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다.
     - 프로젝트 통합 Appkey 사용을 권장합니다.
     - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
     - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
@@ -308,6 +308,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
@@ -498,6 +499,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
@@ -715,4 +717,3 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45050 | InvalidImageURLException | 접근할 수 없는 URL |
 | -45060 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 | -50000 | InternalServerError | 서버 오류 |
-
