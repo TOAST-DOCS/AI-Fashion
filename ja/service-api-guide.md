@@ -307,6 +307,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
 | filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
 | filter.category3_id | string | X | !equal:3 | category3_id値でフィルタリング |
+| threshold | float32 | X | 0.8 | マッチングしたかどうかを判断する類似度基準値<br/> data.items[].similarity >= thresholdの項目のみマッチングしたと判断します。<br/>0超過1.0以下に設定可能 |
 
 * filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 
@@ -497,6 +498,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
 | filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
 | filter.category3_id | string | X | !equal:3 | category3_id値でフィルタリング |
+| threshold | float32 | X | 0.8 | マッチングしたかどうかを判断する類似度基準値<br/> data.items[].similarity >= thresholdの項目のみマッチングしたと判断します。<br/>0超過1.0以下に設定可能 |
 
 * filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 

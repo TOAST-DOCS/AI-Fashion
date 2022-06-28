@@ -1,8 +1,12 @@
 ## AI Service > AI Fashion > Release Notes
 
+### June 30, 2022
+#### Feature Updates
+* [API] Added a search request parameter to limit search results (`threshold`)
+
 ### May 24, 2022
 #### Feature Updates
-* [API] Improve search quality
+* [API] Improved search quality
 
 ### April 26, 2022
 #### Feature Updates
@@ -11,7 +15,7 @@
 
 ### January 25, 2022
 #### Feature Updates
-* [API] Change the method of calculating the similarity score
+* [API] Changed the method of calculating the similarity score
 
 ### October 26, 2021
 #### Feature Updates
