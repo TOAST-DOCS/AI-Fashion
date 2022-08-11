@@ -591,7 +591,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL Encodeされた画像URL |
-| lang | String | X | ko | labelの言語<br/>default: en<br/>en: English<br/>ko: Korean |
+| lang | String | X | ko | labelの言語<br/>default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese  |
 | item_limit | int | X | 3 | 画像で見つかったファッションアイテムのうち、タグ情報を返すアイテムの数<br/>アイテムの幅が長い順にソート<br/>default：1<br/>最大サイズ<br>1以上4以下に設定可能 |
 
 <details><summary>リクエスト例</summary>
