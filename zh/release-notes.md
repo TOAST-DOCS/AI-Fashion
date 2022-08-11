@@ -1,5 +1,9 @@
 ## AI Service > AI Fashion > Release Notes
 
+### August 23, 2022
+#### Feature Updates
+* [API] Added Japanese(`jp`) option to `lang` parameter of Deep Tagging API(tag)
+
 ### June 30, 2022
 #### Feature Updates
 * [API] Added a search request parameter to limit search results (`threshold`)
