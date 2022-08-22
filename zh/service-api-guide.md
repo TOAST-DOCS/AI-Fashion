@@ -592,7 +592,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | path | String | O | `https://imagecdn.co.kr/sample_image.jpg` | URL of the URL-encoded image |
-| lang | String | X | ko | Language of the label<br/>default: en<br/>en: English<br/>ko: Korean |
+| lang | String | X | ko | Language of the label<br/>default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese  |
 | item_limit | int | X | 3 | Number of items to respond with tag information among fashion items found in the image<br/>Sort items in the descending order of width<br/>default: 1<br/>Maximum size<br>Can be set in value from to 1 to 4 |
 
 <details><summary>Request Example</summary>
