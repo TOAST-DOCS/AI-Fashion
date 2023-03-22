@@ -19,6 +19,7 @@
 | 韓国(パンギョ) | https://kr1-aifashion.api.nhncloudservice.com |
 | 韓国(ピョンチョン) | https://kr2-aifashion.api.nhncloudservice.com |
 | 日本(東京) | https://jp1-aifashion.api.nhncloudservice.com |
+| 米国(カリフォルニア) | https://us1-api-aifashion.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### 入力画像ガイド
