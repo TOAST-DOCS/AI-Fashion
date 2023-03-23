@@ -1,7 +1,7 @@
 ## AI Service > AI Fashion > Release Notes
 
 ### March 28, 2023
-* AI Fashion 미국 리전 서비스 출시
+* AI Fashion US region service released
 
 ### August 23, 2022
 #### Feature Updates
