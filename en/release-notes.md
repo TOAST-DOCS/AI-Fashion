@@ -1,5 +1,8 @@
 ## AI Service > AI Fashion > Release Notes
 
+### March 28, 2023
+* AI Fashion US region service released
+
 ### August 23, 2022
 #### Feature Updates
 * [API] Added Japanese(`jp`) option to `lang` parameter of Deep Tagging API(tag)
