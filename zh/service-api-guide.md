@@ -20,6 +20,7 @@
 | KOREA (Pangyo) | https://kr1-aifashion.api.nhncloudservice.com |
 | KOREA (Pyeongchon) | https://kr2-aifashion.api.nhncloudservice.com |
 | JAPAN (Tokyo) | https://jp1-aifashion.api.nhncloudservice.com |
+| US (California) | https://us1-api-aifashion.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### Input Image Guide
