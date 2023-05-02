@@ -166,7 +166,6 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | data.indexID | string | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | Index ID |
-| data.docCnt | int | O | 1000 | Document count |
 
 <details>
 <summary>Response Body Example</summary>
@@ -179,8 +178,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
         "resultMessage": "SUCCESS"
     },
     "data": {
-        "indexID": "24bb94b3-8a6b-488e-b038-4f6038da2596",
-        "docCnt": 1000
+        "indexID": "24bb94b3-8a6b-488e-b038-4f6038da2596"
     }
 }
 ```
