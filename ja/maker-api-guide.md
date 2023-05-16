@@ -166,7 +166,6 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.indexID | string | O | 24bb94b3-8a6b-488e-b038-4f6038da2596 | インデックスID |
-| data.docCnt | int | O | 1000 | 文書数 |
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -179,8 +178,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
         "resultMessage": "SUCCESS"
     },
     "data": {
-        "indexID": "24bb94b3-8a6b-488e-b038-4f6038da2596",
-        "docCnt": 1000
+        "indexID": "24bb94b3-8a6b-488e-b038-4f6038da2596"
     }
 }
 ```
