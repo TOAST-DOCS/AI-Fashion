@@ -1,5 +1,9 @@
 ## AI Service > AI Fashion > Release Notes
 
+### May 16, 2023
+#### Feature Updates
+* [API] Exclude `docCnt` from response when indexing
+
 ### March 28, 2023
 * AI Fashion US region service released
 
