@@ -31,6 +31,7 @@
 * For more accurate recognition, a fashion item needs to take up a larger portion in the image.
 * Maximum size of image file: 5,000,000 bytes (For [tag API](#tag-api): 1,000,000 bytes)
 * Supported image formats: PNG, JPEG, GIF
+* If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
 
 <span id="filtering-guide"></span>
 ### Filtering Guide
