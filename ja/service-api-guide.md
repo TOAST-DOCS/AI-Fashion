@@ -35,7 +35,7 @@
 <span id="filtering-guide"></span>
 ### フィルタリングガイド
 
-* 制限されたカテゴリーで検索するときに使用します。
+* フィルタリング機能は、カテゴリまたはフィルターを制限して検索するときに使用します。
 
 #### 対象フィールド
 | 名前 | フィールド名 |
@@ -43,14 +43,16 @@
 | カテゴリー1depth | category1_id |
 | カテゴリー2depth | category2_id |
 | カテゴリー3depth | category3_id |
+| フィルター1 | s1 |
+| フィルター2 | s2 |
 
 #### 文法
 * `filter.{フィールド名}`=`演算子`:`値`
 
 | 条件 | 演算子 | 例 | 説明 |
 | --- | --- | --- | --- |
-| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | 対象フィールドの値がパラメータ値と同じ文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
-| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | 対象フィールドの値がパラメータ値と異なる文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
+| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 or<br/>filter.category2_id=equal:1003&filter.s1=equal:1 | 対象フィールドの値がパラメータ値と同じ文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
+| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 or<br/>filter.category2_id=!equal:1003,1005&filter.s1=!equal:1 | 対象フィールドの値がパラメータ値と異なる文書のみ結果としてレスポンスします。<br/>コンマ(,)で区切ってOR検索が可能です。 |
 
 <span id="common-response"></span>
 ### レスポンス共通情報
@@ -309,14 +311,16 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
 | filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
 | filter.category3_id | string | X | !equal:3 | category3_id値でフィルタリング |
+| filter.s1 | string | X | equal:3 | s1値でフィルタリング |
+| filter.s2 | string | X | !equal:3 | s2値でフィルタリング |
 | threshold | float32 | X | 0.8 | マッチングしたかどうかを判断する類似度基準値<br/> data.items[].similarity >= thresholdの項目のみマッチングしたと判断します。<br/>0超過1.0以下に設定可能 |
 
-* filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
+* filter.category1~3_id,filter.s1~s2は[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100&filter.s1=equal:1"
 ```
 
 </details>
@@ -500,14 +504,16 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | category1_id値でフィルタリング |
 | filter.category2_id | string | X | !equal:3 | category2_id値でフィルタリング |
 | filter.category3_id | string | X | !equal:3 | category3_id値でフィルタリング |
+| filter.s1 | string | X | equal:3 | s1値でフィルタリング |
+| filter.s2 | string | X | !equal:3 | s2値でフィルタリング |
 | threshold | float32 | X | 0.8 | マッチングしたかどうかを判断する類似度基準値<br/> data.items[].similarity >= thresholdの項目のみマッチングしたと判断します。<br/>0超過1.0以下に設定可能 |
 
-* filter.category1~3_idは[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
+* filter.category1~3_id,filter.s1~s2は[フィルタリングガイド](./service-api-guide/#filtering-guide)で確認可能
 
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
 ```
 
 </details>
