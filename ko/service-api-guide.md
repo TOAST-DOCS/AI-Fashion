@@ -36,7 +36,7 @@
 <span id="filtering-guide"></span>
 ### 필터링 가이드
 
-* 제한된 카테고리로 검색할 때 사용합니다.
+* 필터링 기능은 카테고리 또는 필터를 제한하여 검색할 때 사용합니다.
 
 #### 대상 필드
 | 이름 | 필드명 |
@@ -44,14 +44,16 @@
 | 카테고리 1depth | category1_id |
 | 카테고리 2depth | category2_id |
 | 카테고리 3depth | category3_id |
+| 필터 1 | s1 |
+| 필터 2 | s2 |
 
 #### 문법
 * `filter.{필드명}`=`연산자`:`값`
 
 | 조건 | 연산자 | 예제 | 설명 |
 | --- | --- | --- | --- |
-| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 | 대상 필드의 값이 파라미터 값과 같은 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
-| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 | 대상 필드의 값이 파라미터 값과 다른 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
+| equal(default) | equal | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 or<br/>filter.category2_id=equal:1003&filter.s1=equal:1 | 대상 필드의 값이 파라미터 값과 같은 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
+| not equal | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 or<br/>filter.category2_id=!equal:1003,1005&filter.s1=!equal:1 | 대상 필드의 값이 파라미터 값과 다른 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
 
 <span id="common-response"></span>
 ### 응답 공통 정보
@@ -310,14 +312,16 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| filter.s1 | string | X | equal:3 | s1 값으로 필터링 |
+| filter.s2 | string | X | !equal:3 | s2 값으로 필터링 |
 | threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100&filter.s1=equal:1"
 ```
 
 </details>
@@ -501,14 +505,16 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | category1_id 값으로 필터링 |
 | filter.category2_id | string | X | !equal:3 | category2_id 값으로 필터링 |
 | filter.category3_id | string | X | !equal:3 | category3_id 값으로 필터링 |
+| filter.s1 | string | X | equal:3 | s1 값으로 필터링 |
+| filter.s2 | string | X | !equal:3 | s2 값으로 필터링 |
 | threshold | float32 | X | 0.8 | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
 ```
 
 </details>

@@ -36,7 +36,7 @@
 <span id="filtering-guide"></span>
 ### Filtering Guide
 
-* The filtering function is used to search by limiting the categories.
+* The filtering function is used to search by limiting the categories of the filters.
 
 #### Target Field
 | Name | Field Name |
@@ -44,6 +44,8 @@
 | Category depth 1 | category1_id |
 | Category depth 2 | category2_id |
 | Category depth 3 | category3_id |
+| Filter 1 | s1 |
+| Filter 2 | s2 |
 
 #### Syntax
 * `filter.{field name}` = `operator` : `value`
@@ -310,6 +312,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
 | filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
+| filter.s1 | string | X | equal:3 | Filter by s1 value |
+| filter.s2 | string | X | !equal:3 | Filter by s2 value |
 | threshold | float32 | X | 0.8 | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
@@ -317,7 +321,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 <details><summary>Request Example</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100&filter.s1=equal:1"
 ```
 
 </details>
@@ -501,6 +505,8 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.category1_id | string | X | equal:3 | Filter by category1_id value |
 | filter.category2_id | string | X | !equal:3 | Filter by category2_id value |
 | filter.category3_id | string | X | !equal:3 | Filter by category3_id value |
+| filter.s1 | string | X | equal:3 | Filter by s1 value |
+| filter.s2 | string | X | !equal:3 | Filter by s2 value |
 | threshold | float32 | X | 0.8 | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
 * filter.category1~3_id can be found in the [Filtering Guide](./service-api-guide/#filtering-guide)
@@ -508,7 +514,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 <details><summary>Request Example</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
 ```
 
 </details>
