@@ -1,5 +1,10 @@
 ## AI Service > AI Fashion > 릴리스 노트
 
+### 2023.07.25
+#### 기능 개선/변경
+* [API] s1, s2 필터링 기능 추가
+	* [필터링 가이드](./service-api-guide/#filtering-guide) 참고
+
 ### 2023.05.16
 #### 기능 개선/변경
 * [API] 색인 요청에 대한 응답에서 `docCnt` 삭제
