@@ -1,5 +1,10 @@
 ## AI Service > AI Fashion > Release Notes
 
+### July 25, 2023
+#### Feature Updates
+* [API] Added s1 and s2 filtering functions
+	* See [Filtering Guide](./service-api-guide/#filtering-guide)
+
 ### May 16, 2023
 #### Feature Updates
 * [API] Delete `docCnt` from response to an index request

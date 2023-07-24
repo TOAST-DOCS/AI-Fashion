@@ -84,6 +84,8 @@
 | 카테고리 2depth | category2_id | string | O | 72 | 카테고리 2depth 아이디 |
 | 카테고리 3depth | category3_id | string | O | 72 | 카테고리 3depth 아이디 |
 | 이미지url | image_url | string | O | 1000 | 접근 가능한 이미지 URL |
+| 필터1 | s1 | string | O | 72 | 제한 검색을 위한 필터1 |
+| 필터2 | s2 | string | O | 72 | 제한 검색을 위한 필터2 |
 
 ##### 이미지 가이드
 
@@ -96,17 +98,17 @@
 
 ##### jsonl 예
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg"}
-{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg", "s1": "1", "s2": "2"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg", "s1": "s1", "s2": "2"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg", "s1": "", "s2": "s2"}
 ...
 ```
 
 ##### csv 예
 ```
-10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg
-10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg
-10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg
+10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg,1,2
+10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg,s1,2
+10003,enable,BBB blue blouse,1,1,3,http://bbbbbbb.ddddd.jpg,,s2
 ...
 ```
 
