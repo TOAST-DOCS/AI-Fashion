@@ -99,9 +99,9 @@
 
 ##### jsonl Example
 ```
-{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://aaaaaaa.bbbbb.jpg", "s1": "1", "s2": "2"}
-{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category_id1": "1", "category_id2": "1", "category_id3": "2", "image_url": "http://bbbbbbb.ccccc.jpg", "s1": "s1", "s2": "2"}
-{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category_id1": "1", "category_id2": "1", "category_id3": "3", "image_url": "http://bbbbbbb.ddddd.jpg", "s1": "", "s2": "s2"}
+{"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category1_id": "1", "category2_id": "1", "category3_id": "2", "image_url": "http://aaaaaaa.bbbbb.jpg", "s1": "1", "s2": "2"}
+{"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category1_id": "1", "category2_id": "1", "category3_id": "2", "image_url": "http://bbbbbbb.ccccc.jpg", "s1": "s1", "s2": "2"}
+{"product_id": "10003", "status": "enable", "name": "BBB blue blouse", "category1_id": "1", "category2_id": "1", "category3_id": "3", "image_url": "http://bbbbbbb.ddddd.jpg", "s1": "", "s2": "s2"}
 ...
 ```
 
