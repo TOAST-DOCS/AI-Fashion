@@ -22,13 +22,9 @@
 
 [API 도메인]
 
-| 리전 | 도메인 |
-| --- | --- |
-| 한국(판교) | https://kr1-aifashion.api.nhncloudservice.com |
-| 한국(평촌) | https://kr2-aifashion.api.nhncloudservice.com |
-| 한국(광주) | https://kr3-aifashion.api.nhncloudservice.com |
-| 일본(도쿄) | https://jp1-aifashion.api.nhncloudservice.com |
-| 미국(캘리포니아) | https://us1-api-aifashion.nhncloudservice.com |
+| 도메인 |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### 응답 공통 정보
