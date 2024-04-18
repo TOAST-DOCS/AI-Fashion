@@ -22,13 +22,9 @@
 
 [API Domain]
 
-| Region | Domain |
-| --- | --- |
-| KOREA (Pangyo) | https://kr1-aifashion.api.nhncloudservice.com |
-| KOREA (Pyeongchon) | https://kr2-aifashion.api.nhncloudservice.com |
-| KOREA (Gwangju) | https://kr3-aifashion.api.nhncloudservice.com |
-| JAPAN (Tokyo) | https://jp1-aifashion.api.nhncloudservice.com |
-| US (California) | https://us1-api-aifashion.nhncloudservice.com |
+| Domain |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### Response Common Information

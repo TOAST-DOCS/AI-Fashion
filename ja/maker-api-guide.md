@@ -22,13 +22,9 @@
 
 [APIドメイン]
 
-| リージョン | ドメイン |
-| --- | --- |
-| 韓国(パンギョ) | https://kr1-aifashion.api.nhncloudservice.com |
-| 韓国(ピョンチョン) | https://kr2-aifashion.api.nhncloudservice.com |
-| 韓国(クァンジュ) | https://kr3-aifashion.api.nhncloudservice.com |
-| 日本(東京) | https://jp1-aifashion.api.nhncloudservice.com |
-| 米国(カリフォルニア) | https://us1-api-aifashion.nhncloudservice.com |
+| ドメイン |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### レスポンス共通情報
