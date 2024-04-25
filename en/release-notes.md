@@ -1,7 +1,7 @@
 ## AI Service > AI Fashion > Release Notes
 
 ### May 01, 2024
-* Switched AI Fashion to a global service
+* Switched AI Fashion service from region service to global service
 
 ### July 25, 2023
 #### Feature Updates
