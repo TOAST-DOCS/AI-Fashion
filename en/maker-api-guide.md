@@ -14,7 +14,7 @@
     * For csv files, you need to fill in the actual data from the first line.
     * There should be no blank lines in the file.
 * The maximum file size is 20MB, and the maximum number of documents allowed is 10,000.
-* You can upload files up to 4 times per day, and the counting is reset every day at 00:00 Korean time.
+* You can upload files up to 24 times per day, and the counting is reset every day at 00:00 Korean time.
 * The maximum number of documents that can be indexed per Service ID is 100,000.
 
 ### Request Common Information
@@ -22,13 +22,9 @@
 
 [API Domain]
 
-| Region | Domain |
-| --- | --- |
-| KOREA (Pangyo) | https://kr1-aifashion.api.nhncloudservice.com |
-| KOREA (Pyeongchon) | https://kr2-aifashion.api.nhncloudservice.com |
-| KOREA (Gwangju) | https://kr3-aifashion.api.nhncloudservice.com |
-| JAPAN (Tokyo) | https://jp1-aifashion.api.nhncloudservice.com |
-| US (California) | https://us1-api-aifashion.nhncloudservice.com |
+| Domain |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### Response Common Information

@@ -14,7 +14,7 @@
     * .csv 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
     * 파일에 빈 줄이 없어야 합니다.
 * 파일 크기는 최대 20MB 까지 가능하고, 최대 허용 문서 수는 10,000개입니다.
-* 1일 최대 4회까지 업로드가 가능하며 매일 한국 시간 0시에 초기화됩니다.
+* 1일 최대 24회까지 업로드가 가능하며 매일 한국 시간 0시에 초기화됩니다.
 * Service ID 당 색인 가능한 최대 문서 수는 100,000개입니다.
 
 ### 요청 공통 정보
@@ -22,13 +22,9 @@
 
 [API 도메인]
 
-| 리전 | 도메인 |
-| --- | --- |
-| 한국(판교) | https://kr1-aifashion.api.nhncloudservice.com |
-| 한국(평촌) | https://kr2-aifashion.api.nhncloudservice.com |
-| 한국(광주) | https://kr3-aifashion.api.nhncloudservice.com |
-| 일본(도쿄) | https://jp1-aifashion.api.nhncloudservice.com |
-| 미국(캘리포니아) | https://us1-api-aifashion.nhncloudservice.com |
+| 도메인 |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### 응답 공통 정보

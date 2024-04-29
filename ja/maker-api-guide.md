@@ -14,7 +14,7 @@
     * .csvファイルを作成する時は、最初の行から実際のデータで埋める必要があります。
     * ファイルに空白の行があってはいけません。
 * ファイルサイズは最大20MBまで可能で、最大許可文書数は10,000個です。
-* 1日最大4回までアップロードが可能で、毎日日本時間0時に初期化されます。
+* 1日最大24回までアップロードが可能で、毎日日本時間0時に初期化されます。
 * Service IDごとにインデックス可能な最大文書数は100,000個です。
 
 ### リクエスト共通情報
@@ -22,13 +22,9 @@
 
 [APIドメイン]
 
-| リージョン | ドメイン |
-| --- | --- |
-| 韓国(パンギョ) | https://kr1-aifashion.api.nhncloudservice.com |
-| 韓国(ピョンチョン) | https://kr2-aifashion.api.nhncloudservice.com |
-| 韓国(クァンジュ) | https://kr3-aifashion.api.nhncloudservice.com |
-| 日本(東京) | https://jp1-aifashion.api.nhncloudservice.com |
-| 米国(カリフォルニア) | https://us1-api-aifashion.nhncloudservice.com |
+| ドメイン |
+| --- |
+| https://api-aifashion.nhncloudservice.com |
 
 <span id="common-response"></span>
 ### レスポンス共通情報

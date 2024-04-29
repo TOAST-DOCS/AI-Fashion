@@ -1,5 +1,8 @@
 ## AI Service > AI Fashion > Release Notes
 
+### May 01, 2024
+* Switched AI Fashion service from region service to global service
+
 ### July 25, 2023
 #### Feature Updates
 * [API] Added s1 and s2 filtering functions
