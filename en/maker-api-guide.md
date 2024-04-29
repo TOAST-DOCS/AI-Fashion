@@ -14,7 +14,7 @@
     * For csv files, you need to fill in the actual data from the first line.
     * There should be no blank lines in the file.
 * The maximum file size is 20MB, and the maximum number of documents allowed is 10,000.
-* You can upload files up to 4 times per day, and the counting is reset every day at 00:00 Korean time.
+* You can upload files up to 24 times per day, and the counting is reset every day at 00:00 Korean time.
 * The maximum number of documents that can be indexed per Service ID is 100,000.
 
 ### Request Common Information
