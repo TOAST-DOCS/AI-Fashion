@@ -888,12 +888,12 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 
 [URL Parameter]
 
-| 이름     | 타입     | 필수 | 예제                   | 설명                                                                                  |
-|--------|--------|----|----------------------|-------------------------------------------------------------------------------------|
-| start  | int    | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                   |
-| limit  | int    | O  | 100                  | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
-| order  | string | X  | "requestedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조    |
-| status | string | X  | "finished"           | 색인의 상탯값                                                                             |
+| 이름       | 타입           | 필수 | 예제                   | 설명                                                                                  |
+|----------|--------------|----|----------------------|-------------------------------------------------------------------------------------|
+| start    | int          | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                   |
+| limit    | int          | O  | 100                  | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
+| order    | string       | X  | "requestedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조    |
+| statuses | string array | X  | "running, finished"  | 색인의 상탯값                                                                             |
 
 #### Paging
 * start와 limit 파라미터로 페이징이 가능합니다.
@@ -920,6 +920,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
   * addedCount: 추가된 문서 수
   * failedCount: 실패 문서 수
   * deletedCount: 삭제 문서 수
+  * exceededCount: 제한된 사용량을 넘어선 문서 수
   * updatedCount: 수정 문서 수
   * totalCount: 전체 문서 수
 * 정렬 방식
@@ -939,7 +940,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running,finished&order=startTime:desc"  -H "Content-Type: application/json"
 ```
 
 </details>
