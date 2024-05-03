@@ -1,4 +1,3 @@
-
 ## AI Service > AI Fashion > API v2.0 가이드
 
 - AI Fashion v2.0 서비스를 사용하는 데 필요한 API를 설명합니다.
@@ -258,11 +257,12 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 
 [응답 본문 데이터]
 
-| 이름                         | 타입     | 필수 | 예제         | 설명         |
-|----------------------------|--------|----|------------|------------|
-| data.totalCount            | Number | O  | 2          | 총 검색 결과 개수 |
-| data.items[].serviceName   | string | O  | my-service | 서비스명       |
-| data.items[].documentCount | string | O  | 100        | 전체 문서 개수   |
+| 이름                             | 타입     | 필수 | 예제         | 설명                |
+|--------------------------------|--------|----|------------|-------------------|
+| data.totalCount                | Number | O  | 2          | 총 검색 결과 개수        |
+| data.items[].serviceName       | string | O  | my-service | 서비스명              |
+| data.items[].documentCount     | string | O  | 100        | 전체 문서 개수          |
+| data.items[].remainInsertCount | int    | O  | 3          | 서비스 당 색인 요청 가능 횟수 |
 
 <details><summary>응답 본문 예</summary>
 
@@ -297,6 +297,75 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
 | -50000     | InternalServerError | 서버 오류          |
+
+
+### 서비스 조회
+
+* 특정 서비스의 사용량 정보를 확인할 수 있는 API
+
+#### 요청
+
+[URI]
+
+| 메서드 | URI                                           |
+|-----|-----------------------------------------------|
+| GET | /v2.0/appkeys/{appKey}/services/{serviceName} |
+
+[Path Variable]
+
+| 이름          | 설명                      |
+|-------------|-------------------------|
+| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| serviceName | 서비스명                    |
+
+<details><summary>요청 예</summary>
+
+```
+curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
+```
+
+</details>
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름                     | 타입     | 필수 | 예제         | 설명                |
+|------------------------|--------|----|------------|-------------------|
+| data.serviceName       | string | O  | my-service | 서비스명              |
+| data.documentCount     | string | O  | 100        | 전체 문서 개수          |
+| data.remainInsertCount | int    | O  | 3          | 서비스 당 색인 요청 가능 횟수 |
+
+<details><summary>응답 본문 예</summary>
+
+``` json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    },
+    "data": {
+        "serviceName": "my-service",
+        "documentCount": 100,
+        "remainInsertCount": 3
+    }
+}
+```
+
+</details>
+
+#### 오류 코드
+
+| resultCode | resultMessage       | 설명             |
+|------------|---------------------|----------------|
+| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -50000     | InternalServerError | 서버 오류          |
+
 
 ## 유사 이미지 상품 추천
 
