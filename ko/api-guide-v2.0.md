@@ -24,7 +24,6 @@
   * .csv 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
   * 파일에 빈 줄이 없어야 합니다.
 * 파일 크기는 최대 20MB 까지 가능하고, 최대 허용 문서 수는 10,000개입니다.
-* 1일 최대 4회까지 업로드가 가능하며 매일 한국 시간 0시에 초기화됩니다.
 * Service ID 당 색인 가능한 최대 문서 수는 100,000개입니다.
 
 
@@ -142,7 +141,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 <details><summary>응답 본문 예</summary>
 
@@ -199,7 +198,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 <details><summary>응답 본문 예</summary>
 
@@ -253,7 +252,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -329,7 +328,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -401,7 +400,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | threshold          | float32 | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
@@ -414,7 +413,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
   
 [응답 본문 데이터]
 
@@ -500,7 +499,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -556,8 +555,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
 | -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
+| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
@@ -594,7 +593,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | threshold          | float32 | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](./service-api-guide/#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
@@ -607,7 +606,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -647,16 +646,16 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 #### 오류 코드
 
-| resultCode | resultMessage               | 설명                                                                           |
-|------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
+| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
 ## 딥 태깅
 
@@ -699,7 +698,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./service-api-guide/#common-response)에서 확인 가능
+    * [응답 공통 정보](#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -804,8 +803,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
 | -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[입력 이미지 가이드](./service-api-guide/#input-image-guide) 참고 |
+| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
+| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
