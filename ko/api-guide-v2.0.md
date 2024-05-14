@@ -450,7 +450,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
         "query": "productId=10234455&limit=100",
         "items": [{
                 "similarity": 0.91234,
-                "productId": "8980335".
+                "productId": "8980335",
                 "name": "AAA red onepiece",
                 "imageUrl": "http://url.com"
             }
@@ -551,7 +551,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
         "query": "productId=10234455&limit=100",
         "items": [{
                 "similarity": 0.91234,
-                "productId": "8980335".
+                "productId": "8980335",
                 "name": "AAA red onepiece",
                 "imageUrl": "http://url.com"
             }
@@ -751,7 +751,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
         "query": "link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9uYXdzLmNvbS9mZy1pbWfnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUiOiJBTEwiLpbnB1dHMi0lt7ImJveCI6eyJsZWZ0IjozNQsInRvcCI6MyLCJ3aWa0aCI6MTU1LCJozWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=&limit=100",
         "items": [{
                 "similarity": 0.91234,
-                "productId": "8980335".
+                "productId": "8980335",
                 "name": "AAA red onepiece",
                 "imageUrl": "http://url.com"
             }
