@@ -39,7 +39,7 @@
 * 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식할 수 있습니다.
 * 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식할 수 있습니다.
 * 이미지 URL에 포트를 직접 지정하는 경우 80, 443, 10000~12000 포트만 사용 가능합니다.
-* 이미지 파일의 최대 크기: 5MB(단, [Tag API](#tag-api)는 10MB)
+* 이미지 파일의 최대 크기: 5MB(단, [Tag API](#tag-api)는 1MB)
 * 지원 이미지 파일 형식: PNG, JPEG, GIF
 
 <span id="filtering-guide"></span>
@@ -74,7 +74,7 @@
 | 이름                   | 타입      | 설명                              |
 |----------------------|---------|---------------------------------|
 | header.isSuccessful  | boolean | true: 정상<br>false: 오류           |
-| header.resultCode    | int     | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
+| header.resultCode    | integer     | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
 | header.resultMessage | string  | "SUCCESS": 정상<br>그 외: 오류 메시지 반환 |
 
 [성공 응답 본문 예]
@@ -167,7 +167,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 |------------|-------------------------------|----------------|
 | -40000     | InvalidParam                  | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey            | 승인되지 않은 Appkey |
-| -42010     | DuplicateServiceName          | 중복 서비스명        |
+| -42010     | DuplicateServiceName          | 중복된 서비스명       |
 | -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과  |
 | -50000     | InternalServerError           | 서버 오류          |
 
@@ -262,10 +262,10 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 
 | 이름                             | 타입     | 필수 | 예제         | 설명                |
 |--------------------------------|--------|----|------------|-------------------|
-| data.totalCount                | Number | O  | 2          | 총 검색 결과 개수        |
+| data.totalCount                | integer    | O  | 2          | 총 검색 결과 개수        |
 | data.items[].serviceName       | string | O  | my-service | 서비스명              |
 | data.items[].documentCount     | string | O  | 100        | 전체 문서 개수          |
-| data.items[].remainInsertCount | int    | O  | 3          | 서비스 당 색인 요청 가능 횟수 |
+| data.items[].remainInsertCount | integer    | O  | 3          | 서비스 당 추가 가능한 문서 수 |
 
 <details><summary>응답 본문 예</summary>
 
@@ -336,11 +336,11 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 [응답 본문 데이터]
 
-| 이름                     | 타입     | 필수 | 예제         | 설명                |
-|------------------------|--------|----|------------|-------------------|
-| data.serviceName       | string | O  | my-service | 서비스명              |
-| data.documentCount     | string | O  | 100        | 전체 문서 개수          |
-| data.remainInsertCount | int    | O  | 3          | 서비스 당 색인 요청 가능 횟수 |
+| 이름                     | 타입      | 필수 | 예제         | 설명                |
+|------------------------|---------|----|------------|-------------------|
+| data.serviceName       | string  | O  | my-service | 서비스명              |
+| data.documentCount     | string  | O  | 100        | 전체 문서 개수          |
+| data.remainInsertCount | integer | O  | 3          | 서비스 당 추가 가능한 문서 수 |
 
 <details><summary>응답 본문 예</summary>
 
@@ -372,7 +372,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 ## 유사 이미지 상품 추천
 
-### Search By ProductId
+## 상품 아이디로 검색
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -396,13 +396,13 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 | 이름                 | 타입      | 필수 | 예제       | 설명                                                                                                        |
 |--------------------|---------|----|----------|-----------------------------------------------------------------------------------------------------------|
-| limit              | int     | O  | 100      | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
+| limit              | integer | O  | 100      | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
 | filter.category1Id | string  | X  | equal:3  | category1Id 값으로 필터링                                                                                       |
 | filter.category2Id | string  | X  | !equal:3 | category2Id 값으로 필터링                                                                                       |
 | filter.category3Id | string  | X  | !equal:3 | category3Id 값으로 필터링                                                                                       |
 | filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
-| threshold          | float32 | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| threshold          | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -421,12 +421,20 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
   
 [응답 본문 데이터]
 
-| 이름                      | 타입     | 필수 | 예제                           | 설명         |
-|-------------------------|--------|----|------------------------------|------------|
-| data.totalCount         | Number | O  | 100                          | 총 검색 결과 개수 |
-| data.query              | string | O  | productId=10234455&limit=100 | 검색 질의      |
-| data.items[].similarity | Number | O  | 0.91234                      | 검색 유사도 점수  |
-| data.items[].productId  | string | O  | 8980335                      | 상품 아이디     |
+| 이름                       | 타입      | 필수 | 예제                           | 설명              |
+|--------------------------|---------|----|------------------------------|-----------------|
+| data.totalCount          | integer | O  | 100                          | 총 검색 결과 개수      |
+| data.query               | string  | O  | productId=10234455&limit=100 | 검색 질의           |
+| data.items[].similarity  | float   | O  | 0.91234                      | 검색 유사도 점수       |
+| data.items[].productId   | string  | O  | 8980335                      | 상품 아이디          |
+| data.items[].name        | string  | O  | AAA red onepiece             | 상품명             |
+| data.items[].imageUrl    | string  | O  | http://url.com               | 접근 가능한 이미지 URL  |
+| data.items[].category1Id | string  | X  | 72                           | 카테고리 1depth 아이디 |
+| data.items[].category2Id | string  | X  | 72                           | 카테고리 2depth 아이디 |
+| data.items[].category3Id | string  | X  | 72                           | 카테고리 3depth 아이디 |
+| data.items[].s1          | string  | X  | 72                           | 제한 검색을 위한 필터1   |
+| data.items[].s2          | string  | X  | 72                           | 제한 검색을 위한 필터2   |
+
 
 <details><summary>응답 본문 예</summary>
 
@@ -438,15 +446,13 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
         "resultMessage": "SUCCESS"
     },
     "data": {
-        "totalCount": 100,
+        "totalCount": 1,
         "query": "productId=10234455&limit=100",
         "items": [{
                 "similarity": 0.91234,
-                "productId": "8980335"
-            },
-            {
-                "similarity": 0.81234,
-                "productId": "7980335"
+                "productId": "8980335".
+                "name": "AAA red onepiece",
+                "imageUrl": "http://url.com"
             }
         ]
     }
@@ -465,9 +471,110 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 | -42000     | NotExistService     | 등록되지 않은 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
+
+## 상품 이미지로 검색
+
+* 상품 이미지(url, file)를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+
+#### 요청
+
+[URI]
+
+| 메서드  | URI                                                  |
+|------|------------------------------------------------------|
+| POST | /v2.0/appkeys/{appKey}/services/{serviceName}/search |
+
+[Path Variable]
+
+| 이름          | 설명                      |
+|-------------|-------------------------|
+| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| serviceName | 서비스명                    |
+
+[Request Body]
+
+| 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                        |
+|--------------------|---------|----|-----------------|-----------------------------------------------------------------------------------------------------------|
+| imageUrl           | string  | △  | http://url.com	 | 이미지의 URL                                                                                                  |
+| imageFile          | file    | △  | image.png	      | 이미지 파일                                                                                                    |
+| limit              | integer | O  | 100             | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
+| filter.category1Id | string  | X  | equal:3         | category1Id 값으로 필터링                                                                                       |
+| filter.category2Id | string  | X  | !equal:3        | category2Id 값으로 필터링                                                                                       |
+| filter.category3Id | string  | X  | !equal:3        | category3Id 값으로 필터링                                                                                       |
+| filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
+| filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
+| threshold          | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+
+* Content-Type: multipart/form-data
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
+
+<details><summary>요청 예</summary>
+
+```
+curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/search"
+```
+
+</details>
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름                       | 타입      | 필수 | 예제                           | 설명              |
+|--------------------------|---------|----|------------------------------|-----------------|
+| data.totalCount          | integer | O  | 100                          | 총 검색 결과 개수      |
+| data.items[].similarity  | float   | O  | 0.91234                      | 검색 유사도 점수       |
+| data.items[].productId   | string  | O  | 8980335                      | 상품 아이디          |
+| data.items[].name        | string  | O  | AAA red onepiece             | 상품명             |
+| data.items[].imageUrl    | string  | O  | http://url.com               | 접근 가능한 이미지 URL  |
+| data.items[].category1Id | string  | X  | 72                           | 카테고리 1depth 아이디 |
+| data.items[].category2Id | string  | X  | 72                           | 카테고리 2depth 아이디 |
+| data.items[].category3Id | string  | X  | 72                           | 카테고리 3depth 아이디 |
+| data.items[].s1          | string  | X  | 72                           | 제한 검색을 위한 필터1   |
+| data.items[].s2          | string  | X  | 72                           | 제한 검색을 위한 필터2   |
+
+
+<details><summary>응답 본문 예</summary>
+
+``` json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    },
+    "data": {
+        "totalCount": 1,
+        "query": "productId=10234455&limit=100",
+        "items": [{
+                "similarity": 0.91234,
+                "productId": "8980335".
+                "name": "AAA red onepiece",
+                "imageUrl": "http://url.com"
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+#### 오류 코드
+
+| resultCode | resultMessage       | 설명             |
+|------------|---------------------|----------------|
+| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -50000     | InternalServerError | 서버 오류          |
+
+
 ## 카메라 검색
 
-### Detect
+### 패션 아이템 감지
 
 * 입력 이미지에서 패션 아이템을 감지하는 API입니다.
 
@@ -507,15 +614,15 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 [응답 본문 데이터]
 
-| 이름                  | 타입            | 필수 | 예제                                               | 설명                       |
-|---------------------|---------------|----|--------------------------------------------------|--------------------------|
-| data.totalCount     | Number        | O  | 100                                              | 총 검색 결과 개수               |
-| data.query          | string        | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | 검색 질의                    |
-| data.items[].link   | string        | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | search by image에서 사용할 링크 |
-| data.items[].center | float64 array | O  | [0.825047801147227, 0.330948979591837]           | 감지된 아이템의 중앙 x, y 좌표 %    |
-| data.items[].b0     | float64 array | O  | [0.676864247418738, 0.219377551020408]           | 감지된 아이템의 x0, y0 좌표 %     |
-| data.items[].b1     | float64 array | O  | [0.973231355525813, 0.4426204081632654]          | 감지된 아이템의 x1, y1 좌표 %     |
-| data.items[].score  | float32       | O  | 0.9732                                           | 감지된 아이템의 신뢰도             |
+| 이름                  | 타입           | 필수 | 예제                                               | 설명                                                    |
+|---------------------|--------------|----|--------------------------------------------------|-------------------------------------------------------|
+| data.totalCount     | integer      | O  | 100                                              | 총 검색 결과 개수                                            |
+| data.query          | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | 검색 질의                                                 |
+| data.items[].link   | string       | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | [패션 아이템 감지 link로 검색](#search-by-detect-link)에서 사용할 링크 |
+| data.items[].center | double array | O  | [0.825047801147227, 0.330948979591837]           | 감지된 아이템의 중앙 x, y 좌표 %                                 |
+| data.items[].b0     | double array | O  | [0.676864247418738, 0.219377551020408]           | 감지된 아이템의 x0, y0 좌표 %                                  |
+| data.items[].b1     | double array | O  | [0.973231355525813, 0.4426204081632654]          | 감지된 아이템의 x1, y1 좌표 %                                  |
+| data.items[].score  | float        | O  | 0.9732                                           | 감지된 아이템의 신뢰도                                          |
 
 <details><summary>응답 본문 예</summary>
 
@@ -554,18 +661,19 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 #### 오류 코드
 
-| resultCode | resultMessage               | 설명                                                                           |
-|------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
-### Search By Image
+<span id="search-by-detect-link"></span>
+### 패션 아이템 감지 link로 검색
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -588,14 +696,14 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 | 이름                 | 타입      | 필수 | 예제                                                 | 설명                                                                                                        |
 |--------------------|---------|----|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| limit              | int     | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
+| limit              | integer | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
 | link               | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link (URL encoding 필요)                                                                  |
 | filter.category1Id | string  | X  | equal:3                                            | category1Id 값으로 필터링                                                                                       |
 | filter.category2Id | string  | X  | !equal:3                                           | category2Id 값으로 필터링                                                                                       |
 | filter.category3Id | string  | X  | !equal:3                                           | category3Id 값으로 필터링                                                                                       |
 | filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
-| threshold          | float32 | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| threshold          | float   | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -614,12 +722,20 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 [응답 본문 데이터]
 
-| 이름                      | 타입     | 필수 | 예제                                                              | 설명         |
-|-------------------------|--------|----|-----------------------------------------------------------------|------------|
-| data.totalCount         | Number | O  | 100                                                             | 총 검색 결과 개수 |
-| data.query              | string | O  | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의      |
-| data.items[].similarity | Number | O  | 0.91234                                                         | 검색 유사도 점수  |
-| data.items[].productId  | string | O  | 8980335                                                         | 상품 아이디     |
+| 이름                       | 타입      | 필수 | 예제                                                              | 설명              |
+|--------------------------|---------|----|-----------------------------------------------------------------|-----------------|
+| data.totalCount          | integer | O  | 100                                                             | 총 검색 결과 개수      |
+| data.query               | string  | O  | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의           |
+| data.items[].similarity  | float   | O  | 0.91234                                                         | 검색 유사도 점수       |
+| data.items[].productId   | string  | O  | 8980335                                                         | 상품 아이디          |
+| data.items[].name        | string  | O  | AAA red onepiece                                                | 상품명             |
+| data.items[].imageUrl    | string  | O  | http://url.com                                                  | 접근 가능한 이미지 URL  |
+| data.items[].category1Id | string  | X  | 72                                                              | 카테고리 1depth 아이디 |
+| data.items[].category2Id | string  | X  | 72                                                              | 카테고리 2depth 아이디 |
+| data.items[].category3Id | string  | X  | 72                                                              | 카테고리 3depth 아이디 |
+| data.items[].s1          | string  | X  | 72                                                              | 제한 검색을 위한 필터1   |
+| data.items[].s2          | string  | X  | 72                                                              | 제한 검색을 위한 필터2   |
+
 
 <details><summary>응답 본문 예</summary>
 
@@ -631,15 +747,13 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
         "resultMessage": "SUCCESS"
     },
     "data": {
-        "totalCount": 100,
+        "totalCount": 1,
         "query": "link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9uYXdzLmNvbS9mZy1pbWfnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUiOiJBTEwiLpbnB1dHMi0lt7ImJveCI6eyJsZWZ0IjozNQsInRvcCI6MyLCJ3aWa0aCI6MTU1LCJozWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0=&limit=100",
         "items": [{
                 "similarity": 0.91234,
-                "productId": "8980335"
-            },
-            {
-                "similarity": 0.81234,
-                "productId": "7980335"
+                "productId": "8980335".
+                "name": "AAA red onepiece",
+                "imageUrl": "http://url.com"
             }
         ]
     }
@@ -664,7 +778,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 ## 딥 태깅
 
 <span id="tag-api"></span>
-### Tag
+### 패션 아이템 태그 감지
 
 * 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API입니다.
 
@@ -685,11 +799,11 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 [URL Parameter]
 
-| 이름        | 타입     | 필수 | 예제                                        | 설명                                                                                                      |
-|-----------|--------|----|-------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| path      | string | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL                                                                                     |
-| lang      | string | X  | ko                                        | label의 언어<br/>default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
-| itemLimit | int    | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                                      |
+|-----------|---------|----|-------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL                                                                                     |
+| lang      | string  | X  | ko                                        | label의 언어<br/>default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
+| itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
@@ -706,20 +820,20 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 
 [응답 본문 데이터]
 
-| 이름                                 | 타입                   | 필수 | 예제                                                                  | 설명                                           |
-|------------------------------------|----------------------|----|---------------------------------------------------------------------|----------------------------------------------|
-| data.totalCount                    | Number               | O  | 2                                                                   | 총 검색 결과 개수                                   |
-| data.query                         | string               | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
-| data.items[].type                  | string               | O  | JACKET                                                              | 감지된 아이템의 type                                |
-| data.items[].score                 | float32              | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
-| data.items[].tags                  | Array of json object | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
-| data.items[].tags[].attribute      | string               | O  | category                                                            | 태그의 속성                                       |
-| data.items[].tags[].labels         | Array of json object | O  |                                                                     | 태그 라벨의 배열                                    |
-| data.items[].tags[].labels[].label | string               | O  | 블라우스 \| Blouse                                                      | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐 |
-| data.items[].tags[].labels[].score | float32              | O  | 0.9545                                                              | 태그 라벨의 신뢰도                                   |
-| data.items[].center                | float64 array        | O  | [0.825047801147227, 0.330948979591837]                              | 감지된 아이템의 중앙 x, y 좌표 %                        |
-| data.items[].b0                    | float64 array        | O  | [0.676864247418738, 0.219377551020408]                              | 감지된 아이템의 x0, y0 좌표 %                         |
-| data.items[].b1                    | float64 array        | O  | [0.973231355525813, 0.4426204081632654]                             | 감지된 아이템의 x1, y1 좌표 %                         |
+| 이름                                 | 타입           | 필수 | 예제                                                                  | 설명                                           |
+|------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
+| data.totalCount                    | integer      | O  | 2                                                                   | 총 검색 결과 개수                                   |
+| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
+| data.items[].type                  | string       | O  | JACKET                                                              | 감지된 아이템의 type                                |
+| data.items[].score                 | float        | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
+| data.items[].tags                  | array        | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
+| data.items[].tags[].attribute      | string       | O  | category                                                            | 태그의 속성                                       |
+| data.items[].tags[].labels         | array        | O  |                                                                     | 태그 라벨의 배열                                    |
+| data.items[].tags[].labels[].label | string       | O  | 블라우스 \| Blouse                                                      | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐 |
+| data.items[].tags[].labels[].score | float        | O  | 0.9545                                                              | 태그 라벨의 신뢰도                                   |
+| data.items[].center                | double array | O  | [0.825047801147227, 0.330948979591837]                              | 감지된 아이템의 중앙 x, y 좌표 %                        |
+| data.items[].b0                    | double array | O  | [0.676864247418738, 0.219377551020408]                              | 감지된 아이템의 x0, y0 좌표 %                         |
+| data.items[].b1                    | double array | O  | [0.973231355525813, 0.4426204081632654]                             | 감지된 아이템의 x1, y1 좌표 %                         |
 
 <br>
 <details><summary>응답 본문 예</summary>
@@ -802,16 +916,16 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 
 #### 오류 코드
 
-| resultCode | resultMessage               | 설명                                                                           |
-|------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
 
 ### 색인 요청
@@ -869,11 +983,11 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 
 [Form Data]
 
-| 이름     | 타입     | 필수 여부 | 예제                                                     | 설명                                                     |
-|--------|--------|-------|--------------------------------------------------------|--------------------------------------------------------|
-| format | string | O     | jsonl                                                  | jsonl 또는 csv                                           |
-| link   | string | △     | "https://cdn.my-domain.com/202106251000_product.jsonl" | 데이터 파일 URL                                             |
-| file   | file   | △     | @filename                                              | 데이터 파일<br/>link가 file보다 우선 순위가 높아서 link가 있으면 file은 무시됨 |
+| 이름     | 타입     | 필수 여부 | 예제                                                   | 설명                                                     |
+|--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
+| format | string | O     | jsonl                                                | jsonl 또는 csv                                           |
+| link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                             |
+| file   | file   | △     | @filename                                            | 데이터 파일<br/>link가 file보다 우선 순위가 높아서 link가 있으면 file은 무시됨 |
 
 
 <details>
@@ -932,7 +1046,6 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 | -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40040     | IndexQuotaExceededException | 1일 요청 횟수를 초과한 경우                     |
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
-| -40400     | NoApiFound                  | 정의되지 않은 API로 요청한 경우                  |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                       |
 | -42000     | NotExistService             | 등록되지 않은 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
@@ -962,8 +1075,8 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 
 | 이름       | 타입           | 필수 | 예제                   | 설명                                                                                  |
 |----------|--------------|----|----------------------|-------------------------------------------------------------------------------------|
-| start    | int          | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                   |
-| limit    | int          | O  | 100                  | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
+| start    | integer      | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                   |
+| limit    | integer      | O  | 100                  | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
 | order    | string       | X  | "requestedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조    |
 | statuses | string array | X  | "running, finished"  | 색인의 상탯값                                                                             |
 
@@ -1026,7 +1139,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 
 | 이름                         | 타입             | 필수 | 예제                                   | 설명                                                                                              |
 |----------------------------|----------------|----|--------------------------------------|-------------------------------------------------------------------------------------------------|
-| data.total                 | int            | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
+| data.total                 | integer        | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
 | data.items[].service       | string         | O  | test                                 | 서비스명                                                                                            |
 | data.items[].id            | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename      | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
@@ -1034,12 +1147,12 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | data.items[].requestedTime | unix timestamp | O  | 1625098033                           | 색인 등록 시간                                                                                        |
 | data.items[].startTime     | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime    | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
-| data.items[].addedCount    | int            | O  | 234                                  | 추가된 문서 개수                                                                                       |
-| data.items[].failedCount   | int            | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
-| data.items[].exceededCount | int            | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
-| data.items[].deletedCount  | int            | O  | 31                                   | 삭제된 문서 개수                                                                                       |
-| data.items[].updatedCount  | int            | O  | 592                                  | 수정된 문서 개수                                                                                       |
-| data.items[].totalCount    | int            | O  | 888                                  | 색인 총 문서 개수                                                                                      |
+| data.items[].addedCount    | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
+| data.items[].failedCount   | integer        | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
+| data.items[].exceededCount | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
+| data.items[].deletedCount  | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
+| data.items[].updatedCount  | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
+| data.items[].totalCount    | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                      |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -1076,13 +1189,12 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 
 #### 오류 코드
 
-| resultCode | resultMessage | 설명 |
-| --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40400 | NoApiFound | 정의되지 않은 API로 요청한 경우 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistService | 등록되지 않은 서비스 |
-| -50000 | InternalServerError | 서버 오류 |
+| resultCode | resultMessage       | 설명             |
+|------------|---------------------|----------------|
+| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -50000     | InternalServerError | 서버 오류          |
 
 
 ### 색인 상세 조회
@@ -1105,18 +1217,11 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | serviceName | 서비스명                    |
 | indexId     | 색인 ID                   |
 
-#### 색인 상태
-* 색인 상탯값을 조건으로 검색할 수 있습니다.
-  * reserved: 대기
-  * running: 진행 중
-  * failed: 전체 실패
-  * finished: 완료(부분 실패 포함)
-
 <details>
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 ```
 
 </details>
@@ -1130,7 +1235,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 
 | 이름                              | 타입             | 필수 | 예제                                   | 설명                                                                                              |
 |---------------------------------|----------------|----|--------------------------------------|-------------------------------------------------------------------------------------------------|
-| data.total                      | int            | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
+| data.total                      | integer        | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
 | data.items[].serviceName        | string         | O  | test                                 | 서비스명                                                                                            |
 | data.items[].id                 | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename           | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
@@ -1138,17 +1243,17 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 등록 시간                                                                                        |
 | data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
-| data.items[].addedCount         | int            | O  | 234                                  | 추가된 문서 개수                                                                                       |
+| data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
 | data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 id 목록                                                                                    |
-| data.items[].failedCount        | int            | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
+| data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
 | data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 id 목록                                                                                    |
-| data.items[].exceededCount      | int            | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
+| data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
 | data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을을 넘어서 색인할 수 없는 문서 id 목록                                                                  |
-| data.items[].deletedCount       | int            | O  | 31                                   | 삭제된 문서 개수                                                                                       |
+| data.items[].deletedCount       | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
 | data.items[].deletedProductIds  | string array   | O  | [10001, 10002]                       | 삭제된 문서 id 목록                                                                                    |
-| data.items[].updatedCount       | int            | O  | 592                                  | 수정된 문서 개수                                                                                       |
+| data.items[].updatedCount       | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
 | data.items[].updatedProductIds  | string array   | O  | [10001, 10002]                       | 수정된 문서 id 목록                                                                                    |
-| data.items[].totalCount         | int            | O  | 888                                  | 색인 총 문서 개수                                                                                      |
+| data.items[].totalCount         | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                      |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -1193,7 +1298,6 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | resultCode | resultMessage       | 설명                  |
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -40400     | NoApiFound          | 정의되지 않은 API로 요청한 경우 |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey      |
 | -42000     | NotExistService     | 등록되지 않은 서비스         |
 | -50000     | InternalServerError | 서버 오류               |
