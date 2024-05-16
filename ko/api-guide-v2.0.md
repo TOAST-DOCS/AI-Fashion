@@ -1125,7 +1125,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running,finished&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running,finished&order=startTime:desc"
 ```
 
 </details>

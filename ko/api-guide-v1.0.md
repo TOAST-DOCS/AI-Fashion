@@ -882,7 +882,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 ```
 
 </details>
@@ -1014,7 +1014,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services" -H "Content-T
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes?start=0&limit=100&status=running&order=startTime:desc"  -H "Content-Type: application/json"
+curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes?start=0&limit=100&status=running&order=startTime:desc"
 ```
 
 </details>
