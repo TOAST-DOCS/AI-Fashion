@@ -403,6 +403,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | threshold          | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부                                                                                              |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -504,6 +505,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 | filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
 | threshold          | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false           | 중복 이미지 포함 여부                                                                                              |
+
 
 * Content-Type: multipart/form-data
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
@@ -704,6 +707,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | threshold          | float   | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false                                              | 중복 이미지 포함 여부                                                                                              |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
