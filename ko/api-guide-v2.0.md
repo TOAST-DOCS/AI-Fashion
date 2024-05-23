@@ -473,108 +473,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 | -50000     | InternalServerError | 서버 오류          |
 
 
-## 상품 이미지로 검색
-
-* 상품 이미지(url, file)를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
-
-#### 요청
-
-[URI]
-
-| 메서드  | URI                                                  |
-|------|------------------------------------------------------|
-| POST | /v2.0/appkeys/{appKey}/services/{serviceName}/search |
-
-[Path Variable]
-
-| 이름          | 설명                      |
-|-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
-| serviceName | 서비스명                    |
-
-[Request Body]
-
-| 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                        |
-|--------------------|---------|----|-----------------|-----------------------------------------------------------------------------------------------------------|
-| imageUrl           | string  | △  | http://url.com	 | 이미지의 URL                                                                                                  |
-| imageFile          | file    | △  | image.png	      | 이미지 파일                                                                                                    |
-| limit              | integer | O  | 100             | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| filter.category1Id | string  | X  | equal:3         | category1Id 값으로 필터링                                                                                       |
-| filter.category2Id | string  | X  | !equal:3        | category2Id 값으로 필터링                                                                                       |
-| filter.category3Id | string  | X  | !equal:3        | category3Id 값으로 필터링                                                                                       |
-| filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
-| filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
-| threshold          | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false           | 중복 이미지 포함 여부                                                                                              |
-
-
-* Content-Type: multipart/form-data
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
-
-<details><summary>요청 예</summary>
-
-```
-curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/search"
-```
-
-</details>
-
-#### 응답
-
-* [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](#common-response)에서 확인 가능
-
-[응답 본문 데이터]
-
-| 이름                       | 타입      | 필수 | 예제                           | 설명              |
-|--------------------------|---------|----|------------------------------|-----------------|
-| data.totalCount          | integer | O  | 100                          | 총 검색 결과 개수      |
-| data.items[].similarity  | float   | O  | 0.91234                      | 검색 유사도 점수       |
-| data.items[].productId   | string  | O  | 8980335                      | 상품 아이디          |
-| data.items[].name        | string  | O  | AAA red onepiece             | 상품명             |
-| data.items[].imageUrl    | string  | O  | http://url.com               | 접근 가능한 이미지 URL  |
-| data.items[].category1Id | string  | X  | 72                           | 카테고리 1depth 아이디 |
-| data.items[].category2Id | string  | X  | 72                           | 카테고리 2depth 아이디 |
-| data.items[].category3Id | string  | X  | 72                           | 카테고리 3depth 아이디 |
-| data.items[].s1          | string  | X  | 72                           | 제한 검색을 위한 필터1   |
-| data.items[].s2          | string  | X  | 72                           | 제한 검색을 위한 필터2   |
-
-
-<details><summary>응답 본문 예</summary>
-
-``` json
-{
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "SUCCESS"
-    },
-    "data": {
-        "totalCount": 1,
-        "query": "productId=10234455&limit=100",
-        "items": [{
-                "similarity": 0.91234,
-                "productId": "8980335",
-                "name": "AAA red onepiece",
-                "imageUrl": "http://url.com"
-            }
-        ]
-    }
-}
-```
-
-</details>
-
-#### 오류 코드
-
-| resultCode | resultMessage       | 설명             |
-|------------|---------------------|----------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
-| -50000     | InternalServerError | 서버 오류          |
-
-
 ## 카메라 검색
 
 ### 패션 아이템 감지
@@ -778,6 +676,108 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
 | -50000     | InternalServerError         | 서버 오류                                                 |
+
+### 상품 이미지로 검색
+
+* 상품 이미지(url, file)를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+
+#### 요청
+
+[URI]
+
+| 메서드  | URI                                                  |
+|------|------------------------------------------------------|
+| POST | /v2.0/appkeys/{appKey}/services/{serviceName}/search |
+
+[Path Variable]
+
+| 이름          | 설명                      |
+|-------------|-------------------------|
+| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| serviceName | 서비스명                    |
+
+[Request Body]
+
+| 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                        |
+|--------------------|---------|----|-----------------|-----------------------------------------------------------------------------------------------------------|
+| imageUrl           | string  | △  | http://url.com	 | 이미지의 URL                                                                                                  |
+| imageFile          | file    | △  | image.png	      | 이미지 파일                                                                                                    |
+| limit              | integer | O  | 100             | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
+| filter.category1Id | string  | X  | equal:3         | category1Id 값으로 필터링                                                                                       |
+| filter.category2Id | string  | X  | !equal:3        | category2Id 값으로 필터링                                                                                       |
+| filter.category3Id | string  | X  | !equal:3        | category3Id 값으로 필터링                                                                                       |
+| filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
+| filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
+| threshold          | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false           | 중복 이미지 포함 여부                                                                                              |
+
+
+* Content-Type: multipart/form-data
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
+
+<details><summary>요청 예</summary>
+
+```
+curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/search"
+```
+
+</details>
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름                       | 타입      | 필수 | 예제                           | 설명              |
+|--------------------------|---------|----|------------------------------|-----------------|
+| data.totalCount          | integer | O  | 100                          | 총 검색 결과 개수      |
+| data.items[].productId   | string  | O  | 8980335                      | 상품 아이디          |
+| data.items[].similarity  | float   | O  | 0.91234                      | 검색 유사도 점수       |
+| data.items[].name        | string  | O  | AAA red onepiece             | 상품명             |
+| data.items[].imageUrl    | string  | O  | http://url.com               | 접근 가능한 이미지 URL  |
+| data.items[].category1Id | string  | X  | 72                           | 카테고리 1depth 아이디 |
+| data.items[].category2Id | string  | X  | 72                           | 카테고리 2depth 아이디 |
+| data.items[].category3Id | string  | X  | 72                           | 카테고리 3depth 아이디 |
+| data.items[].s1          | string  | X  | 72                           | 제한 검색을 위한 필터1   |
+| data.items[].s2          | string  | X  | 72                           | 제한 검색을 위한 필터2   |
+
+
+<details><summary>응답 본문 예</summary>
+
+``` json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "SUCCESS"
+    },
+    "data": {
+        "totalCount": 1,
+        "query": "productId=10234455&limit=100",
+        "items": [{
+                "productId": "8980335",
+                "similarity": 0.91234,
+                "name": "AAA red onepiece",
+                "imageUrl": "http://url.com"
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+#### 오류 코드
+
+| resultCode | resultMessage       | 설명             |
+|------------|---------------------|----------------|
+| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -50000     | InternalServerError | 서버 오류          |
+
 
 ## 딥 태깅
 
