@@ -680,6 +680,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 ### 상품 이미지로 검색
 
 * 상품 이미지(url, file)를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
+* Content-Type: multipart/form-data
 
 #### 요청
 
@@ -711,9 +713,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | threshold          | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
 | includeDuplicates  | boolean | X  | false           | 중복 이미지 포함 여부                                                                                              |
 
-
-* Content-Type: multipart/form-data
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
 <details><summary>요청 예</summary>
 
@@ -937,7 +936,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 * 인덱싱할 데이터를 전달합니다.
 * 전달된 파일의 첫 번째 줄을 분석하여 포맷 오류 여부를 검사합니다.
 * 첫 번째 줄에서 오류가 발견되지 않으면 색인을 위한 대기열에 들어간 뒤 스케줄에 따라 색인됩니다.
-
+* 직접 데이터 파일을 전송하거나 다운로드 가능한 URL로 데이터 파일을 전달할 수 있습니다.
+* Content-Type: multipart/form-data
 
 #### 파일 데이터 포맷
 
@@ -970,7 +970,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 ```
 
 #### 요청
-* 직접 데이터 파일을 전송하거나 다운로드 가능한 URL로 데이터 파일을 전달할 수 있습니다.
 
 [URI]
 
