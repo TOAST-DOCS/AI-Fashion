@@ -403,7 +403,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| maxSimilarity         | float   | X  | 0.95      | 매칭 여부를 판단하는 유사도 최대 기준값<br/> data.items[].similarity <= maxSimilarity인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 (minSimilarity가 설정된 경우 minSimilarity로 설정된 값 이상으로 설정 하여야 합니다.) |
 | includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부 (기본적으로 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 제거 옵션을 false 로 설정해서 요청하시기를 바랍니다.)             |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
@@ -607,7 +606,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| maxSimilarity         | float   | X  | 0.95      | 매칭 여부를 판단하는 유사도 최대 기준값<br/> data.items[].similarity <= maxSimilarity인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 (minSimilarity가 설정된 경우 minSimilarity로 설정된 값 이상으로 설정 하여야 합니다.) |
 | includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부 (기본적으로 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 제거 옵션을 false 로 설정해서 요청하시기를 바랍니다.)             |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
@@ -678,6 +676,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                        |
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
 ### 상품 이미지로 검색
@@ -714,7 +713,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| maxSimilarity         | float   | X  | 0.95      | 매칭 여부를 판단하는 유사도 최대 기준값<br/> data.items[].similarity <= maxSimilarity인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 (minSimilarity가 설정된 경우 minSimilarity로 설정된 값 이상으로 설정 하여야 합니다.) |
 | includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부 (기본적으로 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 제거 옵션을 false 로 설정해서 요청하시기를 바랍니다.)             |
 
 

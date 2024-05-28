@@ -483,6 +483,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                        |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
 
 ### 패션 아이템 감지 link로 검색
