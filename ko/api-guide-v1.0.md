@@ -322,6 +322,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 | filter.s1           | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2           | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | threshold           | float32 | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부 (기본적으로 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 제거 옵션을 false 로 설정해서 요청하시기를 바랍니다.)             |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -484,7 +485,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
 
-### Search By Image
+### 패션 아이템 감지 link로 검색
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -515,6 +516,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | filter.s1           | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2           | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | threshold           | float32 | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부 (기본적으로 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 제거 옵션을 false 로 설정해서 요청하시기를 바랍니다.)             |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
