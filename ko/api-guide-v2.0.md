@@ -575,6 +575,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
 <span id="search-by-detect-link"></span>
+
 ### 패션 아이템 감지 link로 검색
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
@@ -778,6 +779,11 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
 | -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
+| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                        |
 | -50000     | InternalServerError | 서버 오류          |
 
 
