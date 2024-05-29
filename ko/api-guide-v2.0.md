@@ -372,9 +372,9 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 ## 유사 이미지 상품 추천
 
-### 상품 아이디로 검색
+## 상품 아이디로 유사 상품 검색
 
-* 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* 상품 아이디를 기반으로 유사한 상품을 찾아주는 API
 
 #### 요청
 
@@ -574,10 +574,9 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
 <span id="search-by-detect-link"></span>
+### 패션 아이템 감지 link로 유사 상품 검색
 
-### 패션 아이템 감지 link로 검색
-
-* detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* detect api에서 응답으로 받은 link를 기반으로 유사한 상품을 찾아주는 API
 
 #### 요청
 
@@ -679,9 +678,9 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                        |
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
-### 상품 이미지로 검색
+### 이미지로 유사 상품 검색
 
-* 상품 이미지(url, file)에서 인식된 가장 큰 아이템을 기준으로 유사한 패션 상품을 찾아주는 API
+* 이미지(url, file)에서 인식된 가장 큰 패션 아이템을 기준으로 유사한 상품을 찾아주는 API
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 * Content-Type: multipart/form-data
 
