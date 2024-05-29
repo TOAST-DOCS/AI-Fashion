@@ -372,7 +372,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 ## 유사 이미지 상품 추천
 
-## 상품 아이디로 검색
+### 상품 아이디로 검색
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
