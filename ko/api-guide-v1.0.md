@@ -291,7 +291,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 ## 유사 이미지 상품 추천
 
-### Search By ProductID
+### 상품 아이디로 검색
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -386,7 +386,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 ## 카메라 검색
 
-### Detect
+### 패션 아이템 감지
 
 * 입력 이미지에서 패션 아이템을 감지하는 API입니다.
 
@@ -484,7 +484,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
 
-### Search By Image
+### 패션 아이템 감지 link로 검색
 
 * detect api에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -578,6 +578,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
 
 ## 딥 태깅
