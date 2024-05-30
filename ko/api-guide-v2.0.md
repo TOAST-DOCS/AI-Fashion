@@ -227,7 +227,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 | -42000     | NotExistService     | 등록되지 않은 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
-### 서비스 목록
+### 서비스 목록 조회
 
 * 등록된 서비스 목록과 사용량 정보를 확인할 수 있는 API
 
@@ -770,17 +770,17 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 
 #### 오류 코드
 
-| resultCode | resultMessage       | 설명             |
-|------------|---------------------|----------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
-| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                        |
-| -50000     | InternalServerError | 서버 오류          |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                         |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
 
 ## 딥 태깅
@@ -1060,8 +1060,8 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 
 ### 색인 목록 조회
 * 요청된 색인 목록을 확인합니다.
-* 색인 상태에 대한 정보를 알 수 있습니다.
-* 색인 상태의 최대 보관 기간은 등록 시간 기준 6개월입니다.
+* 색인 요청에 대한 정보를 알 수 있습니다.
+* 색인 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
 #### 요청
 
@@ -1205,8 +1205,8 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 
 
 ### 색인 상세 조회
-* 색인 상태에 대한 정보를 알 수 있습니다.
-* 색인 상태의 최대 보관 기간은 등록 시간 기준 6개월입니다.
+* 색인 요청에 대한 상세 정보를 알 수 있습니다.
+* 색인 상세 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
 #### 요청
 

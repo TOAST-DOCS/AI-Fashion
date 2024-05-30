@@ -102,10 +102,10 @@
 
 ## 서비스 관리
 
-### 서비스 등록
+### 서비스 생성
 
-* 서비스를 등록할 수 있는 API
-* 최대 5개까지 등록 가능
+* 서비스를 생성할 수 있는 API
+* 최대 5개까지 생성 가능
 * 허용 문자
     * 영어 소문자, 숫자, '-', '\_' 허용
     * 첫 글자는 영어 소문자만 허용
@@ -219,7 +219,7 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 | -42000     | NotExistService     | 등록되지 않은 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
-### 서비스 목록
+### 서비스 목록 조회
 
 * 등록된 서비스명 목록을 확인할 수 있는 API
 
@@ -291,7 +291,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 ## 유사 이미지 상품 추천
 
-### 상품 아이디로 검색
+### 상품 아이디로 유사 상품 검색
 
 * 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
 
@@ -473,16 +473,16 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 #### 오류 코드
 
-| resultCode | resultMessage               | 설명                                                                           |
-|------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
 ### 패션 아이템 감지 link로 검색
 
@@ -569,22 +569,22 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 #### 오류 코드
 
-| resultCode | resultMessage               | 설명                                                                           |
-|------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
+| resultCode | resultMessage               | 설명                                                    |
+|------------|-----------------------------|-------------------------------------------------------|
+| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
+| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
+| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                         |
+| -50000     | InternalServerError         | 서버 오류                                                 |
 
 ## 딥 태깅
 
 <span id="tag-api"></span>
-### Tag
+### 패션 아이템 태그 감지
 
 * 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API입니다.
 
@@ -860,7 +860,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -42000     | NotExistService             | 등록되지 않은 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
-### 서비스 정보
+### 서비스 정보 조회
 * 서비스들의 현재 정보를 확인합니다.
   * 서비스별로 남은 색인 횟수
   * 서비스별 색인된 문서 개수
@@ -945,9 +945,10 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey      |
 | -50000     | InternalServerError | 서버 오류               |
 
-### 색인 상태 조회
-* 요청된 색인들의 현재 상태를 확인합니다.
-* 색인 상태의 최대 보관 기간은 등록 시간 기준 6개월입니다.
+### 색인 목록 조회
+* 요청된 색인 목록을 확인합니다.
+* 색인 요청에 대한 정보를 알 수 있습니다.
+* 색인 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
 #### 요청
 
