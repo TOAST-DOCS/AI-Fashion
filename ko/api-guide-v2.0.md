@@ -173,7 +173,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 
 ### 서비스 삭제
 
-* 등록된 서비스를 삭제할 수 있는 API
+* 서비스를 삭제할 수 있는 API
 * 서비스에 처리중인 색인 요청이 있는 경우도, 서비스를 삭제할 수 있습니다.
 
 #### 요청
@@ -224,12 +224,12 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
 ### 서비스 목록 조회
 
-* 등록된 서비스 목록과 사용량 정보를 확인할 수 있는 API
+* 생성한 서비스의 목록을 확인할 수 있는 API
 
 #### 요청
 
@@ -304,7 +304,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 
 ### 서비스 조회
 
-* 특정 서비스의 사용량 정보를 확인할 수 있는 API
+* 서비스명으로 특정 서비스의 정보를 확인할 수 있는 API
 
 #### 요청
 
@@ -469,7 +469,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -40050     | NotFoundProductId   | 상품 아이디가 없음     |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -566,7 +566,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -670,7 +670,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -774,7 +774,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -928,7 +928,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -1054,7 +1054,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 | -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                       |
-| -42000     | NotExistService             | 등록되지 않은 서비스                          |
+| -42000     | NotExistService             | 존재하지 않는 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
 
@@ -1151,7 +1151,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | data.items[].id            | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename      | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
 | data.items[].status        | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
-| data.items[].requestedTime | unix timestamp | O  | 1625098033                           | 색인 등록 시간                                                                                        |
+| data.items[].requestedTime | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
 | data.items[].startTime     | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime    | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount    | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
@@ -1200,12 +1200,12 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
 
 ### 색인 상세 조회
-* 색인 요청에 대한 상세 정보를 알 수 있습니다.
+* 색인 id로 특정 색인 요청에 대한 상세 정보를 알 수 있습니다.
 * 색인 상세 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
 #### 요청
@@ -1247,7 +1247,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 | data.items[].id                 | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename           | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
 | data.items[].status             | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
-| data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 등록 시간                                                                                        |
+| data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
 | data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
@@ -1306,5 +1306,5 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음        |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey      |
-| -42000     | NotExistService     | 등록되지 않은 서비스         |
+| -42000     | NotExistService     | 존재하지 않는 서비스         |
 | -50000     | InternalServerError | 서버 오류               |

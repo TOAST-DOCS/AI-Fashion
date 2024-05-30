@@ -165,7 +165,7 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 ### 서비스 삭제
 
-* 등록된 서비스를 삭제할 수 있는 API
+* 서비스를 삭제할 수 있는 API
 * 서비스에 처리중인 색인 요청이 있는 경우도, 서비스를 삭제할 수 있습니다.
 
 #### 요청
@@ -216,7 +216,7 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
 ### 서비스 목록 조회
@@ -381,7 +381,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -40050     | NotFoundProductId   | 상품 아이디가 없음     |
 | -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
-| -42000     | NotExistService     | 등록되지 않은 서비스    |
+| -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
 ## 카메라 검색
@@ -477,7 +477,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -573,7 +573,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                           |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
@@ -727,7 +727,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 |------------|-----------------------------|------------------------------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                                               |
-| -42000     | NotExistService             | 등록되지 않은 서비스                                                                  |
+| -42000     | NotExistService             | 존재하지 않는 서비스                                                                  |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
 | -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
@@ -857,7 +857,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
 | -40400     | NoApiFound                  | 정의되지 않은 API로 요청한 경우                  |
 | -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                       |
-| -42000     | NotExistService             | 등록되지 않은 서비스                          |
+| -42000     | NotExistService             | 존재하지 않는 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
 ### 서비스 정보 조회
@@ -895,12 +895,12 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 
 [응답 본문 데이터]
 
-| 이름                           | 타입     | 필수 | 예제    | 설명                  |
-|------------------------------|--------|----|-------|---------------------|
-| data.totalService            | int    | O  | 3     | 서비스 개수              |
-| data.items[].documentCnt     | int    | O  | 51128 | 전체 문서 개수            |
-| data.items[].remainInsertCnt | int    | O  | 3     | 서비스 당 색인 요청 가능 횟수   |
-| data.items[].service         | string | O  | aaa   | 상품에서 등록한 service_id |
+| 이름                           | 타입     | 필수 | 예제    | 설명                |
+|------------------------------|--------|----|-------|-------------------|
+| data.totalService            | int    | O  | 3     | 서비스 개수            |
+| data.items[].documentCnt     | int    | O  | 51128 | 전체 문서 개수          |
+| data.items[].remainInsertCnt | int    | O  | 3     | 서비스 당 색인 요청 가능 횟수 |
+| data.items[].service         | string | O  | aaa   | 서비스명              |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -1035,7 +1035,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/ind
 | data.items[].id           | String         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename     | String         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
 | data.items[].status       | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
-| data.items[].reservedTime | unix timestamp | O  | 1625098033                           | 색인 등록 시간                                                                                        |
+| data.items[].reservedTime | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
 | data.items[].startTime    | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime   | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addCnt       | Int            | O  | 234                                  | 추가된 문서 개수                                                                                       |
@@ -1082,5 +1082,5 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/ind
 | --- | --- | --- |
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 Appkey |
-| -42000 | NotExistService | 등록되지 않은 서비스 |
+| -42000 | NotExistService | 존재하지 않는 서비스 |
 | -50000 | InternalServerError | 서버 오류 |
