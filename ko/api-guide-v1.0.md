@@ -221,7 +221,7 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 ### 서비스 목록 조회
 
-* 등록된 서비스명 목록을 확인할 수 있는 API
+* 등록된 서비스명 목록을 가져오는 API
 
 #### 요청
 
@@ -388,7 +388,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 ### 패션 아이템 감지
 
-* 입력 이미지에서 패션 아이템을 감지하는 API입니다.
+* 입력 이미지에서 패션 아이템을 감지하는 API
 
 #### 요청
 
@@ -586,7 +586,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 <span id="tag-api"></span>
 ### 패션 아이템 태그 감지
 
-* 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API입니다.
+* 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API
 
 #### 요청
 
@@ -736,7 +736,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 ### 색인 요청
 
-* 인덱싱할 데이터를 전달합니다.
+* 패션 아이템 데이터를 색인하는 API
 * 전달된 파일의 첫 번째 줄을 분석하여 포맷 오류 여부를 검사합니다.
 * 첫 번째 줄에서 오류가 발견되지 않으면 색인을 위한 대기열에 들어간 뒤 스케줄에 따라 색인됩니다.
 
@@ -861,7 +861,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -50000     | InternalServerError         | 서버 오류                                |
 
 ### 서비스 정보 조회
-* 서비스들의 현재 정보를 확인합니다.
+* 서비스들의 정보를 가져오는 API
   * 서비스별로 남은 색인 횟수
   * 서비스별 색인된 문서 개수
 
@@ -946,7 +946,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 | -50000     | InternalServerError | 서버 오류               |
 
 ### 색인 목록 조회
-* 요청된 색인 목록을 확인합니다.
+* 요청된 색인 목록을 가져오는 API
 * 색인 요청에 대한 정보를 알 수 있습니다.
 * 색인 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
 
