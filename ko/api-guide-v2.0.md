@@ -4,10 +4,10 @@
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다.
-    - 프로젝트 통합 Appkey 사용을 권장합니다.
-    - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+- API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
+    - 프로젝트 통합 앱키 사용을 권장합니다.
+    - 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
+    - 서비스 앱키는 콘솔 상단 **URL & 앱키** 메뉴에서 확인이 가능합니다.
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
@@ -21,13 +21,13 @@
 
 ### 색인 가이드
 
-* 지원되는 파일 형식: .jsonl, .csv
-  * .csv 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
+* 지원되는 파일 형식: JSONL(.jsonl), CSV(.csv)
+  * CSV 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
   * 파일에 빈 줄이 없어야 합니다.
-  * 내용은 utf-8로 인코딩되어야 합니다.
+  * 내용은 UTF-8로 인코딩되어야 합니다.
 * 색인 파일의 최대 크기: 5MB
 * 색인 파일 내 데이터 최대 개수: 10,000개(줄로 구분)
-* 이미지 url 컨텐츠의 최대 크기: 20MB
+* 이미지 URL 컨텐츠의 최대 크기: 20MB
 * 서비스당 색인 가능한 최대 문서 수: 100,000개
 
 
@@ -124,7 +124,7 @@
 
 | 이름     | 설명                      |
 |--------|-------------------------|
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -166,7 +166,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 | resultCode | resultMessage                 | 설명             |
 |------------|-------------------------------|----------------|
 | -40000     | InvalidParam                  | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey            | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey            | 승인되지 않은 앱키 |
 | -42010     | DuplicateServiceName          | 중복된 서비스명       |
 | -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과  |
 | -50000     | InternalServerError           | 서버 오류          |
@@ -174,7 +174,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 ### 서비스 삭제
 
 * 서비스를 삭제할 수 있는 API
-* 서비스에 처리중인 색인 요청이 있는 경우도, 서비스를 삭제할 수 있습니다.
+* 서비스에 처리 중인 색인 요청이 있는 경우도, 서비스를 삭제할 수 있습니다.
 
 #### 요청
 
@@ -188,7 +188,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 <details><summary>요청 예</summary>
@@ -223,7 +223,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -243,7 +243,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 
 | 이름     | 설명                      |
 |--------|-------------------------|
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 <details><summary>요청 예</summary>
 
@@ -298,7 +298,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -318,7 +318,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 <details><summary>요청 예</summary>
@@ -366,7 +366,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -388,7 +388,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 | productId   | 상품 아이디                  |
 
@@ -403,7 +403,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -468,7 +468,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -40050     | NotFoundProductId   | 상품 아이디가 없음     |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -477,7 +477,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 
 ### 패션 아이템 감지
 
-* 입력 이미지에서 패션 아이템을 감지하는 API
+* 입력된 이미지에서 패션 아이템을 감지하는 API
 
 #### 요청
 
@@ -491,14 +491,14 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 [URL Parameter]
 
 | 이름   | 타입     | 필수 | 예제                                        | 설명                     |
 |------|--------|----|-------------------------------------------|------------------------|
-| path | string | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL Encoding된 이미지의 URL |
+| path | string | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지의 URL |
 
 <details><summary>요청 예</summary>
 
@@ -515,15 +515,15 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 [응답 본문 데이터]
 
-| 이름                  | 타입           | 필수 | 예제                                               | 설명                                                    |
-|---------------------|--------------|----|--------------------------------------------------|-------------------------------------------------------|
-| data.totalCount     | integer      | O  | 100                                              | 총 검색 결과 개수                                            |
-| data.query          | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | 검색 질의                                                 |
-| data.items[].link   | string       | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | [패션 아이템 감지 link로 검색](#search-by-detect-link)에서 사용할 링크 |
-| data.items[].center | double array | O  | [0.825047801147227, 0.330948979591837]           | 감지된 아이템의 중앙 x, y 좌표 %                                 |
-| data.items[].b0     | double array | O  | [0.676864247418738, 0.219377551020408]           | 감지된 아이템의 x0, y0 좌표 %                                  |
-| data.items[].b1     | double array | O  | [0.973231355525813, 0.4426204081632654]          | 감지된 아이템의 x1, y1 좌표 %                                  |
-| data.items[].score  | float        | O  | 0.9732                                           | 감지된 아이템의 신뢰도                                          |
+| 이름                  | 타입           | 필수 | 예제                                               | 설명                                                      |
+|---------------------|--------------|----|--------------------------------------------------|---------------------------------------------------------|
+| data.totalCount     | integer      | O  | 100                                              | 총 검색 결과 개수                                              |
+| data.query          | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | 검색 질의                                                   |
+| data.items[].link   | string       | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | [감지된 패션 아이템으로 유사 상품 검색](#search-by-detect-link)에서 사용할 값 |
+| data.items[].center | double array | O  | [0.825047801147227, 0.330948979591837]           | 감지된 아이템의 중앙 x, y 좌표 %                                   |
+| data.items[].b0     | double array | O  | [0.676864247418738, 0.219377551020408]           | 감지된 아이템의 x0, y0 좌표 %                                    |
+| data.items[].b1     | double array | O  | [0.973231355525813, 0.4426204081632654]          | 감지된 아이템의 x1, y1 좌표 %                                    |
+| data.items[].score  | float        | O  | 0.9732                                           | 감지된 아이템의 신뢰도                                            |
 
 <details><summary>응답 본문 예</summary>
 
@@ -565,7 +565,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -574,9 +574,9 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
 <span id="search-by-detect-link"></span>
-### 패션 아이템 감지 link로 유사 상품 검색
+### 감지된 패션 아이템으로 유사 상품 검색
 
-* detect api에서 응답으로 받은 link를 기반으로 유사한 상품을 찾아주는 API
+* detect API에서 응답으로 받은 link를 기반으로 유사한 상품을 찾아주는 API
 
 #### 요청
 
@@ -590,7 +590,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스 아이디                 |
 
 [URL Parameter]
@@ -598,14 +598,14 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | 이름                 | 타입      | 필수 | 예제                                                 | 설명                                                                                                        |
 |--------------------|---------|----|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | limit              | integer | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| link               | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link (URL encoding 필요)                                                                  |
+| link               | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link(URL 인코딩 필요)                                                                  |
 | filter.category1Id | string  | X  | equal:3                                            | category1Id 값으로 필터링                                                                                       |
 | filter.category2Id | string  | X  | !equal:3                                           | category2Id 값으로 필터링                                                                                       |
 | filter.category3Id | string  | X  | !equal:3                                           | category3Id 값으로 필터링                                                                                       |
 | filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -669,7 +669,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -696,7 +696,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 [Request Body]
@@ -712,7 +712,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
 
 <details><summary>요청 예</summary>
 
@@ -773,7 +773,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -802,16 +802,16 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 [URL Parameter]
 
 | 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                                      |
 |-----------|---------|----|-------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL Encode된 이미지 URL                                                                                     |
-| lang      | string  | X  | ko                                        | label의 언어<br/>default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
-| itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                     |
+| lang      | string  | X  | ko                                        | 라벨의 언어<br/>Default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
+| itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>Default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
@@ -832,12 +832,12 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 |------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
 | data.totalCount                    | integer      | O  | 2                                                                   | 총 검색 결과 개수                                   |
 | data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
-| data.items[].type                  | string       | O  | JACKET                                                              | 감지된 아이템의 type                                |
+| data.items[].type                  | string       | O  | JACKET                                                              | 감지된 아이템의 유형                                |
 | data.items[].score                 | float        | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
 | data.items[].tags                  | array        | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
 | data.items[].tags[].attribute      | string       | O  | category                                                            | 태그의 속성                                       |
 | data.items[].tags[].labels         | array        | O  |                                                                     | 태그 라벨의 배열                                    |
-| data.items[].tags[].labels[].label | string       | O  | 블라우스 \| Blouse                                                      | 태그 라벨<br/>URL Parameter의 lang에 의해 응답 언어가 달라짐 |
+| data.items[].tags[].labels[].label | string       | O  | 블라우스 \| Blouse                                                      | 태그 라벨<br/>URL 파라미터의 lang에 의해 응답 언어가 달라짐 |
 | data.items[].tags[].labels[].score | float        | O  | 0.9545                                                              | 태그 라벨의 신뢰도                                   |
 | data.items[].center                | double array | O  | [0.825047801147227, 0.330948979591837]                              | 감지된 아이템의 중앙 x, y 좌표 %                        |
 | data.items[].b0                    | double array | O  | [0.676864247418738, 0.219377551020408]                              | 감지된 아이템의 x0, y0 좌표 %                         |
@@ -927,7 +927,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                                        |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -948,7 +948,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 
 | 이름          | field       | value type | 필수 | max length | 비고                                 |
 |-------------|-------------|------------|----|------------|------------------------------------|
-| 상품ID        | productId   | string     | O  | 72         | unique key                         |
+| 상품ID        | productId   | string     | O  | 72         | 유니크 키                         |
 | 상태          | status      | string     | O  | 7          | enable: 추가 또는 업데이트<br/>disable: 삭제 |
 | 상품이름        | name        | string     | O  | 256        | 상품명                                |
 | 카테고리 1depth | category1Id | string     | O  | 72         | 카테고리 1depth 아이디                    |
@@ -958,7 +958,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | 필터1         | s1          | string     | O  | 72         | 제한 검색을 위한 필터1                      |
 | 필터2         | s2          | string     | O  | 72         | 제한 검색을 위한 필터2                      |
 
-##### jsonl 예
+##### JSONL 예
 ```
 {"productId": "10001", "status": "enable", "name": "AAA red onepiece", "category1Id": "1", "category2Id": "1", "category3Id": "2", "imageUrl": "http://aaaaaaa.bbbbb.jpg", "s1": "1", "s2": "2"}
 {"productId": "10002", "status": "disable", "name": "BBB blue onepiece", "category1Id": "1", "category2Id": "1", "category3Id": "2", "imageUrl": "http://bbbbbbb.ccccc.jpg", "s1": "s1", "s2": "2"}
@@ -966,7 +966,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 ...
 ```
 
-##### csv 예
+##### CSV 예
 ```
 10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg,1,2
 10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg,s1,2
@@ -986,7 +986,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 [Form Data]
@@ -995,7 +995,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 |--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
 | format | string | O     | jsonl                                                | jsonl 또는 csv                                           |
 | link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                             |
-| file   | file   | △     | @filename                                            | 데이터 파일<br/>link가 file보다 우선 순위가 높아서 link가 있으면 file은 무시됨 |
+| file   | file   | △     | @filename                                            | 데이터 파일<br/>link가 file보다 우선순위가 높아서 link가 있으면 file은 무시됨 |
 
 
 <details>
@@ -1053,7 +1053,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 | -40020     | NoDataError                 | 전달된 파일이 빈 파일인 경우                     |
 | -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 Appkey                       |
+| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                       |
 | -42000     | NotExistService             | 존재하지 않는 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
@@ -1075,19 +1075,19 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
 [URL Parameter]
 
-| 이름       | 타입           | 필수 | 예제                   | 설명                                                                                  |
-|----------|--------------|----|----------------------|-------------------------------------------------------------------------------------|
-| start    | integer      | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                   |
-| limit    | integer      | O  | 100                  | 최대 100<br/>start:0, limit:100의 경우 1부터 100까지<br/>start:200, limit:100 이면 201부터 300까지 |
-| order    | string       | X  | "requestedTime:desc" | (기본값)등록 시간 내림 차순<br/>조건 1개만 설정 가능<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조    |
-| statuses | string array | X  | "running, finished"  | 색인의 상탯값                                                                             |
+| 이름       | 타입           | 필수 | 예제                   | 설명                                                                                    |
+|----------|--------------|----|----------------------|---------------------------------------------------------------------------------------|
+| start    | integer      | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                     |
+| limit    | integer      | O  | 100                  | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
+| order    | string       | X  | "requestedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조             |
+| statuses | string array | X  | "running, finished"  | 색인의 상태 값                                                                              |
 
-#### Paging
+#### 페이징
 * start와 limit 파라미터로 페이징이 가능합니다.
   * start: 0부터 시작합니다.
   * limit: 0보다 커야 하며 최대 100까지 가능합니다.
@@ -1103,7 +1103,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 <span id="indexes-status-order"></span>
 #### 정렬
 * 응답 문서의 정렬 파라미터
-* 파라미터 형식.
+* 파라미터 형식
   * {정렬 가능 항목}:{정렬 방식}
 * 정렬 가능 항목
   * requestedTime: 색인 요청 등록 시간
@@ -1120,7 +1120,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
   * desc: 내림차순
 
 #### 색인 상태
-* 색인 상탯값을 조건으로 검색할 수 있습니다.
+* 색인 상태 값을 조건으로 검색할 수 있습니다.
   * reserved: 대기
   * running: 진행 중
   * failed: 전체 실패
@@ -1150,12 +1150,12 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | data.items[].service       | string         | O  | test                                 | 서비스명                                                                                            |
 | data.items[].id            | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename      | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
-| data.items[].status        | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
+| data.items[].status        | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다.<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
 | data.items[].requestedTime | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
 | data.items[].startTime     | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime    | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount    | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
-| data.items[].failedCount   | integer        | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
+| data.items[].failedCount   | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
 | data.items[].exceededCount | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
 | data.items[].deletedCount  | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
 | data.items[].updatedCount  | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
@@ -1199,7 +1199,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -1220,7 +1220,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 
 | 이름          | 설명                      |
 |-------------|-------------------------|
-| appKey      | 통합 Appkey 또는 서비스 Appkey |
+| appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 | indexId     | 색인 ID                   |
 
@@ -1246,13 +1246,13 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 | data.items[].serviceName        | string         | O  | test                                 | 서비스명                                                                                            |
 | data.items[].id                 | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
 | data.items[].filename           | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
-| data.items[].status             | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
+| data.items[].status             | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다.<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
 | data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
 | data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
 | data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 id 목록                                                                                    |
-| data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>Image Download 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
+| data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
 | data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 id 목록                                                                                    |
 | data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
 | data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을을 넘어서 색인할 수 없는 문서 id 목록                                                                  |
@@ -1305,6 +1305,6 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 | resultCode | resultMessage       | 설명                  |
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 Appkey      |
+| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키      |
 | -42000     | NotExistService     | 존재하지 않는 서비스         |
 | -50000     | InternalServerError | 서버 오류               |
