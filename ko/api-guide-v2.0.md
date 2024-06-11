@@ -7,7 +7,7 @@
 - API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
     - 프로젝트 통합 앱키 사용을 권장합니다.
     - 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 앱키는 콘솔 상단 **URL & 앱키** 메뉴에서 확인이 가능합니다.
+    - 서비스 앱키는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
@@ -372,7 +372,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 ## 유사 이미지 상품 추천
 
-## 상품 아이디로 유사 상품 검색
+### 상품 아이디로 유사 상품 검색
 
 * 상품 아이디를 기반으로 유사한 상품을 찾아주는 API
 
@@ -403,7 +403,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -605,7 +605,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -680,7 +680,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 ### 이미지로 유사 상품 검색
 
-* 이미지(url, file)에서 인식된 가장 큰 패션 아이템을 기준으로 유사한 상품을 찾아주는 API
+* 이미지(URL, File)에서 인식된 가장 큰 패션 아이템을 기준으로 유사한 상품을 찾아주는 API
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 * Content-Type: multipart/form-data
 
@@ -712,7 +712,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
 | filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
 | minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품에 대한 중복 제거가 이루어 지므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않으시면 중복 이미지 포함 여부를 true로 설정해서 요청하시기를 바랍니다.            |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
 
 <details><summary>요청 예</summary>
 
@@ -1084,7 +1084,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 |----------|--------------|----|----------------------|---------------------------------------------------------------------------------------|
 | start    | integer      | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                     |
 | limit    | integer      | O  | 100                  | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
-| order    | string       | X  | "requestedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조             |
+| order    | string       | X  | "requestedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조             |
 | statuses | string array | X  | "running, finished"  | 색인의 상태 값                                                                              |
 
 #### 페이징
@@ -1124,7 +1124,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
   * reserved: 대기
   * running: 진행 중
   * failed: 전체 실패
-  * finished: 완료(부분 실패 포함) <<<?
+  * finished: 완료(부분 실패 포함)
   * canceled: 취소
   * deleted: 삭제
 
@@ -1156,7 +1156,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | data.items[].finishTime    | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount    | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
 | data.items[].failedCount   | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
-| data.items[].exceededCount | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
+| data.items[].exceededCount | integer        | O  | 31                                   | 제한 사용량을 넘어서 색인할 수 없는 문서 개수                                                                     |
 | data.items[].deletedCount  | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
 | data.items[].updatedCount  | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
 | data.items[].totalCount    | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                      |
@@ -1251,15 +1251,15 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 | data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
 | data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
 | data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
-| data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 id 목록                                                                                    |
+| data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 ID 목록                                                                                    |
 | data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
-| data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 id 목록                                                                                    |
-| data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을을 넘어서 색인할 수 없는 문서 개수                                                                     |
-| data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을을 넘어서 색인할 수 없는 문서 id 목록                                                                  |
+| data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 ID 목록                                                                                    |
+| data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을 넘어서 색인할 수 없는 문서 개수                                                                     |
+| data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을 넘어서 색인할 수 없는 문서 ID 목록                                                                  |
 | data.items[].deletedCount       | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
-| data.items[].deletedProductIds  | string array   | O  | [10001, 10002]                       | 삭제된 문서 id 목록                                                                                    |
+| data.items[].deletedProductIds  | string array   | O  | [10001, 10002]                       | 삭제된 문서 ID 목록                                                                                    |
 | data.items[].updatedCount       | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
-| data.items[].updatedProductIds  | string array   | O  | [10001, 10002]                       | 수정된 문서 id 목록                                                                                    |
+| data.items[].updatedProductIds  | string array   | O  | [10001, 10002]                       | 수정된 문서 ID 목록                                                                                    |
 | data.items[].totalCount         | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                      |
 
 <details>

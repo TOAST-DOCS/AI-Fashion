@@ -7,7 +7,7 @@
 - API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
     - 프로젝트 통합 앱키 사용을 권장합니다.
     - 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 앱키는 콘솔 상단 **URL & 앱키** 메뉴에서 확인이 가능합니다.
+    - 서비스 앱키는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
@@ -971,7 +971,7 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 |--------|--------|----|---------------------|-------------------------------------------------------------------------------------|
 | start  | int    | O  | 0                   | 시작 인덱스<br/>0부터 시작                                                                   |
 | limit  | int    | O  | 100                 | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
-| order  | string | X  | "reservedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 ['정렬'](#indexes-status-order) 참조     |
+| order  | string | X  | "reservedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조     |
 | status | string | X  | "finished"          | 색인의 상태 값                                                                             |
 
 #### 페이징
