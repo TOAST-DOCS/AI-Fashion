@@ -394,16 +394,16 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 
 [URL Parameter]
 
-| 이름                 | 타입      | 필수 | 예제       | 설명                                                                                                        |
-|--------------------|---------|----|----------|-----------------------------------------------------------------------------------------------------------|
-| limit              | integer | O  | 100      | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| filter.category1Id | string  | X  | equal:3  | category1Id 값으로 필터링                                                                                       |
-| filter.category2Id | string  | X  | !equal:3 | category2Id 값으로 필터링                                                                                       |
-| filter.category3Id | string  | X  | !equal:3 | category3Id 값으로 필터링                                                                                       |
-| filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
-| filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
-| minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
+| 이름                 | 타입      | 필수 | 예제       | 설명                                                                                                                                                      |
+|--------------------|---------|----|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| limit              | integer | O  | 100      | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                                                                             |
+| filter.category1Id | string  | X  | equal:3  | category1Id 값으로 필터링                                                                                                                                     |
+| filter.category2Id | string  | X  | !equal:3 | category2Id 값으로 필터링                                                                                                                                     |
+| filter.category3Id | string  | X  | !equal:3 | category3Id 값으로 필터링                                                                                                                                     |
+| filter.s1          | string  | X  | equal:3  | s1 값으로 필터링                                                                                                                                              |
+| filter.s2          | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                                                              |
+| minSimilarity      | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능                                         |
+| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부(기본값: false)<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다. |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -595,17 +595,17 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 
 [URL Parameter]
 
-| 이름                 | 타입      | 필수 | 예제                                                 | 설명                                                                                                        |
-|--------------------|---------|----|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| limit              | integer | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| link               | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link(URL 인코딩 필요)                                                                  |
-| filter.category1Id | string  | X  | equal:3                                            | category1Id 값으로 필터링                                                                                       |
-| filter.category2Id | string  | X  | !equal:3                                           | category2Id 값으로 필터링                                                                                       |
-| filter.category3Id | string  | X  | !equal:3                                           | category3Id 값으로 필터링                                                                                       |
-| filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
-| filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
-| minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
+| 이름                 | 타입      | 필수 | 예제                                                 | 설명                                                                                                                                                      |
+|--------------------|---------|----|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| limit              | integer | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                                                                             |
+| link               | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link(URL 인코딩 필요)                                                                                                                      |
+| filter.category1Id | string  | X  | equal:3                                            | category1Id 값으로 필터링                                                                                                                                     |
+| filter.category2Id | string  | X  | !equal:3                                           | category2Id 값으로 필터링                                                                                                                                     |
+| filter.category3Id | string  | X  | !equal:3                                           | category3Id 값으로 필터링                                                                                                                                     |
+| filter.s1          | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                                                              |
+| filter.s2          | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                                                              |
+| minSimilarity      | float   | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능                                         |
+| includeDuplicates  | boolean | X  | false                                              | 중복 이미지 포함 여부(기본값: false)<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다. |
 
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
 
@@ -701,18 +701,18 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 [Request Body]
 
-| 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                        |
-|--------------------|---------|----|-----------------|-----------------------------------------------------------------------------------------------------------|
-| imageUrl           | string  | △  | http://url.com	 | 이미지의 URL                                                                                                  |
-| imageFile          | file    | △  | image.png	      | 이미지 파일                                                                                                    |
-| limit              | integer | O  | 100             | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| filter.category1Id | string  | X  | equal:3         | category1Id 값으로 필터링                                                                                       |
-| filter.category2Id | string  | X  | !equal:3        | category2Id 값으로 필터링                                                                                       |
-| filter.category3Id | string  | X  | !equal:3        | category3Id 값으로 필터링                                                                                       |
-| filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                |
-| filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                |
-| minSimilarity         | float   | X  | 0.8      | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
-| includeDuplicates  | boolean | X  | false    | 중복 이미지 포함 여부<br/>Default: false<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다.            |
+| 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                                                                      |
+|--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| imageUrl           | string  | △  | http://url.com	 | 이미지의 URL                                                                                                                                                |
+| imageFile          | file    | △  | image.png	      | 이미지 파일                                                                                                                                                  |
+| limit              | integer | O  | 100             | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                                                                             |
+| filter.category1Id | string  | X  | equal:3         | category1Id 값으로 필터링                                                                                                                                     |
+| filter.category2Id | string  | X  | !equal:3        | category2Id 값으로 필터링                                                                                                                                     |
+| filter.category3Id | string  | X  | !equal:3        | category3Id 값으로 필터링                                                                                                                                     |
+| filter.s1          | string  | X  | equal:3         | s1 값으로 필터링                                                                                                                                              |
+| filter.s2          | string  | X  | !equal:3        | s2 값으로 필터링                                                                                                                                              |
+| minSimilarity      | float   | X  | 0.8             | 매칭 여부를 판단하는 유사도 최소 기준값<br/> data.items[].similarity >= minSimilarity 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능                                         |
+| includeDuplicates  | boolean | X  | false           | 중복 이미지 포함 여부(기본값: false)<br/>중복 이미지 포함 여부가 false인 경우 동일한 상품은 중복 제거가 되므로, 응답 결과가 요청한 문서 수 보다 적을 수 있습니다. 이를 원치 않을 경우 중복 이미지 포함 여부를 true로 설정하여 요청하시기 바랍니다. |
 
 <details><summary>요청 예</summary>
 
@@ -807,11 +807,11 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 
 [URL Parameter]
 
-| 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                                      |
-|-----------|---------|----|-------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                     |
-| lang      | string  | X  | ko                                        | 라벨의 언어<br/>Default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
-| itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>Default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                               |
+|-----------|---------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
+| path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                 |
+| lang      | string  | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬(기본값: 1)<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
@@ -1073,19 +1073,19 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 
 [Path Variable]
 
-| 이름          | 설명                      |
-|-------------|-------------------------|
+| 이름          | 설명              |
+|-------------|-----------------|
 | appKey      | 통합 앱키 또는 서비스 앱키 |
-| serviceName | 서비스명                    |
+| serviceName | 서비스명            |
 
 [URL Parameter]
 
-| 이름       | 타입           | 필수 | 예제                   | 설명                                                                                    |
-|----------|--------------|----|----------------------|---------------------------------------------------------------------------------------|
-| start    | integer      | O  | 0                    | 시작 인덱스<br/>0부터 시작                                                                     |
-| limit    | integer      | O  | 100                  | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
-| order    | string       | X  | "requestedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조             |
-| statuses | string array | X  | "running, finished"  | 색인의 상태 값                                                                              |
+| 이름       | 타입           | 필수 | 예제                 | 설명                                                                                    |
+|----------|--------------|----|--------------------|---------------------------------------------------------------------------------------|
+| start    | integer      | O  | 0                  | 시작 인덱스<br/>0부터 시작                                                                     |
+| limit    | integer      | O  | 100                | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
+| order    | string       | X  | requestedTime:desc | 정렬 조건(기본값: requestedTime:desc)<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조           |
+| statuses | string array | X  | running,finished   | 색인의 상태 값                                                                              |
 
 #### 페이징
 * start와 limit 파라미터로 페이징이 가능합니다.
@@ -1240,27 +1240,27 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 
 [응답 본문 데이터]
 
-| 이름                              | 타입             | 필수 | 예제                                   | 설명                                                                                              |
-|---------------------------------|----------------|----|--------------------------------------|-------------------------------------------------------------------------------------------------|
-| data.total                      | integer        | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
-| data.items[].serviceName        | string         | O  | test                                 | 서비스명                                                                                            |
-| data.items[].id                 | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
-| data.items[].filename           | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
+| 이름                              | 타입             | 필수 | 예제                                   | 설명                                                                                               |
+|---------------------------------|----------------|----|--------------------------------------|--------------------------------------------------------------------------------------------------|
+| data.total                      | integer        | O  | 100                                  | 검색된 전체 문서 개수                                                                                     |
+| data.items[].serviceName        | string         | O  | test                                 | 서비스명                                                                                             |
+| data.items[].id                 | string         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                            |
+| data.items[].filename           | string         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                         |
 | data.items[].status             | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다.<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
-| data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
-| data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
-| data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
-| data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                       |
-| data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 ID 목록                                                                                    |
-| data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
-| data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 ID 목록                                                                                    |
-| data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을 넘어서 색인할 수 없는 문서 개수                                                                     |
-| data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을 넘어서 색인할 수 없는 문서 ID 목록                                                                  |
-| data.items[].deletedCount       | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                       |
-| data.items[].deletedProductIds  | string array   | O  | [10001, 10002]                       | 삭제된 문서 ID 목록                                                                                    |
-| data.items[].updatedCount       | integer        | O  | 592                                  | 수정된 문서 개수                                                                                       |
-| data.items[].updatedProductIds  | string array   | O  | [10001, 10002]                       | 수정된 문서 ID 목록                                                                                    |
-| data.items[].totalCount         | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                      |
+| data.items[].requestedTime      | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                      |
+| data.items[].startTime          | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                         |
+| data.items[].finishTime         | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                       |
+| data.items[].addedCount         | integer        | O  | 234                                  | 추가된 문서 개수                                                                                        |
+| data.items[].addedProductIds    | string array   | O  | [10001, 10002]                       | 추가된 문서 ID 목록                                                                                     |
+| data.items[].failedCount        | integer        | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                         |
+| data.items[].failedProductIds   | string array   | O  | [10001, 10002]                       | 실패한 문서 ID 목록                                                                                     |
+| data.items[].exceededCount      | integer        | O  | 31                                   | 제한 사용량을 넘어서 색인할 수 없는 문서 개수                                                                       |
+| data.items[].exceededProductIds | string array   | O  | [10001, 10002]                       | 제한 사용량을 넘어서 색인할 수 없는 문서 ID 목록                                                                    |
+| data.items[].deletedCount       | integer        | O  | 31                                   | 삭제된 문서 개수                                                                                        |
+| data.items[].deletedProductIds  | string array   | O  | [10001, 10002]                       | 삭제된 문서 ID 목록                                                                                     |
+| data.items[].updatedCount       | integer        | O  | 592                                  | 수정된 문서 개수                                                                                        |
+| data.items[].updatedProductIds  | string array   | O  | [10001, 10002]                       | 수정된 문서 ID 목록                                                                                     |
+| data.items[].totalCount         | integer        | O  | 888                                  | 색인 총 문서 개수                                                                                       |
 
 <details>
 <summary>응답 본문 예</summary>

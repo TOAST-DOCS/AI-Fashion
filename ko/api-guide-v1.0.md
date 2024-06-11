@@ -598,18 +598,18 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 [Path Variable]
 
-| 이름        | 설명                      |
-|-----------|-------------------------|
+| 이름        | 설명              |
+|-----------|-----------------|
 | appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| serviceID | 서비스명            |
 
 [URL Parameter]
 
-| 이름         | 타입     | 필수 | 예제                                        | 설명                                                                                                      |
-|------------|--------|----|-------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| path       | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                     |
-| lang       | String | X  | ko                                        | 라벨의 언어<br/>Default: en<br/>en: English<br/>ko: Korean<br/>jp: Japanese                               |
-| item_limit | int    | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬<br/>Default: 1<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| 이름         | 타입     | 필수 | 예제                                        | 설명                                                                                               |
+|------------|--------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
+| path       | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                 |
+| lang       | String | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| item_limit | int    | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬(기본값: 1)<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
@@ -967,12 +967,12 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 
 [URL Parameter]
 
-| 이름     | 타입     | 필수 | 예제                  | 설명                                                                                  |
-|--------|--------|----|---------------------|-------------------------------------------------------------------------------------|
-| start  | int    | O  | 0                   | 시작 인덱스<br/>0부터 시작                                                                   |
-| limit  | int    | O  | 100                 | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
-| order  | string | X  | "reservedTime:desc" | Default: requestedTime:desc<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조     |
-| status | string | X  | "finished"          | 색인의 상태 값                                                                             |
+| 이름     | 타입     | 필수 | 예제                | 설명                                                                                    |
+|--------|--------|----|-------------------|---------------------------------------------------------------------------------------|
+| start  | int    | O  | 0                 | 시작 인덱스<br/>0부터 시작                                                                     |
+| limit  | int    | O  | 100               | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
+| order  | string | X  | reservedTime:desc | 정렬 조건(기본값: requestedTime:desc)<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조           |
+| status | string | X  | finished          | 색인의 상태 값                                                                              |
 
 #### 페이징
 * start와 limit 파라미터로 페이징이 가능합니다.
