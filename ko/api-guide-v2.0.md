@@ -1083,7 +1083,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 | 이름       | 타입           | 필수 | 예제                 | 설명                                                                                    |
 |----------|--------------|----|--------------------|---------------------------------------------------------------------------------------|
 | start    | integer      | O  | 0                  | 시작 인덱스<br/>0부터 시작                                                                     |
-| limit    | integer      | O  | 100                | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start:200, limit: 100 이면 201부터 300까지 |
+| limit    | integer      | O  | 100                | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start: 200, limit: 100 이면 201부터 300까지 |
 | order    | string       | X  | requestedTime:desc | 정렬 조건(기본값: requestedTime:desc)<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조           |
 | statuses | string array | X  | running,finished   | 색인의 상태 값                                                                              |
 
