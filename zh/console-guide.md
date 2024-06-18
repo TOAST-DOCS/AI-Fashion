@@ -1,7 +1,7 @@
 ## AI Service > AI Fashion > Console User Guide
 
 The console provides a dashboard where you can create or delete services and monitor indexing status and search statistics.
-AI Fashion's camera search and similar item recommendations features are provided as APIs, and the detailed features can be implemented by referring to the [Service API Guide](./service-api-guide).
+AI Fashion's camera search and similar item recommendations features are provided as APIs, and the detailed features can be implemented by referring to the [Service API Guide](./api-guide-v2.0).
 
 The following describes how to use the console.
 
