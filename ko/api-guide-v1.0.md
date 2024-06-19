@@ -734,6 +734,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
 | -50000     | InternalServerError         | 서버 오류                                                                        |
 
+## 색인
 ### 색인 요청
 
 * 패션 아이템 데이터를 색인하는 API

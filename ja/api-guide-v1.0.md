@@ -18,6 +18,7 @@
 |-------------------------------------------|
 | https://api-aifashion.nhncloudservice.com |
 
+## インデックス
 ### インデックスガイド
 
 * サポートされるファイル形式：JSONL(.jsonl), CSV(.csv)
