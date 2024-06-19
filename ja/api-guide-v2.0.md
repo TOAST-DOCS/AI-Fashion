@@ -18,6 +18,11 @@
 |-------------------------------------------|
 | https://api-aifashion.nhncloudservice.com |
 
+[Header]
+
+| 名前 | 値 | 説明 |
+| --- | --- | --- |
+| Authorization | {secretKey} | コンソールで発行されたセキュリティキー |
 
 ### インデックスガイド
 
@@ -935,7 +940,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | -45060     | ImageTimeoutError           | 画像ダウンロードタイムアウト                                    |
 | -50000     | InternalServerError         | サーバーエラー                                             |
 
-
+## インデックス
 ### インデックスリクエスト
 
 * ファッションアイテムデータをインデックスするAPI

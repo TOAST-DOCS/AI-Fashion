@@ -18,6 +18,11 @@
 |-------------------------------------------|
 | https://api-aifashion.nhncloudservice.com |
 
+[Header]
+
+| Name | Value | Description |
+| --- | --- | --- |
+| Authorization | {secretKey} | Security key issued from the console |
 
 ### 색인 가이드
 
@@ -935,7 +940,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
-
+## 색인
 ### 색인 요청
 
 * 패션 아이템 데이터를 색인하는 API

@@ -18,6 +18,11 @@
 |-------------------------------------------|
 | https://api-aifashion.nhncloudservice.com |
 
+[Header]
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| Authorization | {secretKey} | 콘솔에서 발급 받은 보안 키 |
 
 ### 색인 가이드
 
@@ -135,7 +140,7 @@
 <details><summary>요청 예</summary>
 
 ```
-curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: application/json;charset=UTF-8" "${domain}/v2.0/appkeys/{appKey}/services" -d '{
     "serviceName": "my-serviceName"
 }'
 ```
@@ -194,7 +199,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 <details><summary>요청 예</summary>
 
 ```
-curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
+curl -X DELETE -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 ```
 
 </details>
@@ -248,7 +253,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services"
 ```
 
 </details>
@@ -324,7 +329,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 ```
 
 </details>
@@ -410,7 +415,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{productId}/search?limit=100&filter.s1=equal:1"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{productId}/search?limit=100&filter.s1=equal:1"
 ```
 
 </details>
@@ -503,7 +508,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
 ```
 
 </details>
@@ -612,7 +617,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
 ```
 
 </details>
@@ -717,7 +722,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 <details><summary>요청 예</summary>
 
 ```
-curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/search"
+curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-data" -F imageFile=@image.png -F limit=100 "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/search"
 ```
 
 </details>
@@ -816,7 +821,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
 ```
 
 </details>
@@ -936,6 +941,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
 
+## 색인
 ### 색인 요청
 
 * 패션 아이템 데이터를 색인하는 API
@@ -1002,7 +1008,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 <summary>요청 예 1</summary>
 
 ```
-curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl -F format=jsonl"
+curl -X POST -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl -F format=jsonl"
 ```
 
 </details>
@@ -1011,7 +1017,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 <summary>요청 예 2</summary>
 
 ```
-curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content-Type: multipart/form-data" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl -F format=jsonl"
+curl -X POST "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content-Type: multipart/form-data" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl -F format=jsonl"
 ```
 
 </details>
@@ -1132,7 +1138,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running,finished&order=startTime:desc"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit=100&status=running,finished&order=startTime:desc"
 ```
 
 </details>
@@ -1228,7 +1234,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 <summary>요청 예 </summary>
 
 ```
-curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 ```
 
 </details>
