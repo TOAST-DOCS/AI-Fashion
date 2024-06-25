@@ -815,7 +815,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | Name        | Type      | Required | Examples                                        | Description                                                                                               |
 |-----------|---------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
 | path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL-encoded image URL                                                                                 |
-| lang      | string  | X  | ko                                        | Language of the label (default: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| lang      | string  | X  | ko                                        | Language of the label (default: en)<br/>en: English<br/>ko: Korean<br/>ja: Japanese                                  |
 | itemLimit | integer | X  | 3                                         | Number of items to respond with tag information among fashion items found in the image<br/>Sort items in the descending order of width (default: 1)<br/>Max size<br>Can be set in value from to 1 to 4 |
 
 <details><summary>Request example</summary>
