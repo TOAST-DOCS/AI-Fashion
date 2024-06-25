@@ -815,7 +815,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 | 名前    | タイプ  | 必須 | 例                                    | 説明                                                                                           |
 |-----------|---------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
 | path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URLエンコードされた画像URL                                                                                 |
-| lang      | string  | X  | ko                                        | ラベルの言語(デフォルト値: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| lang      | string  | X  | ko                                        | ラベルの言語(デフォルト値: en)<br/>en: English<br/>ko: Korean<br/>ja: Japanese                                  |
 | itemLimit | integer | X  | 3                                         | 画像から見つかったファッションアイテムのうち、タグ情報をレスポンスするアイテムの数<br/>アイテムの幅が長い順にソート(デフォルト値：1)<br/>最大サイズ<br>1以上4以下に設定可能 |
 
 <details><summary>リクエスト例</summary>
