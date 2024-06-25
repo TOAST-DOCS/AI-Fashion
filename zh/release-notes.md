@@ -1,5 +1,10 @@
 ## AI Service > AI Fashion > Release Notes
 
+### July 9, 2024
+* Released API v2.0
+* Removed the limit of 24 indexing requests per day
+* Improved the indexing and search speed
+
 ### May 01, 2024
 * Switched AI Fashion service from region service to global service
 

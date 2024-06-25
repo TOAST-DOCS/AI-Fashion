@@ -815,7 +815,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                               |
 |-----------|---------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
 | path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                 |
-| lang      | string  | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| lang      | string  | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>ja: Japanese                                  |
 | itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬(기본값: 1)<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
