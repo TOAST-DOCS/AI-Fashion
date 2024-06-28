@@ -168,13 +168,13 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: application/json;
 
 #### 오류 코드
 
-| resultCode | resultMessage                 | 설명             |
-|------------|-------------------------------|----------------|
-| -40000     | InvalidParam                  | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey            | 승인되지 않은 앱키 |
-| -42010     | DuplicateServiceName          | 중복된 서비스명       |
-| -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과  |
-| -50000     | InternalServerError           | 서버 오류          |
+| resultCode | resultMessage                 | 설명                 |
+|------------|-------------------------------|--------------------|
+| -40000     | InvalidParam                  | 파라미터에 오류가 있음       |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
+| -42010     | DuplicateServiceName          | 중복된 서비스명           |
+| -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과      |
+| -50000     | InternalServerError           | 서버 오류              |
 
 ### 서비스 삭제
 
@@ -228,7 +228,7 @@ curl -X DELETE -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -303,7 +303,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -371,7 +371,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -473,7 +473,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -40050     | NotFoundProductId   | 상품 아이디가 없음     |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -570,7 +570,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -674,7 +674,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -778,7 +778,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -932,7 +932,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -1059,7 +1059,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H
 | -40020     | NoDataError                 | 전달된 파일이 빈 파일인 경우                     |
 | -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                       |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                       |
 | -42000     | NotExistService             | 존재하지 않는 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
@@ -1205,7 +1205,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -1311,6 +1311,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명                  |
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키      |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키      |
 | -42000     | NotExistService     | 존재하지 않는 서비스         |
 | -50000     | InternalServerError | 서버 오류               |
