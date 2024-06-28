@@ -168,13 +168,13 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: application/json;
 
 #### Error Codes
 
-| resultCode | resultMessage                 | Description             |
-|------------|-------------------------------|----------------|
-| -40000     | InvalidParam                  | The parameter contains an error   |
-| -41000     | UnauthorizedAppKey            | Unauthorized AppKeys |
-| -42010     | DuplicateServiceName          | Duplicate service names       |
-| -42030     | ServiceQuotaExceededException | Exceeding the number of allowed services  |
-| -50000     | InternalServerError           | Server error          |
+| resultCode | resultMessage                 | Description                              |
+|------------|-------------------------------|------------------------------------------|
+| -40000     | InvalidParam                  | The parameter contains an error          |
+| -41005     | UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey         |
+| -42010     | DuplicateServiceName          | Duplicate service names                  |
+| -42030     | ServiceQuotaExceededException | Exceeding the number of allowed services |
+| -50000     | InternalServerError           | Server error                             |
 
 ### Delete a service
 
@@ -228,7 +228,7 @@ curl -X DELETE -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/
 | resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | The parameter contains an error   |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
 | -42000     | NotExistService     | Services that don't exist    |
 | -50000     | InternalServerError | Server error          |
 
@@ -303,7 +303,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | The parameter contains an error   |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
 | -50000     | InternalServerError | Server error          |
 
 
@@ -371,7 +371,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | The parameter contains an error   |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
 | -50000     | InternalServerError | Server error          |
 
 
@@ -473,7 +473,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | The parameter contains an error   |
 | -40050     | NotFoundProductId   | Product ID not found.     |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
 | -42000     | NotExistService     | Services that don't exist    |
 | -50000     | InternalServerError | Server error          |
 
@@ -570,7 +570,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | The parameter contains an error                                          |
-| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                                        |
 | -42000     | NotExistService             | Services that don't exist                                           |
 | -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
 | -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
@@ -674,7 +674,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | The parameter contains an error                                          |
-| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                                        |
 | -42000     | NotExistService             | Services that don't exist                                           |
 | -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
 | -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
@@ -778,7 +778,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | The parameter contains an error                                          |
-| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                                        |
 | -42000     | NotExistService             | Services that don't exist                                           |
 | -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
 | -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
@@ -932,7 +932,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | The parameter contains an error                                          |
-| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                                        |
 | -42000     | NotExistService             | Services that don't exist                                           |
 | -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
 | -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
@@ -1059,7 +1059,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H
 | -40020     | NoDataError                 | The provided file is empty.                     |
 | -40030     | ExceedDataSizeError         | The provided file exceeds the file size limit or data count limit. |
 | -40080     | TooManyRequestError         | Multiple requests occurred simultaneously.                    |
-| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                       |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                       |
 | -42000     | NotExistService             | Services that don't exist                          |
 | -50000     | InternalServerError         | Server error                                |
 
@@ -1205,7 +1205,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | The parameter contains an error   |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
 | -42000     | NotExistService     | Services that don't exist    |
 | -50000     | InternalServerError | Server error          |
 
@@ -1311,6 +1311,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | Description                  |
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | The parameter contains an error        |
-| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys      |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey      |
 | -42000     | NotExistService     | Services that don't exist         |
 | -50000     | InternalServerError | Server error               |
