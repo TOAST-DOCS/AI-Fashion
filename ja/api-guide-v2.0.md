@@ -168,13 +168,13 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {sec
 
 #### エラーコード
 
-| resultCode | resultMessage                 | 説明         |
-|------------|-------------------------------|----------------|
-| -40000     | InvalidParam                  | パラメータにエラーがある |
-| -41000     | UnauthorizedAppKey            | 承認されていないアプリキー |
-| -42010     | DuplicateServiceName          | 重複したサービス名   |
-| -42030     | ServiceQuotaExceededException | 許可されたサービス数超過 |
-| -50000     | InternalServerError           | サーバーエラー      |
+| resultCode | resultMessage                 | 説明                       |
+|------------|-------------------------------|--------------------------|
+| -40000     | InvalidParam                  | パラメータにエラーがある             |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+| -42010     | DuplicateServiceName          | 重複したサービス名                |
+| -42030     | ServiceQuotaExceededException | 許可されたサービス数超過             |
+| -50000     | InternalServerError           | サーバーエラー                  |
 
 ### サービス削除
 
@@ -228,7 +228,7 @@ curl -X DELETE "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}"
 | resultCode | resultMessage       | 説明         |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | パラメータにエラーがある |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵 |
 | -42000     | NotExistService     | 存在しないサービス |
 | -50000     | InternalServerError | サーバーエラー      |
 
@@ -303,7 +303,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
 | resultCode | resultMessage       | 説明         |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | パラメータにエラーがある |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵 |
 | -50000     | InternalServerError | サーバーエラー      |
 
 
@@ -371,7 +371,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/my-service"
 | resultCode | resultMessage       | 説明         |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | パラメータにエラーがある |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵 |
 | -50000     | InternalServerError | サーバーエラー      |
 
 
@@ -473,7 +473,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/products/{pr
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | パラメータにエラーがある |
 | -40050     | NotFoundProductId   | 商品IDが見つからない  |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵 |
 | -42000     | NotExistService     | 存在しないサービス |
 | -50000     | InternalServerError | サーバーエラー      |
 
@@ -570,7 +570,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/detect?path=
 | resultCode | resultMessage               | 説明                                                |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | パラメータにエラーがある                                        |
-| -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                                    |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 承認されていないアプリケーションキーまたは秘密鍵                                    |
 | -42000     | NotExistService             | 存在しないサービス                                       |
 | -45020     | ImageTooLargeException      | 画像ファイルのサイズが大きすぎる<br>[画像ガイド](#input-image-guide)参考 |
 | -45040     | InvalidImageFormatException | サポートしない画像ファイル形式<br>[画像ガイド](#input-image-guide)参考 |
@@ -674,7 +674,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | resultCode | resultMessage               | 説明                                                |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | パラメータにエラーがある                                        |
-| -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                                    |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 承認されていないアプリケーションキーまたは秘密鍵                                    |
 | -42000     | NotExistService             | 存在しないサービス                                       |
 | -45020     | ImageTooLargeException      | 画像ファイルのサイズが大きすぎる<br>[画像ガイド](#input-image-guide)参考 |
 | -45040     | InvalidImageFormatException | サポートしない画像ファイル形式<br>[画像ガイド](#input-image-guide)参考 |
@@ -778,7 +778,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 | resultCode | resultMessage               | 説明                                                |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | パラメータにエラーがある                                        |
-| -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                                    |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 承認されていないアプリケーションキーまたは秘密鍵                                    |
 | -42000     | NotExistService             | 存在しないサービス                                       |
 | -45020     | ImageTooLargeException      | 画像ファイルのサイズが大きすぎる<br>[画像ガイド](#input-image-guide)参考 |
 | -45040     | InvalidImageFormatException | サポートしない画像ファイル形式<br>[画像ガイド](#input-image-guide)参考 |
@@ -932,7 +932,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | resultCode | resultMessage               | 説明                                                |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | パラメータにエラーがある                                        |
-| -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                                    |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 承認されていないアプリケーションキーまたは秘密鍵                                    |
 | -42000     | NotExistService             | 存在しないサービス                                       |
 | -45020     | ImageTooLargeException      | 画像ファイルのサイズが大きすぎる<br>[画像ガイド](#input-image-guide)参考 |
 | -45040     | InvalidImageFormatException | サポートしない画像ファイル形式<br>[画像ガイド](#input-image-guide)参考 |
@@ -1058,7 +1058,7 @@ curl -X POST "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H "Content
 | -40020     | NoDataError                 | 転送されたファイルが空のファイルである場合                 |
 | -40030     | ExceedDataSizeError         | 転送されたファイルが定められた容量または定められたデータ数を超過した場合 |
 | -40080     | TooManyRequestError         | 同時に複数のリクエストを行った場合                |
-| -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                   |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 承認されていないアプリケーションキーまたは秘密鍵                   |
 | -42000     | NotExistService             | 存在しないサービス                      |
 | -50000     | InternalServerError         | サーバーエラー                            |
 
@@ -1204,7 +1204,7 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes?start=0&limit
 | resultCode | resultMessage       | 説明         |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | パラメータにエラーがある |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵 |
 | -42000     | NotExistService     | 存在しないサービス |
 | -50000     | InternalServerError | サーバーエラー      |
 
@@ -1310,6 +1310,6 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 | resultCode | resultMessage       | 説明              |
 |------------|---------------------|---------------------|
 | -40000     | InvalidParam        | パラメータにエラーがある     |
-| -41000     | UnauthorizedAppKey  | 承認されていないアプリキー  |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵  |
 | -42000     | NotExistService     | 存在しないサービス     |
 | -50000     | InternalServerError | サーバーエラー           |
