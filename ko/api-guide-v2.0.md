@@ -687,7 +687,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 * 이미지(URL, File)에서 인식된 가장 큰 패션 아이템을 기준으로 유사한 상품을 찾아주는 API
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
-* Content-Type: multipart/form-data
 
 #### 요청
 
@@ -705,6 +704,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | serviceName | 서비스명                    |
 
 [Request Body]
+#### Content-Type: multipart/form-data
 
 | 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                                                                      |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
