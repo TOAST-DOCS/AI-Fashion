@@ -687,7 +687,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 * API to find similar products based on the largest recognized fashion item in an image (URL, File)
 * filter.category1~3_id, filter.s1~2 can be found in the [](#filtering-guide)Filtering Guide[](#filtering-guide)
-* Content-Type: multipart/form-data
 
 #### Request
 
@@ -705,6 +704,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | serviceName | Service Name                    |
 
 [Request Body]
+#### Content-Type: multipart/form-data
 
 | Name                 | Type      | Required | Examples              | Description                                                                                                                                                      |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -948,7 +948,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 * Analyze the first line of the provided file and check if there is a format error.
 * If no error is found on the first line, the file enters a queue for indexing and is indexed according to the schedule.
 * You can send data files directly or pass data files to a downloadable URL.
-* Content-Type: multipart/form-data
 
 #### File Data Format
 
