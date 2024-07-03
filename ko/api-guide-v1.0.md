@@ -484,6 +484,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
 | -50000     | InternalServerError         | 서버 오류                                                 |
 
+<span id="search-by-detect-link"></span>
 ### 감지된 패션 아이템으로 유사 상품 검색
 
 * detect API에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API

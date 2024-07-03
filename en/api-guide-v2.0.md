@@ -524,7 +524,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 |---------------------|--------------|----|--------------------------------------------------|---------------------------------------------------------|
 | data.totalCount     | integer      | O  | 100                                              | Total number of search results                                              |
 | data.query          | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | Search query                                                   |
-| data.items[].link   | string       | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | Values to use in similar product search with detected fashion items |
+| data.items[].link   | string       | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | Values to use in [similar product search with detected fashion items](#search-by-detect-link) |
 | data.items[].center | double array | O  | [0.825047801147227, 0.330948979591837]           | Center x, y coordinate % of a detected item                                   |
 | data.items[].b0     | double array | O  | [0.676864247418738, 0.219377551020408]           | x0, y0 coordinate % of a detected item                                    |
 | data.items[].b1     | double array | O  | [0.973231355525813, 0.4426204081632654]          | x1, y1 coordinate % of a detected item                                    |

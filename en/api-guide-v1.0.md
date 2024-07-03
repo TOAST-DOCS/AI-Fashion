@@ -430,7 +430,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 |---------------------|---------------|----|--------------------------------------------------|---------------------------------------------------------|
 | data.totalCount     | Number        | O  | 100                                              | Total number of search results                                              |
 | data.query          | String        | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | Search query                                                   |
-| data.items[].link   | String        | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | Values to use in similar product search with detected fashion items |
+| data.items[].link   | String        | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | Values to use in [similar product search with detected fashion items](#search-by-detect-link) |
 | data.items[].center | float64 array | O  | [0.825047801147227, 0.330948979591837]           | Center x, y coordinate % of a detected item                                   |
 | data.items[].b0     | float64 array | O  | [0.676864247418738, 0.219377551020408]           | x0, y0 coordinate % of a detected item                                    |
 | data.items[].b1     | float64 array | O  | [0.973231355525813, 0.4426204081632654]          | x1, y1 coordinate % of a detected item                                    |
@@ -484,6 +484,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | Image download timeout                                        |
 | -50000     | InternalServerError         | Server error                                                 |
 
+<span id="search-by-detect-link"></span>
 ### Search for similar products with detected fashion items
 
 * API to search for products including similar fashion items based on the link received as the response from detect API.

@@ -485,6 +485,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 | -45060     | ImageTimeoutError           | 画像ダウンロードタイムアウト                                    |
 | -50000     | InternalServerError         | サーバーエラー                                             |
 
+<span id="search-by-detect-link"></span>
 ### 検出されたファッションアイテムで類似商品検索
 
 * detect APIからレスポンスで受け取ったlinkを基に類似のファッションアイテムを含む商品を検索するAPI
