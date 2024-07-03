@@ -687,7 +687,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 
 * 画像(URL, File)から認識された最も大きなファッションアイテムを基準に類似商品を探すAPI
 * filter.category1～3_id, filter.s1～2は[フィルタリングガイド](#filtering-guide)で確認可能
-* Content-Type: multipart/form-data
 
 #### リクエスト
 
@@ -705,6 +704,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | serviceName | サービス名                |
 
 [Request Body]
+#### Content-Type: multipart/form-data
 
 | 名前             | タイプ  | 必須 | 例          | 説明                                                                                                                                                  |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
