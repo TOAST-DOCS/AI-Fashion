@@ -704,7 +704,8 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/image?limit=
 | serviceName | サービス名                |
 
 [Request Body]
-#### Content-Type: multipart/form-data
+
+**Content-Type : multipart/form-data**
 
 | 名前             | タイプ  | 必須 | 例          | 説明                                                                                                                                                  |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
