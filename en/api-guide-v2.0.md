@@ -704,7 +704,8 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | serviceName | Service Name                    |
 
 [Request Body]
-#### Content-Type: multipart/form-data
+
+**Content-Type : multipart/form-data**
 
 | Name                 | Type      | Required | Examples              | Description                                                                                                                                                      |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
