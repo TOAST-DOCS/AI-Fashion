@@ -1308,9 +1308,10 @@ curl -X GET "/v2.0/appkeys/{appKey}/services/{serviceName}/indexes/{indexId}"
 
 #### エラーコード
 
-| resultCode | resultMessage       | 説明              |
-|------------|---------------------|---------------------|
-| -40000     | InvalidParam        | パラメータにエラーがある     |
-| -41005     | UnauthorizedAppKeyOrSecretKey  | 承認されていないアプリケーションキーまたは秘密鍵  |
-| -42000     | NotExistService     | 存在しないサービス     |
-| -50000     | InternalServerError | サーバーエラー           |
+| resultCode | resultMessage                 | 説明                       |
+|------------|-------------------------------|--------------------------|
+| -40000     | InvalidParam                  | パラメータにエラーがある             |
+| -40090     | NotFoundIndexId               | 索引IDが見つからない              |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+| -42000     | NotExistService               | 存在しないサービス                |
+| -50000     | InternalServerError           | サーバーエラー                  |

@@ -469,13 +469,13 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 #### Error Codes
 
-| resultCode | resultMessage       | Description             |
-|------------|---------------------|----------------|
-| -40000     | InvalidParam        | The parameter contains an error   |
-| -40050     | NotFoundProductId   | Product ID not found.     |
-| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey |
-| -42000     | NotExistService     | Services that don't exist    |
-| -50000     | InternalServerError | Server error          |
+| resultCode | resultMessage                 | Description                      |
+|------------|-------------------------------|----------------------------------|
+| -40000     | InvalidParam                  | The parameter contains an error  |
+| -40050     | NotFoundProductId             | Product ID not found             |
+| -41005     | UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
+| -42000     | NotExistService               | Services that don't exist        |
+| -50000     | InternalServerError           | Server error                     |
 
 
 ## Search for Cameras
@@ -567,16 +567,16 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 #### Error Codes
 
-| resultCode | resultMessage               | Description                                                    |
-|------------|-----------------------------|-------------------------------------------------------|
-| -40000     | InvalidParam                | The parameter contains an error                                          |
-| -41005     | UnauthorizedAppKeyOrSecretKey          | Unauthorized Appkey or SecretKey                                        |
-| -42000     | NotExistService             | Services that don't exist                                           |
-| -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
-| -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
-| -45050     | InvalidImageURLException    | The URL is not accessible.                                          |
-| -45060     | ImageTimeoutError           | Image download timeout                                        |
-| -50000     | InternalServerError         | Server error                                                 |
+| resultCode | resultMessage                 | Description                                                     |
+|------------|-------------------------------|-----------------------------------------------------------------|
+| -40000     | InvalidParam                  | The parameter contains an error                                 |
+| -41005     | UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey                                |
+| -42000     | NotExistService               | Services that don't exist                                       |
+| -45020     | ImageTooLargeException        | The size of the image file is too large.<br>See the image guide |
+| -45040     | InvalidImageFormatException   | Unsupported image file format.<br>See the image guide           |
+| -45050     | InvalidImageURLException      | The URL is not accessible.                                      |
+| -45060     | ImageTimeoutError             | Image download timeout                                          |
+| -50000     | InternalServerError           | Server error                                                    |
 
 <span id="search-by-detect-link"></span>
 ### Search for similar products with detected fashion items
@@ -1308,9 +1308,10 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 #### Error Codes
 
-| resultCode | resultMessage       | Description                  |
-|------------|---------------------|---------------------|
-| -40000     | InvalidParam        | The parameter contains an error        |
-| -41005     | UnauthorizedAppKeyOrSecretKey  | Unauthorized Appkey or SecretKey      |
-| -42000     | NotExistService     | Services that don't exist         |
-| -50000     | InternalServerError | Server error               |
+| resultCode | resultMessage                 | Description                      |
+|------------|-------------------------------|----------------------------------|
+| -40000     | InvalidParam                  | The parameter contains an error  |
+| -40090     | NotFoundIndexId               | Index ID not found               |
+| -41005     | UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
+| -42000     | NotExistService               | Services that don't exist        |
+| -50000     | InternalServerError           | Server error                     |

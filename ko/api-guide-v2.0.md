@@ -1309,9 +1309,10 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 #### 오류 코드
 
-| resultCode | resultMessage       | 설명                  |
-|------------|---------------------|---------------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키      |
-| -42000     | NotExistService     | 존재하지 않는 서비스         |
-| -50000     | InternalServerError | 서버 오류               |
+| resultCode | resultMessage                 | 설명                 |
+|------------|-------------------------------|--------------------|
+| -40000     | InvalidParam                  | 파라미터에 오류가 있음       |
+| -40090     | NotFoundIndexId               | 색인 id가 없음          |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
+| -42000     | NotExistService               | 존재하지 않는 서비스        |
+| -50000     | InternalServerError           | 서버 오류              |
