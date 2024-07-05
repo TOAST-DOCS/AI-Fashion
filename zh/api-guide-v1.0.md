@@ -857,7 +857,6 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -40020     | NoDataError                 | The provided file is empty.                     |
 | -40030     | ExceedDataSizeError         | The provided file exceeds the file size limit or data count limit. |
 | -40080     | TooManyRequestError         | Multiple requests occurred simultaneously.                    |
-| -40400     | NoApiFound                  | A request was made with an undefined API.                  |
 | -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                       |
 | -42000     | NotExistService             | Services that don't exist                          |
 | -50000     | InternalServerError         | Server error                                |
