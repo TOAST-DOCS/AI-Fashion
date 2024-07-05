@@ -141,7 +141,7 @@
 
 ```
 curl -X POST "${domain}/v2.0/appkeys/{appKey}/services " -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
-    "serviceName": "my-serviceName"
+    "serviceName": "my-servicename"
 }'
 ```
 
@@ -284,7 +284,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services"
     "data": {
         "totalCount": 2,
         "items": [{
-                "serviceName": "my-serviceName",
+                "serviceName": "my-servicename",
                 "documentCount": 100
             },
             {
