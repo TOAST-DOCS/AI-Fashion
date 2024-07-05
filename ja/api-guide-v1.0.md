@@ -857,7 +857,6 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 | -40020     | NoDataError                 | 転送されたファイルが空のファイルである場合                 |
 | -40030     | ExceedDataSizeError         | 転送されたファイルが定められた容量または定められたデータ数を超過した場合 |
 | -40080     | TooManyRequestError         | 同時に複数のリクエストを行った場合                |
-| -40400     | NoApiFound                  | 定義されていないAPIにリクエストした場合              |
 | -41000     | UnauthorizedAppKey          | 承認されていないアプリキー                   |
 | -42000     | NotExistService             | 存在しないサービス                      |
 | -50000     | InternalServerError         | サーバーエラー                            |
