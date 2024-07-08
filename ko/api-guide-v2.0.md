@@ -949,7 +949,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 * 전달된 파일의 첫 번째 줄을 분석하여 포맷 오류 여부를 검사합니다.
 * 첫 번째 줄에서 오류가 발견되지 않으면 색인을 위한 대기열에 들어간 뒤 스케줄에 따라 색인됩니다.
 * 직접 데이터 파일을 전송하거나 다운로드 가능한 URL로 데이터 파일을 전달할 수 있습니다.
-* Content-Type: multipart/form-data
 
 #### 파일 데이터 포맷
 
@@ -996,12 +995,14 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
-[Form Data]
+[Request Body]
 
-| 이름     | 타입     | 필수 여부 | 예제                                                   | 설명                                                     |
-|--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
-| format | string | O     | jsonl                                                | jsonl 또는 csv                                           |
-| link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                             |
+**Content-Type : multipart/form-data**
+
+| 이름     | 타입     | 필수 여부 | 예제                                                   | 설명                                                    |
+|--------|--------|-------|------------------------------------------------------|-------------------------------------------------------|
+| format | string | O     | jsonl                                                | jsonl 또는 csv                                          |
+| link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                            |
 | file   | file   | △     | @filename                                            | 데이터 파일<br/>link가 file보다 우선순위가 높아서 link가 있으면 file은 무시됨 |
 
 
