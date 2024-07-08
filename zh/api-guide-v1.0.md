@@ -795,7 +795,9 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 |--------|--------|----|-------|--------------|
 | format | string | O  | jsonl | jsonl or csv |
 
-[Form Data]
+[Request Body]
+
+**Content-Type : multipart/form-data**
 
 | Name   | Type     | Required? | Examples                                                     | Description                                                     |
 |------|--------|-------|--------------------------------------------------------|--------------------------------------------------------|

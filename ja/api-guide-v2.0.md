@@ -948,7 +948,6 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 * 渡されたファイルの最初の行を分析して、フォーマットエラーがあるかどうかを検査します。
 * 最初の行にエラーが見つからない場合、インデックスのためのキューに入った後、スケジュールに従ってインデックスが作成されます。
 * 直接データファイルを送信するか、ダウンロード可能なURLでデータファイルを渡すことができます。
-* Content-Type: multipart/form-data
 
 #### ファイルデータフォーマット
 
@@ -995,7 +994,9 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | appKey      | 統合アプリキーまたはサービスアプリキー |
 | serviceName | サービス名                |
 
-[Form Data]
+[Request Body]
+
+**Content-Type : multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | 例                                               | 説明                                                 |
 |--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
