@@ -995,7 +995,9 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | appKey      | Integration app key or service app key |
 | serviceName | Service Name                    |
 
-[Form Data]
+[Request Body]
+
+**Content-Type : multipart/form-data**
 
 | Name     | Type     | Required? | Examples                                                   | Description                                                     |
 |--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
