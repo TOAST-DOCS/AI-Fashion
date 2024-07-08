@@ -822,7 +822,7 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F l
 <details><summary>リクエスト例</summary>
 
 ```
-curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3"
 ```
 
 </details>
@@ -837,7 +837,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
 | 名前                             | タイプ       | 必須 | 例                                                              | 説明                                       |
 |------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
 | data.totalCount                    | integer      | O  | 2                                                                   | 総検索結果数                               |
-| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 検索クエリ                                      |
+| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&itemLimit=3` | 検索クエリ                                      |
 | data.items[].type                  | string       | O  | JACKET                                                              | 検出されたアイテムのタイプ                            |
 | data.items[].score                 | float        | O  | 0.9515                                                              | 検出されたアイテムの信頼度                             |
 | data.items[].tags                  | array        | O  |                                                                     | 検出されたアイテムタグ情報の配列                        |
@@ -861,7 +861,7 @@ curl -X GET "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=htt
     },
     "data": {
         "totalCount": 2,
-        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3",
         "items": [{
             "type": "SHIRT",
             "tags": [{

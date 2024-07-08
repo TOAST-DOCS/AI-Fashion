@@ -822,7 +822,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 <details><summary>Request example</summary>
 
 ```
-curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3"
 ```
 
 </details>
@@ -837,7 +837,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | Name                                 | Type           | Required | Examples                                                                  | Description                                           |
 |------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
 | data.totalCount                    | integer      | O  | 2                                                                   | Total number of search results                                   |
-| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | Search query                                        |
+| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&itemLimit=3` | Search query                                        |
 | data.items[].type                  | string       | O  | JACKET                                                              | Types of detected items                                |
 | data.items[].score                 | float        | O  | 0.9515                                                              | Confidence score of a detected item                                 |
 | data.items[].tags                  | array        | O  |                                                                     | Array of detected item tag information                            |
@@ -861,7 +861,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
     },
     "data": {
         "totalCount": 2,
-        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3",
         "items": [{
             "type": "SHIRT",
             "tags": [{
