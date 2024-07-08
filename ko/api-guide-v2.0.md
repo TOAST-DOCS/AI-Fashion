@@ -822,7 +822,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3"
 ```
 
 </details>
@@ -837,7 +837,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | 이름                                 | 타입           | 필수 | 예제                                                                  | 설명                                           |
 |------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
 | data.totalCount                    | integer      | O  | 2                                                                   | 총 검색 결과 개수                                   |
-| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
+| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&itemLimit=3` | 검색 질의                                        |
 | data.items[].type                  | string       | O  | JACKET                                                              | 감지된 아이템의 유형                                |
 | data.items[].score                 | float        | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
 | data.items[].tags                  | array        | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
@@ -861,7 +861,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
     },
     "data": {
         "totalCount": 2,
-        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3",
         "items": [{
             "type": "SHIRT",
             "tags": [{
