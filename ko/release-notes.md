@@ -1,7 +1,7 @@
 ## AI Service > AI Fashion > 릴리스 노트
 
 ### 2024. 07. 09.
-* API v2.0 출시
+* [API v2.0](./api-guide-v2.0) 출시
 * 1일 최대 24회 색인 요청 제한 해제
 * 색인 및 검색 속도 향상
 
@@ -11,7 +11,7 @@
 ### 2023. 07. 25.
 #### 기능 개선/변경
 * [API] s1, s2 필터링 기능 추가
-	* [필터링 가이드](./service-api-guide/#filtering-guide) 참고
+	* [필터링 가이드](./api-guide-v1.0/#filtering-guide) 참고
 
 ### 2023. 05. 16.
 #### 기능 개선/변경
@@ -35,7 +35,7 @@
 ### 2022. 04. 26.
 #### 기능 개선/변경
 * [API] 필터링 기능 추가
-	* [필터링 가이드](./service-api-guide/#filtering-guide) 참고
+	* [필터링 가이드](./api-guide-v1.0/#filtering-guide) 참고
 
 ### 2022. 01. 25.
 #### 기능 개선/변경
@@ -44,7 +44,7 @@
 ### 2021. 10. 26.
 #### 기능 개선/변경
 * [API] 딥 태깅 API(tag) 추가
-	* [tag API](./service-api-guide/#tag-api) 참고
+	* [tag API](./api-guide-v1.0/#tag-api) 참고
 
 ### 2021. 09. 28.
 * AI Fashion 서비스 출시

@@ -1,82 +1,82 @@
-## AI Service > AI Fashion > API v1.0 가이드
+## AI Service > AI Fashion > API v1.0 Guide
 
-- AI Fashion v1.0 서비스를 사용하는 데 필요한 API를 설명합니다.
+- This guide describes APIs required to use the AI Fashion v1.0 service.
 
-## API 공통 정보
-### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
-    - 프로젝트 통합 앱키 사용을 권장합니다.
-    - 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 앱키는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+## API Common Information
+### Preparations
+- To use APIs, an integrated project AppKey or service AppKey is required.
+    - We recommend using the integrated project AppKey.
+    - You can create and use the integrated project AppKey from the API security settings in the project settings page.
+    - The service AppKey can be found in the **URL & Appkey** menu on the top of the console.
 
-### 요청 공통 정보
-- API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
+### Common Request Information
+- The security key needs to be authenticated in order to use APIs.
 
-[API 도메인]
+[API domain]
 
-| 도메인                                       |
+| Domain                                       |
 |-------------------------------------------|
 | https://api-aifashion.nhncloudservice.com |
 
-### 색인 가이드
+### Indexing guide
 
-* 지원되는 파일 형식: JSONL(.jsonl), CSV(.csv)
-  * CSV 파일을 작성할 때는 첫 줄부터 실제 데이터로 채워야 합니다.
-  * 파일에 빈 줄이 없어야 합니다.
-  * 내용은 UTF-8로 인코딩되어야 합니다.
-* 색인 파일의 최대 크기: 5MB
-* 색인 파일 내 데이터 최대 개수: 10,000개(줄로 구분)
-* 이미지 URL 컨텐츠의 최대 크기: 20MB
-* 서비스당 색인 가능한 최대 문서 수: 100,000개
+* Supported file types: JSONL(.jsonl), CSV(.csv)
+  * When you build a CSV file, you need to fill it with actual data from the first line.
+  * There should be no blank lines in the file.
+  * The content must be UTF-8 encoded.
+* Maximum size of the index file: 5 MB
+* Maximum number of data in the index file: 10,000 (separated by lines)
+* Maximum size of image URL content: 20 MB
+* Maximum number of indexable documents per service: 100,000
 
 
 <span id="input-image-guide"></span>
-### 이미지 가이드
+### Image Guide
 
-* 이미지 다운로드에 3초 이상 걸리면 실패로 간주합니다.
-* 이미지에서 패션 아이템의 너비와 높이가 모두 20px 이하인 경우에는 인식하지 않습니다.
-* 이미지 크기가 커질수록 패션 아이템의 크기도 커져야 더 정확하게 인식할 수 있습니다.
-* 이미지에서 패션 아이템이 차지하는 비중이 클수록 더 정확하게 인식할 수 있습니다.
-* 이미지 URL에 포트를 직접 지정하는 경우 80, 443, 10000~12000 포트만 사용 가능합니다.
-* 이미지 파일의 최대 크기: 5MB(단, [Tag API](#tag-api)는 1MB)
-* 지원 이미지 파일 형식: PNG, JPEG, GIF
+* If the image takes more than 3 seconds to download, it is considered a failure.
+* If the width and height of a fashion item in an image are both 20px or less, it will not be recognized.
+* The larger the image size, the larger the size of the fashion item should be for more accurate recognition.
+* The larger the proportion of fashion items in an image, the more accurate the recognition.
+* If you specify a port directly in the image URL, only ports 80, 443, and 10000 to 12000 are available.
+* Maximum size of the image file: 5 MB (but 1 MB for [](#tag-api)Tag API[](#tag-api))
+* Supported image file formats: PNG, JPEG, GIF
 
 <span id="filtering-guide"></span>
-### 필터링 가이드
+### Filtering Guide
 
-* 필터링 기능은 카테고리 또는 필터를 제한하여 검색할 때 사용합니다.
+* Filtering is used to search by limiting categories or filters.
 
-#### 대상 필드
-| 이름          | 필드명          |
+#### Target Field
+| Name          | Field Name          |
 |-------------|--------------|
-| 카테고리 1depth | category1_id |
-| 카테고리 2depth | category2_id |
-| 카테고리 3depth | category3_id |
-| 필터 1        | s1           |
-| 필터 2        | s2           |
+| Category depth 1 | category1_id |
+| Category depth 2 | category2_id |
+| Category depth 3 | category3_id |
+| Filter 1        | s1           |
+| Filter 2        | s2           |
 
-#### 문법
-* `filter.{필드명}`=`연산자`:`값`
+#### Grammar
+* `filter.{field name}` = `operator` : `value`
 
-| 조건             | 연산자    | 예제                                                                                                                                          | 설명                                                                |
+| Condition             | Operator    | Examples                                                                                                                                          | Description                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| equal(default) | equal  | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 or<br/>filter.category2_id=equal:1003&filter.s1=equal:1                 | 대상 필드의 값이 파라미터 값과 같은 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
-| not equal      | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 or<br/>filter.category2_id=!equal:1003,1005&filter.s1=!equal:1 | 대상 필드의 값이 파라미터 값과 다른 문서만 결과로 응답합니다.<br/>콤마(,)로 구분하여 OR 검색이 가능합니다. |
+| equal(default) | equal  | filter.category2_id=1003,1005 or<br/>filter.category2_id=equal:1003 or<br/>filter.category2_id=equal:1003&filter.s1=equal:1                 | Only documents where the value of the target field is equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
+| not equal      | !equal | filter.category2_id=!equal:1003 or <br/>filter.category2_id=!equal:1003,1005 or<br/>filter.category2_id=!equal:1003,1005&filter.s1=!equal:1 | Only documents where the value of the target field is not equal to the value of the parameter are responded as a result.<br/>You can perform an OR search by separating values with commas (,). |
 
 <span id="common-response"></span>
-### 응답 공통 정보
+### Common Response Information
 
-- 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
+- Respond to all API requests with a '200 OK'. For more information on the response results, see Response Body Header.
 
-[응답 본문 헤더]
+[Response Body Header]
 
-| 이름                   | 타입      | 설명                              |
+| Name                   | Type      | Description                              |
 |----------------------|---------|---------------------------------|
-| header.isSuccessful  | boolean | true: 정상<br>false: 오류           |
-| header.resultCode    | int     | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
-| header.resultMessage | string  | "SUCCESS": 정상<br>그 외: 오류 메시지 반환 |
+| header.isSuccessful  | boolean | true: Normal<br>false: Error           |
+| header.resultCode    | int     | 0: Normal<br>Greater than 0: Partial success<br>Negative: Error |
+| header.resultMessage | string  | "SUCCESS": Normal<br>Other: Returns an error message |
 
-[성공 응답 본문 예]
+[Success Response Body Example]
 
 ```json
 {
@@ -88,7 +88,7 @@
 }
 ```
 
-[실패 응답 본문 예]
+[Example of Failure Response Body]
 
 ```json
 {
@@ -100,33 +100,33 @@
 }
 ```
 
-## 서비스 관리
+## Manage services
 
-### 서비스 생성
+### Create a service
 
-* 서비스를 생성할 수 있는 API
-* 최대 5개까지 생성 가능
-* 허용 문자
-    * 영어 소문자, 숫자, '-', '\_' 허용
-    * 첫 글자는 영어 소문자만 허용
-    * 2~32 글자 허용
+* APIs to create services
+* You can create up to five
+* Allowed characters
+    * Allow English lowercase letters, numbers, '-', and '_'
+    * Allow only lowercase English letters for the first letter
+    * Allow 2 to 32 characters
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드  | URI                                                       |
+| Method  | URI                                                       |
 |------|-----------------------------------------------------------|
 | POST | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
@@ -134,12 +134,12 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -153,37 +153,37 @@ curl -X POST "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage                 | 설명             |
+| resultCode | resultMessage                 | Description             |
 |------------|-------------------------------|----------------|
-| -40000     | InvalidParam                  | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey            | 승인되지 않은 앱키 |
-| -42010     | DuplicateServiceName          | 중복된 서비스명       |
-| -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과  |
-| -50000     | InternalServerError           | 서버 오류          |
+| -40000     | InvalidParam                  | The parameter contains an error   |
+| -41000     | UnauthorizedAppKey            | Unauthorized AppKeys |
+| -42010     | DuplicateServiceName          | Duplicate service names       |
+| -42030     | ServiceQuotaExceededException | Exceeding the number of allowed services  |
+| -50000     | InternalServerError           | Server error          |
 
-### 서비스 삭제
+### Delete a service
 
-* 서비스를 삭제할 수 있는 API
-* 서비스에 처리 중인 색인 요청이 있는 경우도, 서비스를 삭제할 수 있습니다.
+* APIs to delete services
+* You can also delete a service if it has pending index requests.
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드    | URI                                                       |
+| Method    | URI                                                       |
 |--------|-----------------------------------------------------------|
 | DELETE | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID} |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}"
@@ -191,12 +191,12 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -210,34 +210,34 @@ curl -X DELETE "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceI
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage       | 설명             |
+| resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
-| -42000     | NotExistService     | 존재하지 않는 서비스    |
-| -50000     | InternalServerError | 서버 오류          |
+| -40000     | InvalidParam        | The parameter contains an error   |
+| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -42000     | NotExistService     | Services that don't exist    |
+| -50000     | InternalServerError | Server error          |
 
-### 서비스 목록 조회
+### Get a list of services
 
-* 등록된 서비스명 목록을 가져오는 API
+* API to get a list of registered service names
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                            |
+| Method | URI                                            |
 |-----|------------------------------------------------|
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/services |
 
 [Path Variable]
 
-| 이름     | 설명                      |
+| Name     | Description                      |
 |--------|-------------------------|
-| appKey | 통합 앱키 또는 서비스 앱키 |
+| appKey | Integration app key or service app key |
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
@@ -245,19 +245,19 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                     | 타입     | 필수 | 예제         | 설명         |
+| Name                     | Type     | Required | Examples         | Description         |
 |------------------------|--------|----|------------|------------|
-| data.totalCount        | Number | O  | 5          | 총 검색 결과 개수 |
-| data.items[].serviceID | String | O  | my-service | 서비스명       |
+| data.totalCount        | Number | O  | 5          | Total number of search results |
+| data.items[].serviceID | String | O  | my-service | Service Name       |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -281,51 +281,51 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage       | 설명             |
+| resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
-| -50000     | InternalServerError | 서버 오류          |
+| -40000     | InvalidParam        | The parameter contains an error   |
+| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -50000     | InternalServerError | Server error          |
 
-## 유사 이미지 상품 추천
+## Similar Image Product Recommendations
 
-### 상품 아이디로 유사 상품 검색
+### Search for similar products by product ID
 
-* 상품 아이디를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* API to find products with similar fashion items based on product IDs
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                                           |
+| Method | URI                                                                           |
 |-----|-------------------------------------------------------------------------------|
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID} |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
-| productID | 상품 아이디                  |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
+| productID | Product ID                  |
 
 [URL Parameter]
 
-| 이름                  | 타입      | 필수 | 예제       | 설명                                                                                                        |
+| Name                  | Type      | Required | Examples       | Description                                                                                                        |
 |---------------------|---------|----|----------|-----------------------------------------------------------------------------------------------------------|
-| limit               | int     | O  | 100      | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| filter.category1_id | string  | X  | equal:3  | category1_id 값으로 필터링                                                                                      |
-| filter.category2_id | string  | X  | !equal:3 | category2_id 값으로 필터링                                                                                      |
-| filter.category3_id | string  | X  | !equal:3 | category3_id 값으로 필터링                                                                                      |
-| filter.s1           | string  | X  | equal:3  | s1 값으로 필터링                                                                                                |
-| filter.s2           | string  | X  | !equal:3 | s2 값으로 필터링                                                                                                |
-| threshold           | float32 | X  | 0.8      | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| limit               | int     | O  | 100      | Max size<br>Can be set in value from 1 to 200                                                                               |
+| filter.category1_id | string  | X  | equal:3  | Filter by category1_id value                                                                                      |
+| filter.category2_id | string  | X  | !equal:3 | Filter by category2_id value                                                                                      |
+| filter.category3_id | string  | X  | !equal:3 | Filter by category3_id value                                                                                      |
+| filter.s1           | string  | X  | equal:3  | Filter by s1 value                                                                                                |
+| filter.s2           | string  | X  | !equal:3 | Filter by s2 value                                                                                                |
+| threshold           | float32 | X  | 0.8      | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2 can be found in the [](#filtering-guide)Filtering Guide[](#filtering-guide)
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/product/{productID}?limit=100&filter.s1=equal:1"
@@ -333,21 +333,21 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                      | 타입     | 필수 | 예제                           | 설명         |
+| Name                      | Type     | Required | Examples                           | Description         |
 |-------------------------|--------|----|------------------------------|------------|
-| data.totalCount         | Number | O  | 100                          | 총 검색 결과 개수 |
-| data.query              | String | O  | productID=10234455&limit=100 | 검색 질의      |
-| data.items[].similarity | Number | O  | 0.91234                      | 검색 유사도 점수  |
-| data.items[].productID  | String | O  | 8980335                      | 상품 아이디     |
+| data.totalCount         | Number | O  | 100                          | Total number of search results |
+| data.query              | String | O  | productID=10234455&limit=100 | Search query      |
+| data.items[].similarity | Number | O  | 0.91234                      | Search similarity score  |
+| data.items[].productID  | String | O  | 8980335                      | Product ID     |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -374,44 +374,44 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage       | 설명             |
+| resultCode | resultMessage       | Description             |
 |------------|---------------------|----------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -40050     | NotFoundProductId   | 상품 아이디가 없음     |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
-| -42000     | NotExistService     | 존재하지 않는 서비스    |
-| -50000     | InternalServerError | 서버 오류          |
+| -40000     | InvalidParam        | The parameter contains an error   |
+| -40050     | NotFoundProductId   | Product ID not found.     |
+| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys |
+| -42000     | NotExistService     | Services that don't exist    |
+| -50000     | InternalServerError | Server error          |
 
-## 카메라 검색
+## Search for Cameras
 
-### 패션 아이템 감지
+### Detect Fashion Items
 
-* 입력된 이미지에서 패션 아이템을 감지하는 API
+* API to detect fashion items from input images
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                              |
+| Method | URI                                                              |
 |-----|------------------------------------------------------------------|
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
 [URL Parameter]
 
-| 이름   | 타입     | 필수 | 예제                                        | 설명                     |
+| Name   | Type     | Required | Examples                                        | Description                     |
 |------|--------|----|-------------------------------------------|------------------------|
-| path | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지의 URL |
+| path | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL for URL-encoded images |
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/detect?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg"
@@ -419,24 +419,24 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                  | 타입            | 필수 | 예제                                               | 설명                                                      |
+| Name                  | Type            | Required | Examples                                               | Description                                                      |
 |---------------------|---------------|----|--------------------------------------------------|---------------------------------------------------------|
-| data.totalCount     | Number        | O  | 100                                              | 총 검색 결과 개수                                              |
-| data.query          | String        | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | 검색 질의                                                   |
-| data.items[].link   | String        | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | [감지된 패션 아이템으로 유사 상품 검색](#search-by-detect-link)에서 사용할 값 |
-| data.items[].center | float64 array | O  | [0.825047801147227, 0.330948979591837]           | 감지된 아이템의 중앙 x, y 좌표 %                                   |
-| data.items[].b0     | float64 array | O  | [0.676864247418738, 0.219377551020408]           | 감지된 아이템의 x0, y0 좌표 %                                    |
-| data.items[].b1     | float64 array | O  | [0.973231355525813, 0.4426204081632654]          | 감지된 아이템의 x1, y1 좌표 %                                    |
-| data.items[].score  | float32       | O  | 0.9732                                           | 감지된 아이템의 신뢰도                                            |
+| data.totalCount     | Number        | O  | 100                                              | Total number of search results                                              |
+| data.query          | String        | O  | `path=https://imagecdn.co.kr/sample_image.jpg`   | Search query                                                   |
+| data.items[].link   | String        | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0= | Values to use in [similar product search with detected fashion items](#search-by-detect-link) |
+| data.items[].center | float64 array | O  | [0.825047801147227, 0.330948979591837]           | Center x, y coordinate % of a detected item                                   |
+| data.items[].b0     | float64 array | O  | [0.676864247418738, 0.219377551020408]           | x0, y0 coordinate % of a detected item                                    |
+| data.items[].b1     | float64 array | O  | [0.973231355525813, 0.4426204081632654]          | x1, y1 coordinate % of a detected item                                    |
+| data.items[].score  | float32       | O  | 0.9732                                           | Confidence score of a detected item                                            |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -471,54 +471,55 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage               | 설명                                                    |
+| resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
-| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
-| -50000     | InternalServerError         | 서버 오류                                                 |
+| -40000     | InvalidParam                | The parameter contains an error                                          |
+| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -42000     | NotExistService             | Services that don't exist                                           |
+| -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
+| -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
+| -45050     | InvalidImageURLException    | The URL is not accessible.                                          |
+| -45060     | ImageTimeoutError           | Image download timeout                                        |
+| -50000     | InternalServerError         | Server error                                                 |
 
-### 감지된 패션 아이템으로 유사 상품 검색
+<span id="search-by-detect-link"></span>
+### Search for similar products with detected fashion items
 
-* detect API에서 응답으로 받은 link를 기반으로 유사한 패션 아이템을 포함한 상품을 찾아주는 API
+* API to search for products including similar fashion items based on the link received as the response from detect API.
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                             |
+| Method | URI                                                             |
 |-----|-----------------------------------------------------------------|
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
 [URL Parameter]
 
-| 이름                  | 타입      | 필수 | 예제                                                 | 설명                                                                                                        |
+| Name                  | Type      | Required | Examples                                                 | Description                                                                                                        |
 |---------------------|---------|----|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| limit               | int     | O  | 100                                                | 최대 크기<br>1 이상 200 이하로 설정 가능                                                                               |
-| link                | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | detect API에서 전달받은 link(URL 인코딩 필요)                                                                  |
-| filter.category1_id | string  | X  | equal:3                                            | category1_id 값으로 필터링                                                                                      |
-| filter.category2_id | string  | X  | !equal:3                                           | category2_id 값으로 필터링                                                                                      |
-| filter.category3_id | string  | X  | !equal:3                                           | category3_id 값으로 필터링                                                                                      |
-| filter.s1           | string  | X  | equal:3                                            | s1 값으로 필터링                                                                                                |
-| filter.s2           | string  | X  | !equal:3                                           | s2 값으로 필터링                                                                                                |
-| threshold           | float32 | X  | 0.8                                                | 매칭 여부를 판단하는 유사도 기준값<br/> data.items[].similarity >= threshold인 항목만 매칭되는 것으로 판단합니다.<br/>0 초과 1.0 이하로 설정 가능 |
+| limit               | int     | O  | 100                                                | Max size<br>Can be set in value from 1 to 200                                                                               |
+| link                | string  | O  | eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0%3D | link passed from the detect API (URL encoding required)                                                                  |
+| filter.category1_id | string  | X  | equal:3                                            | Filter by category1_id value                                                                                      |
+| filter.category2_id | string  | X  | !equal:3                                           | Filter by category2_id value                                                                                      |
+| filter.category3_id | string  | X  | !equal:3                                           | Filter by category3_id value                                                                                      |
+| filter.s1           | string  | X  | equal:3                                            | Filter by s1 value                                                                                                |
+| filter.s2           | string  | X  | !equal:3                                           | Filter by s2 value                                                                                                |
+| threshold           | float32 | X  | 0.8                                                | Similarity threshold for determining whether an item is matched<br/> Only items with data.items[].similarity >= threshold are determined as matching.<br/>This can be set to a value over 0 and equal to or less than 1.0 |
 
-* filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
+* filter.category1~3_id, filter.s1~2 can be found in the [](#filtering-guide)Filtering Guide[](#filtering-guide)
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
 curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/image?limit=100&link=eyJwYXRoIjoiaHR0cHM6Ly9zMy11cy13ZXN0LTIuW1hem9u1XdzLmNvbS9mZy1pbWFnZSZWFyY2gvMjAxOTEyMDIvNDIyMDZmWYtYWI0Ni00Zjk2LThkYWItZGRkZjllMTI3OWVm9jdGV0LXN0cmSIsInR5cGUi0iJBTEwiLpbnB1dHMiOlt7ImJveCI6eyJsZWZ0IjozNQaInRvcCI6MyLCJ3aWR0aCI6MTU1LCJoZWlnaHQiOjE3NX0sInNjb3JlIjowLjg4NjAyODcwNzAyNzQzNTMsInR5cGUiOiJKQUNLRVQifV0sImNvbmZpZiOnsiY2FtZXJhIjp0cnVlfX0%3D&filter.s1=equal:1"
@@ -526,21 +527,21 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                      | 타입     | 필수 | 예제                                                              | 설명         |
+| Name                      | Type     | Required | Examples                                                              | Description         |
 |-------------------------|--------|----|-----------------------------------------------------------------|------------|
-| data.totalCount         | Number | O  | 100                                                             | 총 검색 결과 개수 |
-| data.query              | String | O  | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | 검색 질의      |
-| data.items[].similarity | Number | O  | 0.91234                                                         | 검색 유사도 점수  |
-| data.items[].productID  | String | O  | 8980335                                                         | 상품 아이디     |
+| data.totalCount         | Number | O  | 100                                                             | Total number of search results |
+| data.query              | String | O  | link=eyJwYXRoIjoHR0cHM6Ly9zMy11cy13ZXN0LTIuW...VlfX0=&limit=100 | Search query      |
+| data.items[].similarity | Number | O  | 0.91234                                                         | Search similarity score  |
+| data.items[].productID  | String | O  | 8980335                                                         | Product ID     |
 
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -567,82 +568,82 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage               | 설명                                                    |
+| resultCode | resultMessage               | Description                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
-| -42000     | NotExistService             | 존재하지 않는 서비스                                           |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                          |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                        |
-| -45070     | NoDetectedFashionItems      | 감지된 패션 아이템 없음                                         |
-| -50000     | InternalServerError         | 서버 오류                                                 |
+| -40000     | InvalidParam                | The parameter contains an error                                          |
+| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                        |
+| -42000     | NotExistService             | Services that don't exist                                           |
+| -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
+| -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
+| -45050     | InvalidImageURLException    | The URL is not accessible.                                          |
+| -45060     | ImageTimeoutError           | Image download timeout                                        |
+| -45070     | NoDetectedFashionItems      | No fashion items detected                                         |
+| -50000     | InternalServerError         | Server error                                                 |
 
-## 딥 태깅
+## Deep Tagging
 
 <span id="tag-api"></span>
-### 패션 아이템 태그 감지
+### Detect Fashion Tag Items
 
-* 입력 이미지에서 패션 아이템의 태그 정보를 감지하는 API
+* API to detect tag information of fashion items in the input image
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                           |
+| Method | URI                                                           |
 |-----|---------------------------------------------------------------|
 | GET | /nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag |
 
 [Path Variable]
 
-| 이름        | 설명              |
+| Name        | Description              |
 |-----------|-----------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명            |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name            |
 
 [URL Parameter]
 
-| 이름         | 타입     | 필수 | 예제                                        | 설명                                                                                               |
+| Name         | Type     | Required | Examples                                        | Description                                                                                               |
 |------------|--------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
-| path       | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                 |
-| lang       | String | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
-| item_limit | int    | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬(기본값: 1)<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
+| path       | String | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL-encoded image URL                                                                                 |
+| lang       | String | X  | ko                                        | Language of the label (default: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| item_limit | int    | X  | 3                                         | Number of items to respond with tag information among fashion items found in the image<br/>Sort items in the descending order of width (default: 1)<br/>Max size<br>Can be set in value from to 1 to 4 |
 
-<details><summary>요청 예</summary>
+<details><summary>Request example</summary>
 
 ```
-curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=en&item_limit=3"
 ```
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+    * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                                 | 타입                   | 필수 | 예제                                                                  | 설명                                           |
+| Name                                 | Type                   | Required | Examples                                                                  | Description                                           |
 |------------------------------------|----------------------|----|---------------------------------------------------------------------|----------------------------------------------|
-| data.totalCount                    | Number               | O  | 2                                                                   | 총 검색 결과 개수                                   |
-| data.query                         | String               | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
-| data.items[].type                  | String               | O  | JACKET                                                              | 감지된 아이템의 유형                                |
-| data.items[].score                 | float32              | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
-| data.items[].tags                  | Array of json object | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
-| data.items[].tags[].attribute      | String               | O  | category                                                            | 태그의 속성                                       |
-| data.items[].tags[].labels         | Array of json object | O  |                                                                     | 태그 라벨의 배열                                    |
-| data.items[].tags[].labels[].label | String               | O  | 블라우스 \| Blouse                                                      | 태그 라벨<br/>URL 파라미터의 lang에 의해 응답 언어가 달라짐 |
-| data.items[].tags[].labels[].score | float32              | O  | 0.9545                                                              | 태그 라벨의 신뢰도                                   |
-| data.items[].center                | float64 array        | O  | [0.825047801147227, 0.330948979591837]                              | 감지된 아이템의 중앙 x, y 좌표 %                        |
-| data.items[].b0                    | float64 array        | O  | [0.676864247418738, 0.219377551020408]                              | 감지된 아이템의 x0, y0 좌표 %                         |
-| data.items[].b1                    | float64 array        | O  | [0.973231355525813, 0.4426204081632654]                             | 감지된 아이템의 x1, y1 좌표 %                         |
+| data.totalCount                    | Number               | O  | 2                                                                   | Total number of search results                                   |
+| data.query                         | String               | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | Search query                                        |
+| data.items[].type                  | String               | O  | JACKET                                                              | Types of detected items                                |
+| data.items[].score                 | float32              | O  | 0.9515                                                              | Confidence score of a detected item                                 |
+| data.items[].tags                  | Array of json object | O  |                                                                     | Array of detected item tag information                            |
+| data.items[].tags[].attribute      | String               | O  | category                                                            | Tag attribute                                       |
+| data.items[].tags[].labels         | Array of json object | O  |                                                                     | Array of tag labels                                    |
+| data.items[].tags[].labels[].label | String               | O  | blouse | Blouse                                                      | Tag label<br/>Response language depends on lang in the URL parameter |
+| data.items[].tags[].labels[].score | float32              | O  | 0.9545                                                              | Confidence score of tag labels                                   |
+| data.items[].center                | float64 array        | O  | [0.825047801147227, 0.330948979591837]                              | Center x, y coordinate % of a detected item                        |
+| data.items[].b0                    | float64 array        | O  | [0.676864247418738, 0.219377551020408]                              | x0, y0 coordinate % of a detected item                         |
+| data.items[].b1                    | float64 array        | O  | [0.973231355525813, 0.4426204081632654]                             | x1, y1 coordinate % of a detected item                         |
 
 <br>
-<details><summary>응답 본문 예</summary>
+<details><summary>Response body example</summary>
 
 ``` json
 {
@@ -657,31 +658,31 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
         "items": [{
             "type": "SHIRT",
             "tags": [{
-                "attribute": "category", "labels": [{ "label": "블라우스", "score": 0.9966272115707397 }]
+                "attribute": "category", "labels": [{ "label": "Blouse", "score": 0.9966272115707397 }]
             }, {
-                "attribute": "color", "labels": [{ "label": "베이지/아이보리", "score": 0.7692235112190247 }]
+                "attribute": "color", "labels": [{ "label": "Beige/Ivory", "score": 0.7692235112190247 }]
             }, {
-                "attribute": "pattern", "labels": [{ "label": "무지", "score": 0.9893960356712341 }]
+                "attribute": "pattern", "labels": [{ "label": "ignorance", "score": 0.9893960356712341 }]
             }, {
-                "attribute": "fabric", "labels": [{ "label": "실크", "score": 0.586938738822937 }]
+                "attribute": "fabric", "labels": [{ "label": "Silk", "score": 0.586938738822937 }]
             }, {
-                "attribute": "neckline", "labels": [{ "label": "셔츠칼라", "score": 0.9922573566436768 }]
+                "attribute": "neckline", "labels": [{ "label": "shirt collar", "score": 0.9922573566436768 }]
             }, {
-                "attribute": "shoulder", "labels": [{ "label": "퍼프/볼륨", "score": 0.5369117856025696 }]
+                "attribute": "shoulder", "labels": [{ "label": "puff/volume", "score": 0.5369117856025696 }]
             }, {
-                "attribute": "sleeve_length", "labels": [{ "label": "긴소매", "score": 0.6998409032821655 }]
+                "attribute": "sleeve_length", "labels": [{ "label": "Long sleeve", "score": 0.6998409032821655 }]
             }, {
-                "attribute": "sleeve_shape", "labels": [{ "label": "스트레이트/일자", "score": 0.689109206199646 }]
+                "attribute": "sleeve_shape", "labels": [{ "label": "Straight/date", "score": 0.689109206199646 }]
             }, {
-                "attribute": "length_up", "labels": [{ "label": "허리선", "score": 0.9575495719909668 }]
+                "attribute": "length_up", "labels": [{ "label": "Waistline", "score": 0.9575495719909668 }]
             }, {
-                "attribute": "age", "labels": [{ "label": "어른", "score": 0.9985153079032898 }]
+                "attribute": "age", "labels": [{ "label": "Adult", "score": 0.9985153079032898 }]
             }, {
-                "attribute": "gender", "labels": [{ "label": "여성", "score": 0.9960111379623413 }]
+                "attribute": "gender", "labels": [{ "label": "Female", "score": 0.9960111379623413 }]
             }, {
-                "attribute": "detail", "labels": [{ "label": "버튼", "score": 0.9440848231315613 }]
+                "attribute": "detail", "labels": [{ "label": "button", "score": 0.9440848231315613 }]
             }, {
-                "attribute": "fit", "labels": [{ "label": "기본핏/레귤러핏", "score": 0.789472222328186 }]
+                "attribute": "fit", "labels": [{ "label": "Basic Fit/Regular Fit", "score": 0.789472222328186 }]
             }],
             "center": [ 0.46125, 0.34125 ],
             "b0": [ 0.1875, 0.0175 ],
@@ -690,25 +691,25 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
         }, {
             "type": "SKIRT",
             "tags": [{
-                "attribute": "category", "labels": [{ "label": "스커트", "score": 0.9997897744178772 }]
+                "attribute": "category", "labels": [{ "label": "skirt", "score": 0.9997897744178772 }]
             }, {
-                "attribute": "color", "labels": [{ "label": "브라운/갈색", "score": 0.8597127199172974 }]
+                "attribute": "color", "labels": [{ "label": "Brown/Brown", "score": 0.8597127199172974 }]
             }, {
-                "attribute": "pattern", "labels": [{ "label": "무지", "score": 0.988312304019928 }]
+                "attribute": "pattern", "labels": [{ "label": "ignorance", "score": 0.988312304019928 }]
             }, {
-                "attribute": "fabric", "labels": [{ "label": "캔버스", "score": 0.24775846302509308 }]
+                "attribute": "fabric", "labels": [{ "label": "canvas", "score": 0.24775846302509308 }]
             }, {
                 "attribute": "length_lo", "labels": [{ "label": "숏", "score": 0.9987099170684814 }]
             }, {
-                "attribute": "age", "labels": [{ "label": "어른", "score": 0.9993846416473389 }]
+                "attribute": "age", "labels": [{ "label": "Adult", "score": 0.9993846416473389 }]
             }, {
-                "attribute": "gender", "labels": [{ "label": "여성", "score": 0.9950520396232605 }]
+                "attribute": "gender", "labels": [{ "label": "Female", "score": 0.9950520396232605 }]
             }, {
-                "attribute": "detail", "labels": [{ "label": "랩스타일", "score": 0.7058117985725403 }]
+                "attribute": "detail", "labels": [{ "label": "Rapstyle", "score": 0.7058117985725403 }]
             }, {
-                "attribute": "fit", "labels": [{ "label": "기본핏/레귤러핏", "score": 0.9844645857810974 }]
+                "attribute": "fit", "labels": [{ "label": "Basic Fit/Regular Fit", "score": 0.9844645857810974 }]
             }, {
-                "attribute": "shape", "labels": [{ "label": "A라인/플레어", "score": 0.9432026743888855 }]
+                "attribute": "shape", "labels": [{ "label": "A-line/flare", "score": 0.9432026743888855 }]
             }],
             "center": [ 0.5, 0.69125 ],
             "b0": [ 0.28, 0.445 ],
@@ -721,42 +722,42 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage               | 설명                                                                           |
+| resultCode | resultMessage               | Description                                                                           |
 |------------|-----------------------------|------------------------------------------------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                                                                 |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                                               |
-| -42000     | NotExistService             | 존재하지 않는 서비스                                                                  |
-| -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
-| -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
-| -45050     | InvalidImageURLException    | 접근할 수 없는 URL                                                                 |
-| -45060     | ImageTimeoutError           | 이미지 다운로드 시간 초과                                                               |
-| -50000     | InternalServerError         | 서버 오류                                                                        |
+| -40000     | InvalidParam                | The parameter contains an error                                                                 |
+| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                                                               |
+| -42000     | NotExistService             | Services that don't exist                                                                  |
+| -45020     | ImageTooLargeException      | The size of the image file is too large.<br>See the image guide  |
+| -45040     | InvalidImageFormatException | Unsupported image file format.<br>See the image guide |
+| -45050     | InvalidImageURLException    | The URL is not accessible.                                                                 |
+| -45060     | ImageTimeoutError           | Image download timeout                                                               |
+| -50000     | InternalServerError         | Server error                                                                        |
 
-## 색인
-### 색인 요청
+## Indexing
+### Indexing Request
 
-* 패션 아이템 데이터를 색인하는 API
-* 전달된 파일의 첫 번째 줄을 분석하여 포맷 오류 여부를 검사합니다.
-* 첫 번째 줄에서 오류가 발견되지 않으면 색인을 위한 대기열에 들어간 뒤 스케줄에 따라 색인됩니다.
+* API to index fashion item data
+* Analyze the first line of the provided file and check if there is a format error.
+* If no error is found on the first line, the file enters a queue for indexing and is indexed according to the schedule.
 
-#### 파일 데이터 포맷
+#### File Data Format
 
-| 이름          | field        | value type | 필수 | max length | 비고                                 |
+| Name          | field        | value type | Required | max length | Note                                 |
 |-------------|--------------|------------|----|------------|------------------------------------|
-| 상품ID        | product_id   | string     | O  | 72         | 유니크 키                         |
-| 상태          | status       | string     | O  | 7          | enable: 추가 또는 업데이트<br/>disable: 삭제 |
-| 상품이름        | name         | string     | O  | 256        | 상품명                                |
-| 카테고리 1depth | category1_id | string     | O  | 72         | 카테고리 1depth 아이디                    |
-| 카테고리 2depth | category2_id | string     | O  | 72         | 카테고리 2depth 아이디                    |
-| 카테고리 3depth | category3_id | string     | O  | 72         | 카테고리 3depth 아이디                    |
-| 이미지url      | image_url    | string     | O  | 1000       | 접근 가능한 이미지 URL                     |
-| 필터1         | s1           | string     | O  | 72         | 제한 검색을 위한 필터1                      |
-| 필터2         | s2           | string     | O  | 72         | 제한 검색을 위한 필터2                      |
+| Product ID        | product_id   | string     | O  | 72         | Unique keys                         |
+| Status          | status       | string     | O  | 7          | enable: Add or update<br/>disable: Delete |
+| Product name        | name         | string     | O  | 256        | Product name                                |
+| Category depth 1 | category1_id | string     | O  | 72         | Category depth 1 ID                    |
+| Category depth 2 | category2_id | string     | O  | 72         | Category depth 2 ID                    |
+| Category depth 3 | category3_id | string     | O  | 72         | Category depth 3 ID                    |
+| Image URL      | image_url    | string     | O  | 1000       | Accessible image URL                     |
+| Filter1         | s1           | string     | O  | 72         | Filters for limited search1                      |
+| Filter2         | s2           | string     | O  | 72         | Filters for limited search2                      |
 
 
-##### JSONL 예
+##### JSONL example
 ```
 {"product_id": "10001", "status": "enable", "name": "AAA red onepiece", "category1_id": "1", "category2_id": "1", "category3_id": "2", "image_url": "http://aaaaaaa.bbbbb.jpg", "s1": "1", "s2": "2"}
 {"product_id": "10002", "status": "disable", "name": "BBB blue onepiece", "category1_id": "1", "category2_id": "1", "category3_id": "2", "image_url": "http://bbbbbbb.ccccc.jpg", "s1": "s1", "s2": "2"}
@@ -764,7 +765,7 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 ...
 ```
 
-##### CSV 예
+##### CSV example
 ```
 10001,enable,AAA red onepiece,1,1,2,http://aaaaaaa.bbbbb.jpg,1,2
 10002,disable,BBB blue onepiece,1,1,2,http://bbbbbbb.ccccc.jpg,s1,2
@@ -772,37 +773,39 @@ curl -X GET "${domain}/nhn-ai-fashion/v1.0/appkeys/{appKey}/service/{serviceID}/
 ...
 ```
 
-#### 요청
-* 직접 데이터 파일을 전송하거나 다운로드 가능한 URL로 데이터 파일을 전달할 수 있습니다.
+#### Request
+* You can send data files directly or pass data files to a downloadable URL.
 
 [URI]
 
-| 메서드  | URI                                                                   |
+| Method  | URI                                                                   |
 |------|-----------------------------------------------------------------------|
 | POST | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
 [URL Parameter]
 
-| 이름     | 타입     | 필수 | 예제    | 설명           |
+| Name     | Type     | Required | Examples    | Description           |
 |--------|--------|----|-------|--------------|
-| format | string | O  | jsonl | jsonl 또는 csv |
+| format | string | O  | jsonl | jsonl or csv |
 
-[Form Data]
+[Request Body]
 
-| 이름   | 타입     | 필수 여부 | 예제                                                     | 설명                                                     |
+**Content-Type : multipart/form-data**
+
+| Name   | Type     | Required? | Examples                                                     | Description                                                     |
 |------|--------|-------|--------------------------------------------------------|--------------------------------------------------------|
-| link | string | △     | "https://cdn.my-domain.com/202106251000_product.jsonl" | 데이터 파일 URL                                             |
-| file | file   | △     | @filename                                              | 데이터 파일<br/>link가 file보다 우선순위가 높아서 link가 있으면 file은 무시됨 |
+| link | string | △     | "https://cdn.my-domain.com/202106251000_product.jsonl" | Data file URL                                             |
+| file | file   | △     | @filename                                              | A data file<br/>FILE is ignored if LINK is present because LINK has higher priority than FILE |
 
 <details>
-<summary>요청 예 1</summary>
+<summary>Request Example 1</summary>
 
 ```
 curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -H "Content-Type: multipart/form-data" -F "file=@/home/user1/202106251000_product.jsonl"
@@ -811,7 +814,7 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 </details>
 
 <details>
-<summary>요청 예 2</summary>
+<summary>Request Example 2</summary>
 
 ```
 curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/index?format=jsonl" -F "link=https://cdn.my-domain.com/202106251000_product.jsonl"
@@ -819,19 +822,19 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+  * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름           | 타입     | 필수 | 예제                                   | 설명     |
+| Name           | Type     | Required | Examples                                   | Description     |
 |--------------|--------|----|--------------------------------------|--------|
-| data.indexID | string | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 인덱스 ID |
+| data.indexID | string | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | Index ID |
 
 <details>
-<summary>응답 본문 예</summary>
+<summary>Response body example</summary>
 
 ```json
 {
@@ -848,40 +851,39 @@ curl -X POST "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/in
 
 </details>
 
-#### 오류 코드
-| resultCode | resultMessage               | 설명                                   |
+#### Error Codes
+| resultCode | resultMessage               | Description                                   |
 |------------|-----------------------------|--------------------------------------|
-| -40000     | InvalidParam                | 파라미터에 오류가 있음                         |
-| -40010     | InvalidFileError            | 파일 전달에 오류가 있는 경우                     |
-| -40020     | NoDataError                 | 전달된 파일이 빈 파일인 경우                     |
-| -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
-| -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
-| -40400     | NoApiFound                  | 정의되지 않은 API로 요청한 경우                  |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                       |
-| -42000     | NotExistService             | 존재하지 않는 서비스                          |
-| -50000     | InternalServerError         | 서버 오류                                |
+| -40000     | InvalidParam                | The parameter contains an error                         |
+| -40010     | InvalidFileError            | There is an error in the file transfer.                     |
+| -40020     | NoDataError                 | The provided file is empty.                     |
+| -40030     | ExceedDataSizeError         | The provided file exceeds the file size limit or data count limit. |
+| -40080     | TooManyRequestError         | Multiple requests occurred simultaneously.                    |
+| -41000     | UnauthorizedAppKey          | Unauthorized AppKeys                       |
+| -42000     | NotExistService             | Services that don't exist                          |
+| -50000     | InternalServerError         | Server error                                |
 
-### 서비스 정보 조회
-* 서비스들의 정보를 가져오는 API
-  * 서비스별로 남은 색인 횟수
-  * 서비스별 색인된 문서 개수
+### Get Service Information
+* APIs to get information about services
+  * Number of indexing left for each service
+  * Number of indexed documents for each service
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                  |
+| Method | URI                                                  |
 |-----|------------------------------------------------------|
 | GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| Name | Description |
 | --- | --- |
-| appKey | 통합 앱키 또는 서비스 앱키 |
+| appKey | Integration app key or service app key |
 
 <details>
-<summary>요청 예 </summary>
+<summary>Request Example</summary>
 
 ```
 curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
@@ -889,22 +891,22 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+  * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                           | 타입     | 필수 | 예제    | 설명                |
+| Name                           | Type     | Required | Examples    | Description                |
 |------------------------------|--------|----|-------|-------------------|
-| data.totalService            | int    | O  | 3     | 서비스 개수            |
-| data.items[].documentCnt     | int    | O  | 51128 | 전체 문서 개수          |
-| data.items[].remainInsertCnt | int    | O  | 3     | 서비스 당 색인 요청 가능 횟수 |
-| data.items[].service         | string | O  | aaa   | 서비스명              |
+| data.totalService            | int    | O  | 3     | Service count            |
+| data.items[].documentCnt     | int    | O  | 51128 | Total document count          |
+| data.items[].remainInsertCnt | int    | O  | 3     | Number of index requests per service |
+| data.items[].service         | string | O  | aaa   | Service Name              |
 
 <details>
-<summary>응답 본문 예</summary>
+<summary>Response body example</summary>
 
 ```json
 {
@@ -938,83 +940,83 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/services"
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage       | 설명                  |
+| resultCode | resultMessage       | Description                  |
 |------------|---------------------|---------------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키      |
-| -50000     | InternalServerError | 서버 오류               |
+| -40000     | InvalidParam        | The parameter contains an error        |
+| -41000     | UnauthorizedAppKey  | Unauthorized AppKeys      |
+| -50000     | InternalServerError | Server error               |
 
-### 색인 목록 조회
-* 요청된 색인 목록을 가져오는 API
-* 색인 요청에 대한 정보를 알 수 있습니다.
-* 색인 정보의 최대 보관 기간은 등록 시간 기준 6개월입니다.
+### Get a list of indexes
+* API to get a list of requested indexes
+* Information about the index request.
+* The maximum retention period for indexed information is 6 months from the time of registration.
 
-#### 요청
+#### Request
 
 [URI]
 
-| 메서드 | URI                                                                     |
+| Method | URI                                                                     |
 |-----|-------------------------------------------------------------------------|
 | GET | /nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes |
 
 [Path Variable]
 
-| 이름        | 설명                      |
+| Name        | Description                      |
 |-----------|-------------------------|
-| appKey    | 통합 앱키 또는 서비스 앱키 |
-| serviceID | 서비스명                    |
+| appKey    | Integration app key or service app key |
+| serviceID | Service Name                    |
 
 [URL Parameter]
 
-| 이름     | 타입     | 필수 | 예제                | 설명                                                                                    |
+| Name     | Type     | Required | Examples                | Description                                                                                    |
 |--------|--------|----|-------------------|---------------------------------------------------------------------------------------|
-| start  | int    | O  | 0                 | 시작 인덱스<br/>0부터 시작                                                                     |
-| limit  | int    | O  | 100               | 최대 100<br/>start:0, limit: 100의 경우 1부터 100까지<br/>start: 200, limit: 100 이면 201부터 300까지 |
-| order  | string | X  | reservedTime:desc | 정렬 조건(기본값: requestedTime:desc)<br/>설정 가능 조건은 [정렬](#indexes-status-order) 참조           |
-| status | string | X  | finished          | 색인의 상태 값                                                                              |
+| start  | int    | O  | 0                 | Start index.<br/>Starts from 0.                                                                     |
+| limit  | int    | O  | 100               | Max 100.<br/>start:0, limit: 1 through 100 for 100<br/>start: 200, limit: If 100, then 201 through 300 |
+| order  | string | X  | reservedTime:desc | Sort by (default: requestedTime:desc)<br/>For conditions that can set, see [Sorting](#indexes-status-order)           |
+| status | string | X  | finished          | Status value of the index                                                                              |
 
-#### 페이징
-* start와 limit 파라미터로 페이징이 가능합니다.
-  * start: 0부터 시작합니다.
-  * limit: 0보다 커야 하며 최대 100까지 가능합니다.
-* 최대 페이징 가능한 숫자는 1000입니다.
-  * 가능:
+#### Paging
+* Paging can be performed with start and limit parameters.
+  * start: Starts from 0.
+  * limit: Must be greater than 0 and can be up to 100.
+* The maximum number for paging is 1000.
+  * Yes:
     * start: 900
     * end: 100
-  * 불가능:
+  * Impossible:
     * start: 901
     * end: 100
-    * 최대 가능 페이징 수인 1000을 넘어가기 때문에 불가능합니다.
+    * This is not possible because it would exceed the maximum possible paging count of 1000.
 
 <span id="indexes-status-order"></span>
-#### 정렬
-* 응답 문서의 정렬 파라미터
-* 파라미터 형식
-  * {정렬 가능 항목}:{정렬 방식}
-* 정렬 가능 항목
-  * reservedTime: 색인 요청 등록 시간
-  * startTime: 색인 시작 시간
-  * finishTime: 색인 종료 시간
-  * addCnt: 추가된 문서 수
-  * failCnt: 실패 문서 수
-  * deleteCnt: 삭제 문서 수
-  * updateCnt: 수정 문서 수
-  * totalCnt: 전체 문서 수
-* 정렬 방식
-  * asc: 오름차순
-  * desc: 내림차순
+#### Sort
+* Alignment parameters for response documents
+* Parameter formats
+  * {sortable items}:{sorting method}
+* Sortable items
+  * reservedTime: Index request registration time
+  * startTime: Index start time
+  * finishTime: Index end time
+  * addCnt: Number of documents added
+  * failCnt: Number of failed documents
+  * deleteCnt: Number of documents deleted
+  * updateCnt: Number of revised documents
+  * totalCnt: Total number of documents
+* Sorting Methods
+  * asc: Ascending
+  * desc: Descending
 
-#### 색인 상태
-* 색인 상태 값을 조건으로 검색할 수 있습니다.
-  * reserved: 대기
-  * running: 진행 중
-  * failed: 전체 실패
-  * finished: 완료(부분 실패 포함)
+#### Index status
+* You can search for index status values by conditions.
+  * reserved: Waiting
+  * Running: In Progress
+  * failed: All Failure
+  * finished: Completed (including partial failures)
 
 <details>
-<summary>요청 예 </summary>
+<summary>Request Example</summary>
 
 ```
 curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/indexes?start=0&limit=100&status=running&order=startTime:desc"
@@ -1022,31 +1024,31 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/ind
 
 </details>
 
-#### 응답
+#### Response
 
-* [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](#common-response)에서 확인 가능
+* [Response Body header description omitted].
+  * This information is available in [Response Common Information](#common-response).
 
-[응답 본문 데이터]
+[Response body data]
 
-| 이름                        | 타입             | 필수 | 예제                                   | 설명                                                                                              |
+| Name                        | Type             | Required | Examples                                   | Description                                                                                              |
 |---------------------------|----------------|----|--------------------------------------|-------------------------------------------------------------------------------------------------|
-| data.total                | int            | O  | 100                                  | 검색된 전체 문서 개수                                                                                    |
-| data.items[].service      | String         | O  | testserviceid                        | 해당 색인 요청이 발생한 서비스명                                                                               |
-| data.items[].id           | String         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | 색인 ID                                                                                           |
-| data.items[].filename     | String         | O  | 202106251000_product.jsonl           | 색인 파일 이름                                                                                        |
-| data.items[].status       | string         | O  | reserved                             | 현재 색인 상태를 나타냅니다.<br/>reserved: 대기<br/>running: 진행 중<br/>failed: 전체 실패<br/>finished: 완료(부분 실패 포함) |
-| data.items[].reservedTime | unix timestamp | O  | 1625098033                           | 색인 요청 등록 시간                                                                                     |
-| data.items[].startTime    | unix timestamp | O  | 1625098033                           | 색인 시작 시간                                                                                        |
-| data.items[].finishTime   | unix timestamp | O  | 1625098033                           | 색인이 완료된 시간                                                                                      |
-| data.items[].addCnt       | Int            | O  | 234                                  | 추가된 문서 개수                                                                                       |
-| data.items[].failCnt      | Int            | O  | 31                                   | 실패한 문서 개수<br/>이미지 다운로드 실패 등이 포함되며, 패션 아이템을 찾지 못한 경우도 포함.                                  |
-| data.items[].deleteCnt    | Int            | O  | 31                                   | 삭제된 문서 개수                                                                                       |
-| data.items[].updateCnt    | int            | O  | 592                                  | 수정된 문서 개수                                                                                       |
-| data.items[].totalCnt     | Int            | O  | 888                                  | 색인 총 문서 개수                                                                                      |
+| data.total                | int            | O  | 100                                  | Number of total searched documents                                                                                    |
+| data.items[].service      | String         | O  | testserviceid                        | The name of the service from which the index request originated                                                                               |
+| data.items[].id           | String         | O  | 24bb94b3-8a6b-488e-b038-4f6038da2596 | Indexing ID                                                                                           |
+| data.items[].filename     | String         | O  | 202106251000_product.jsonl           | Indexing file name                                                                                        |
+| data.items[].status       | string         | O  | reserved                             | Represents the current indexing status.<br/>reserved: Waiting<br/>Running: In Progress<br/>failed: All Failure<br/>finished: Completed (including partial failures) |
+| data.items[].reservedTime | unix timestamp | O  | 1625098033                           | Index request registration time                                                                                     |
+| data.items[].startTime    | unix timestamp | O  | 1625098033                           | Index start time                                                                                        |
+| data.items[].finishTime   | unix timestamp | O  | 1625098033                           | Indexing finish time                                                                                      |
+| data.items[].addCnt       | Int            | O  | 234                                  | Number of added documents                                                                                       |
+| data.items[].failCnt      | Int            | O  | 31                                   | Number of failed documents<br/>Including image download failures, and not finding a fashion item.                                  |
+| data.items[].deleteCnt    | Int            | O  | 31                                   | Number of deleted documents                                                                                       |
+| data.items[].updateCnt    | int            | O  | 592                                  | Number of updated documents                                                                                       |
+| data.items[].totalCnt     | Int            | O  | 888                                  | Total number of documents for indexing                                                                                      |
 
 <details>
-<summary>응답 본문 예</summary>
+<summary>Response body example</summary>
 
 ```json
 {
@@ -1077,11 +1079,11 @@ curl -X GET "/nhn-ai-fashion-maker/v1.0/appkeys/{appKey}/service/{serviceID}/ind
 
 </details>
 
-#### 오류 코드
+#### Error Codes
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | Description |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 앱키 |
-| -42000 | NotExistService | 존재하지 않는 서비스 |
-| -50000 | InternalServerError | 서버 오류 |
+| -40000 | InvalidParam | The parameter contains an error |
+| -41000 | UnauthorizedAppKey | Unauthorized AppKeys |
+| -42000 | NotExistService | Services that don't exist |
+| -50000 | InternalServerError | Server error |

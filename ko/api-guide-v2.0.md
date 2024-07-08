@@ -141,7 +141,7 @@
 
 ```
 curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: application/json;charset=UTF-8" "${domain}/v2.0/appkeys/{appKey}/services" -d '{
-    "serviceName": "my-serviceName"
+    "serviceName": "my-servicename"
 }'
 ```
 
@@ -168,13 +168,13 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: application/json;
 
 #### 오류 코드
 
-| resultCode | resultMessage                 | 설명             |
-|------------|-------------------------------|----------------|
-| -40000     | InvalidParam                  | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey            | 승인되지 않은 앱키 |
-| -42010     | DuplicateServiceName          | 중복된 서비스명       |
-| -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과  |
-| -50000     | InternalServerError           | 서버 오류          |
+| resultCode | resultMessage                 | 설명                 |
+|------------|-------------------------------|--------------------|
+| -40000     | InvalidParam                  | 파라미터에 오류가 있음       |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
+| -42010     | DuplicateServiceName          | 중복된 서비스명           |
+| -42030     | ServiceQuotaExceededException | 허용된 서비스 개수 초과      |
+| -50000     | InternalServerError           | 서버 오류              |
 
 ### 서비스 삭제
 
@@ -228,7 +228,7 @@ curl -X DELETE -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -284,7 +284,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
     "data": {
         "totalCount": 2,
         "items": [{
-                "serviceName": "my-serviceName",
+                "serviceName": "my-servicename",
                 "documentCount": 100
             },
             {
@@ -303,7 +303,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -371,7 +371,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -50000     | InternalServerError | 서버 오류          |
 
 
@@ -473,7 +473,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
 | -40050     | NotFoundProductId   | 상품 아이디가 없음     |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -570,7 +570,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -674,7 +674,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -687,7 +687,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 * 이미지(URL, File)에서 인식된 가장 큰 패션 아이템을 기준으로 유사한 상품을 찾아주는 API
 * filter.category1~3_id, filter.s1~2는 [필터링 가이드](#filtering-guide)에서 확인 가능
-* Content-Type: multipart/form-data
 
 #### 요청
 
@@ -705,6 +704,8 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | serviceName | 서비스명                    |
 
 [Request Body]
+
+**Content-Type : multipart/form-data**
 
 | 이름                 | 타입      | 필수 | 예제              | 설명                                                                                                                                                      |
 |--------------------|---------|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -778,7 +779,7 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -815,13 +816,13 @@ curl -X POST -H "Authorization: {secretKey}" -H "Content-Type: multipart/form-da
 | 이름        | 타입      | 필수 | 예제                                        | 설명                                                                                               |
 |-----------|---------|----|-------------------------------------------|--------------------------------------------------------------------------------------------------|
 | path      | string  | O  | `https://imagecdn.co.kr/sample_image.jpg` | URL 인코딩된 이미지 URL                                                                                 |
-| lang      | string  | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>jp: Japanese                                  |
+| lang      | string  | X  | ko                                        | 라벨의 언어(기본값: en)<br/>en: English<br/>ko: Korean<br/>ja: Japanese                                  |
 | itemLimit | integer | X  | 3                                         | 이미지에서 발견된 패션 아이템 중 태그 정보를 응답할 아이템 숫자<br/>아이템의 너비가 긴 순서로 정렬(기본값: 1)<br/>최대 크기<br>1 이상 4 이하로 설정 가능 |
 
 <details><summary>요청 예</summary>
 
 ```
-curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3"
+curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/tag?path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3"
 ```
 
 </details>
@@ -836,7 +837,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | 이름                                 | 타입           | 필수 | 예제                                                                  | 설명                                           |
 |------------------------------------|--------------|----|---------------------------------------------------------------------|----------------------------------------------|
 | data.totalCount                    | integer      | O  | 2                                                                   | 총 검색 결과 개수                                   |
-| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&item_limit=3` | 검색 질의                                        |
+| data.query                         | string       | O  | `path=https://imagecdn.co.kr/sample_image.jpg&lang=ko&itemLimit=3` | 검색 질의                                        |
 | data.items[].type                  | string       | O  | JACKET                                                              | 감지된 아이템의 유형                                |
 | data.items[].score                 | float        | O  | 0.9515                                                              | 감지된 아이템의 신뢰도                                 |
 | data.items[].tags                  | array        | O  |                                                                     | 감지된 아이템 태그 정보의 배열                            |
@@ -860,7 +861,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
     },
     "data": {
         "totalCount": 2,
-        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&item_limit=3",
+        "query": "path=https%3A%2F%2Fimagecdn.co.kr%2Fsample_image.jpg&lang=ko&itemLimit=3",
         "items": [{
             "type": "SHIRT",
             "tags": [{
@@ -932,7 +933,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage               | 설명                                                    |
 |------------|-----------------------------|-------------------------------------------------------|
 | -40000     | InvalidParam                | 파라미터에 오류가 있음                                          |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                                        |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                                        |
 | -42000     | NotExistService             | 존재하지 않는 서비스                                           |
 | -45020     | ImageTooLargeException      | 이미지 파일의 크기가 너무 큼<br>[이미지 가이드](#input-image-guide) 참고  |
 | -45040     | InvalidImageFormatException | 지원하지 않는 이미지 파일 형식<br>[이미지 가이드](#input-image-guide) 참고 |
@@ -948,7 +949,6 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 * 전달된 파일의 첫 번째 줄을 분석하여 포맷 오류 여부를 검사합니다.
 * 첫 번째 줄에서 오류가 발견되지 않으면 색인을 위한 대기열에 들어간 뒤 스케줄에 따라 색인됩니다.
 * 직접 데이터 파일을 전송하거나 다운로드 가능한 URL로 데이터 파일을 전달할 수 있습니다.
-* Content-Type: multipart/form-data
 
 #### 파일 데이터 포맷
 
@@ -995,12 +995,14 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | appKey      | 통합 앱키 또는 서비스 앱키 |
 | serviceName | 서비스명                    |
 
-[Form Data]
+[Request Body]
 
-| 이름     | 타입     | 필수 여부 | 예제                                                   | 설명                                                     |
-|--------|--------|-------|------------------------------------------------------|--------------------------------------------------------|
-| format | string | O     | jsonl                                                | jsonl 또는 csv                                           |
-| link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                             |
+**Content-Type : multipart/form-data**
+
+| 이름     | 타입     | 필수 여부 | 예제                                                   | 설명                                                    |
+|--------|--------|-------|------------------------------------------------------|-------------------------------------------------------|
+| format | string | O     | jsonl                                                | jsonl 또는 csv                                          |
+| link   | string | △     | https://cdn.my-domain.com/202106251000_product.jsonl | 데이터 파일 URL                                            |
 | file   | file   | △     | @filename                                            | 데이터 파일<br/>link가 file보다 우선순위가 높아서 link가 있으면 file은 무시됨 |
 
 
@@ -1059,7 +1061,7 @@ curl -X POST "${domain}/v2.0/appkeys/{appKey}/services/{serviceName}/indexes" -H
 | -40020     | NoDataError                 | 전달된 파일이 빈 파일인 경우                     |
 | -40030     | ExceedDataSizeError         | 전달된 파일이 정해진 용량 또는 정해진 데이터 개수를 초과한 경우 |
 | -40080     | TooManyRequestError         | 동시에 여러 번 요청을 한 경우                    |
-| -41000     | UnauthorizedAppKey          | 승인되지 않은 앱키                       |
+| -41005     | UnauthorizedAppKeyOrSecretKey          | 승인되지 않은 앱키 또는 비밀 키                       |
 | -42000     | NotExistService             | 존재하지 않는 서비스                          |
 | -50000     | InternalServerError         | 서버 오류                                |
 
@@ -1205,7 +1207,7 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 | resultCode | resultMessage       | 설명             |
 |------------|---------------------|----------------|
 | -40000     | InvalidParam        | 파라미터에 오류가 있음   |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키 |
+| -41005     | UnauthorizedAppKeyOrSecretKey  | 승인되지 않은 앱키 또는 비밀 키 |
 | -42000     | NotExistService     | 존재하지 않는 서비스    |
 | -50000     | InternalServerError | 서버 오류          |
 
@@ -1308,9 +1310,10 @@ curl -X GET -H "Authorization: {secretKey}" "${domain}/v2.0/appkeys/{appKey}/ser
 
 #### 오류 코드
 
-| resultCode | resultMessage       | 설명                  |
-|------------|---------------------|---------------------|
-| -40000     | InvalidParam        | 파라미터에 오류가 있음        |
-| -41000     | UnauthorizedAppKey  | 승인되지 않은 앱키      |
-| -42000     | NotExistService     | 존재하지 않는 서비스         |
-| -50000     | InternalServerError | 서버 오류               |
+| resultCode | resultMessage                 | 설명                 |
+|------------|-------------------------------|--------------------|
+| -40000     | InvalidParam                  | 파라미터에 오류가 있음       |
+| -40090     | NotFoundIndexId               | 색인 id가 없음          |
+| -41005     | UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
+| -42000     | NotExistService               | 존재하지 않는 서비스        |
+| -50000     | InternalServerError           | 서버 오류              |
